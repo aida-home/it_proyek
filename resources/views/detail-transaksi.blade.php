@@ -60,9 +60,6 @@
         <div class="mb-3">
             <strong>Tanggal Transaksi: </strong> {{ $transaksi->tanggal_transaksi }}
         </div>
-        <div class="mb-3">
-            <strong>Total Pembayaran: </strong> Rp {{ number_format($transaksi->total_pembayaran, 2, ',', '.') }}
-        </div>
 
         <h3>Barang yang Dibeli</h3>
         <table class="table table-bordered table-striped">
@@ -75,6 +72,9 @@
                 </tr>
             </thead>
             <tbody>
+                @php
+                    $total_pembayaran = 0;
+                @endphp
                 @foreach($transaksi->detailTransaksi as $detail)
                 <tr>
                     <td>{{ $detail->nama_barang }}</td>
@@ -82,11 +82,21 @@
                     <td>{{ $detail->jumlah_beli }}</td>
                     <td>Rp {{ number_format($detail->subtotal, 2, ',', '.') }}</td>
                 </tr>
+                @php
+                    $total_pembayaran += $detail->subtotal;
+                @endphp
                 @endforeach            
             </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3"><strong>Total Pembayaran</strong></td>
+                    <td><strong>Rp {{ number_format($total_pembayaran, 2, ',', '.') }}</strong></td>
+                </tr>
+            </tfoot>
         </table>
 
         <a href="{{ route('transaksi.index') }}" class="btn btn-secondary">Kembali</a>
     </div>
 </body>
+
 </html>
