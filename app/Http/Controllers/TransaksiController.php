@@ -18,11 +18,7 @@ class TransaksiController extends Controller
 
     public function store(Request $request)
     {
-            // Tambahkan validasi tanggal
-    $request->validate([
-        'tanggal_transaksi' => 'required|date|before_or_equal:today',
-    ]);
-    
+        
         // Generate ID Transaksi
         $lastTransaksi = Transaksi::orderBy('id_transaksi', 'desc')->first();
         $tanggalTransaksi = $request->tanggal_transaksi; 
