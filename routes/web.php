@@ -25,7 +25,7 @@ Route::get('/dashboard', function () {
 Route::get('/laporan-penjualan', function () {
     return view('laporan-penjualan');
 });
-Route::get('/laporan-penjualan', [LaporanPenjualanController::class, 'index']);
+Route::get('/laporan-penjualan', [LaporanPenjualanController::class, 'index'])->name('laporan-penjualan.index');
 
 
 Route::get('/barang', function () {

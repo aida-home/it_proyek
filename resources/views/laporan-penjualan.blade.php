@@ -10,7 +10,7 @@
     <div class="container">
         <h1>Laporan Penjualan Produk Terjual</h1>
 
-        <form action="{{ route('laporan-penjualan') }}" method="GET">
+        <form action="{{ route('laporan-penjualan.index') }}" method="GET">
             <label for="start_date">Mulai Tanggal:</label>
             <input type="date" name="start_date" id="start_date" value="{{ $startDate }}">
             <label for="end_date">Sampai Tanggal:</label>
