@@ -8,27 +8,32 @@
 </head>
 <body>
     <div class="container">
-        <h1>Laporan Penjualan</h1>
+        <h1>Laporan Penjualan Produk Terjual</h1>
+
         <form action="{{ route('laporan-penjualan') }}" method="GET">
-            <label for="start_date">Tanggal Mulai:</label>
+            <label for="start_date">Mulai Tanggal:</label>
             <input type="date" name="start_date" id="start_date" value="{{ $startDate }}">
-            <label for="end_date">Tanggal Selesai:</label>
+            <label for="end_date">Sampai Tanggal:</label>
             <input type="date" name="end_date" id="end_date" value="{{ $endDate }}">
-            <button type="submit">Tampilkan</button>
+            <button type="submit">Filter</button>
         </form>
 
         <table>
             <thead>
                 <tr>
-                    <th>Nama Barang</th>
-                    <th>Jumlah Beli</th>
+                    <th>No</th>
+                    <th>Tanggal Transaksi</th>
+                    <th>Nama Produk</th>
+                    <th>Jumlah Terjual</th>
                     <th>Harga Satuan</th>
                     <th>Total Penjualan</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($laporanPenjualan as $item)
+                @foreach ($laporanPenjualan as $index => $item)
                     <tr>
+                        <td>{{ $index + 1 }}</td>
+                        <td>{{ $item->created_at->format('d/m/Y') }}</td>
                         <td>{{ $item->nama_barang }}</td>
                         <td>{{ $item->jumlah_beli }}</td>
                         <td>{{ number_format($item->harga_jual, 2, ',', '.') }}</td>
@@ -38,7 +43,7 @@
             </tbody>
         </table>
 
-        <h3>Total Penjualan: {{ number_format($totalPenjualan, 2, ',', '.') }}</h3>
+        <h3>Total Penjualan: Rp{{ number_format($totalPenjualan, 2, ',', '.') }}</h3>
     </div>
 </body>
 </html>
