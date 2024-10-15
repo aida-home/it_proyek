@@ -22,10 +22,10 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 });
 
-Route::get('/laporan-penjualan ', function () {
+Route::get('/laporan-penjualan', function () {
     return view('laporan-penjualan');
 });
-Route::get('/laporan-penjualan', [LaporanPenjualanController::class, 'index'])->name('laporan-penjualan.index');
+Route::get('/laporan-penjualan', [LaporanPenjualanController::class, 'index']);
 
 
 Route::get('/barang', function () {
