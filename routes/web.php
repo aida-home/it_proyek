@@ -67,6 +67,7 @@ Route::get('/kategori', function () {
 });
 
 Route::post('/create-kategori', [KategoriController::class, 'createKategori']);
+Route::get('/create-kategori', [KategoriController::class, 'showCreateForm']);
 Route::get('/edit-kategori/{kategori}', [KategoriController::class,'showEditScreen']);
 Route::put('/edit-kategori/{kategori}', [KategoriController::class,'actuallyUpdateKategori']);
 Route::delete('/delete-kategori/{kategori}', [KategoriController::class,'deleteKategori']);

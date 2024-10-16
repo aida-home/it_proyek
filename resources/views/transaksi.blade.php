@@ -12,7 +12,7 @@
 
         <div class="table-section">
             <!-- Link untuk menambahkan transaksi baru -->
-            <a href="{{ route('transaksi.create') }}" class="btn btn-primary">Tambah Transaksi</a>
+            <a href="{{ route('transaksi.create') }}" class="btn">Tambah Transaksi</a>
 
             <table class="table table-bordered">
                 <thead>

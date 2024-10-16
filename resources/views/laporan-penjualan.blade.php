@@ -8,17 +8,17 @@
 </head>
 <body>
     <div class="container">
-        <h1>Laporan Penjualan Produk Terjual</h1>
+        <h1>Laporan Penjualan</h1>
 
-        <form action="{{ route('laporan-penjualan.index') }}" method="GET">
-            <label for="start_date">Mulai Tanggal:</label>
-            <input type="date" name="start_date" id="start_date" value="{{ $startDate }}">
-            <label for="end_date">Sampai Tanggal:</label>
-            <input type="date" name="end_date" id="end_date" value="{{ $endDate }}">
-            <button type="submit">Filter</button>
-        </form>
-
-        <table>
+        <div class="table-section">
+            <form action="{{ route('laporan-penjualan.index') }}" method="GET">
+                <label for="start_date">Mulai Tanggal:</label>
+                <input type="date" name="start_date" id="start_date" value="{{ $startDate }}">
+                <label for="end_date">Sampai Tanggal:</label>
+                <input type="date" name="end_date" id="end_date" value="{{ $endDate }}">
+                <button type="submit">Filter</button>
+            </form>
+        <table class="table table-bordered">
             <thead>
                 <tr>
                     <th>No</th>
@@ -36,8 +36,8 @@
                         <td>{{ $item->created_at->format('d/m/Y') }}</td>
                         <td>{{ $item->nama_barang }}</td>
                         <td>{{ $item->jumlah_beli }}</td>
-                        <td>{{ number_format($item->harga_jual, 2, ',', '.') }}</td>
-                        <td>{{ number_format($item->total_penjualan, 2, ',', '.') }}</td>
+                        <td>Rp {{ number_format($item->harga_jual, 2, ',', '.') }}</td>
+                        <td>Rp {{ number_format($item->total_penjualan, 2, ',', '.') }}</td>
                     </tr>
                 @endforeach
             </tbody>
