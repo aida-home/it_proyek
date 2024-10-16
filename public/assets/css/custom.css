@@ -15,7 +15,7 @@
         /* Styling untuk judul utama (h1) */
         h1 {
             text-align: center;
-            color: #d5006d; /* Warna teks header */
+            color: #8A5E41; /* Warna teks header */
             font-size: 28px;
             margin-bottom: 20px;
         }
@@ -33,7 +33,7 @@
             width: 100%;
             max-width: 1200px; /* Lebar maksimum tabel */
             padding: 20px; /* Padding untuk tabel */
-            border: 1px solid #d5006d; /* Warna border */
+            border: 1px solid #000000; /* Warna border */
             border-radius: 8px;
             background-color: #fff; /* Warna latar section */
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Bayangan untuk depth */
@@ -74,7 +74,7 @@
 
         /* Styling untuk header tabel */
         th {
-            background-color: #ff80ab; /* Warna latar header tabel */
+            background-color: white; /* Warna latar header tabel */
             color: white; /* Warna teks header tabel */
         }
 
@@ -87,7 +87,7 @@
             color: white;
             transition: background-color 0.3s ease, transform 0.2s;
             text-decoration: none;
-            background-color: #d5006d; /* Warna tombol utama */
+            background-color: #8A5E41; /* Warna tombol utama */
             display: inline-block;
             margin-bottom: 10px; /* Jarak bawah tombol */
             align-self: flex-start; /* Memposisikan tombol di pinggir kiri */
@@ -95,16 +95,16 @@
 
         /* Warna tombol edit */
         .btn-edit {
-            background-color: #ffb3c1; /* Warna pink sedikit lebih gelap untuk tombol edit */
+            background-color: #FEC53D; /* Warna pink sedikit lebih gelap untuk tombol edit */
         }
 
         /* Warna tombol hapus */
         .btn-delete {
-            background-color: #d50000; /* Warna merah untuk tombol hapus */
+            background-color: #D20606; /* Warna merah untuk tombol hapus */
         }
 
         /* Efek hover pada semua tombol */
         .btn:hover {
-            background-color: #ff80ab; /* Warna pink lebih gelap saat hover */
+            background-color: #6b4832; /* Warna pink lebih gelap saat hover */
             transform: scale(1.05); /* Efek perbesaran saat hover */
         }
