@@ -5,110 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Create Transaksi</title>
-    <style>
-        /* Reset margin dan padding untuk semua elemen */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Roboto, sans-serif;
-            background-color: #f9f4f4; /* Latar belakang pastel pink */
-            padding: 20px;
-        }
-
-        .container {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        h1 {
-            text-align: center;
-            color: #d5006d;
-            font-size: 28px;
-            margin-bottom: 20px;
-        }
-
-        .form-section, .table-section {
-            padding: 20px;
-            border: 1px solid #d5006d;
-            border-radius: 8px;
-            background-color: #fff;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        input[type="text"], input[type="number"], input[type="date"], select {
-            width: calc(100% - 20px);
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-
-        .btn {
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            color: white;
-            width: 100%;
-            text-decoration: none;
-        }
-
-        .btn-primary {
-            background-color:  #d5006d;
-        }
-
-        .btn-success {
-            background-color:  #d5006d;
-        }
-
-        .btn:hover {
-            opacity: 0.9;
-            transform: scale(1.05);
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            background-color: #ffeef8;
-        }
-
-        table, th, td {
-            border: 1px solid #ddd;
-        }
-
-        th, td {
-            padding: 8px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #ff80ab;
-            color: white;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
 </head>
 <body>
     <div class="container">
         <h2>Tambah Transaksi</h2>
         <form action="{{ route('transaksi.store') }}" method="POST" id="transaksiForm">
             @csrf
+            <div class="table-section">
             <!-- Input Tanggal dengan Filter -->
             <div class="form-group">
                 <label for="tanggal_transaksi">Tanggal Transaksi:</label>
@@ -131,7 +35,7 @@
             <!-- Harga Jual Barang -->
             <div class="form-group">
                 <label for="harga_jual">Harga Jual:</label>
-                <input type="text" class="form-control" id="harga_jual" readonly>
+                <input type="number" class="form-control" id="harga_jual" readonly>
             </div>
 
             <!-- Jumlah Beli -->
