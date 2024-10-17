@@ -12,7 +12,7 @@
     <h1>Kategori</h1>
     <div class="table-section">
         <!-- Link untuk menambahkan kategori baru -->
-        <a href="/create-kategori" class="btn">Tambah Transaksi</a>
+        <a href="/create-kategori" class="btn">Tambah Kategori</a>
         <table class="table table-bordered">
                     <thead>
                         <tr>
