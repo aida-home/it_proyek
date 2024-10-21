@@ -12,9 +12,9 @@
 
         <div class="table-section">
             <form action="{{ route('laporan-penjualan.index') }}" method="GET">
-                <label for="start_date">Mulai Tanggal:</label>
+                <label for="start_date">Tanggal awal:</label>
                 <input type="date" name="start_date" id="start_date" value="{{ $startDate }}">
-                <label for="end_date">Sampai Tanggal:</label>
+                <label for="end_date">Tanggal akhir:</label>
                 <input type="date" name="end_date" id="end_date" value="{{ $endDate }}">
                 <button type="submit">Filter</button>
             </form>
