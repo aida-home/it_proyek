@@ -26,7 +26,7 @@
                     <th>Nama Produk</th>
                     <th>Jumlah Terjual</th>
                     <th>Harga Satuan</th>
-                    <th>Total Penjualan</th>
+                    <th>Total Pendapatan</th>
                 </tr>
             </thead>
             <tbody>
@@ -37,13 +37,13 @@
                         <td>{{ $item->nama_barang }}</td>
                         <td>{{ $item->jumlah_beli }}</td>
                         <td>Rp {{ number_format($item->harga_jual, 2, ',', '.') }}</td>
-                        <td>Rp {{ number_format($item->total_penjualan, 2, ',', '.') }}</td>
+                        <td>Rp {{ number_format($item->total_pendapatan, 2, ',', '.') }}</td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
 
-        <h3>Total Penjualan: Rp{{ number_format($totalPenjualan, 2, ',', '.') }}</h3>
+        <h3>Total Pendapatan: Rp{{ number_format($totalPendapatan, 2, ',', '.') }}</h3>
     </div>
 </body>
 </html>

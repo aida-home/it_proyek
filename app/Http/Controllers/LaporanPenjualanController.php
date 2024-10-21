@@ -16,7 +16,7 @@ class LaporanPenjualanController extends Controller
         // Ambil data detail transaksi dengan join ke tabel barang
         $query = DetailTransaksi::join('barang', 'detail_transaksi.id_barang', '=', 'barang.id_barang')
             ->select('detail_transaksi.created_at', 'barang.nama_barang', 'detail_transaksi.jumlah_beli', 'barang.harga_jual',
-                DB::raw('detail_transaksi.jumlah_beli * barang.harga_jual as total_penjualan'));
+                DB::raw('detail_transaksi.jumlah_beli * barang.harga_jual as total_pendapatan'));
 
         if ($startDate && $endDate) {
             $query->whereBetween('detail_transaksi.created_at', [$startDate, $endDate]);
@@ -25,8 +25,8 @@ class LaporanPenjualanController extends Controller
         $laporanPenjualan = $query->get();
 
         // Hitung total penjualan
-        $totalPenjualan = $laporanPenjualan->sum('total_penjualan');
+        $totalPendapatan = $laporanPenjualan->sum('total_pendapatan');
 
-        return view('laporan-penjualan', compact('laporanPenjualan', 'totalPenjualan', 'startDate', 'endDate'));
+        return view('laporan-penjualan', compact('laporanPenjualan', 'totalPendapatan', 'startDate', 'endDate'));
     }
 }
