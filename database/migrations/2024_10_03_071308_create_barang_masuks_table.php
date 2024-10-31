@@ -6,9 +6,9 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateBarangMasuksTable extends Migration
 {
-    public function up()
+    public function up()//mendefinisikan perubahan apa yang harus diterapkan
     {
-        Schema::create('barang_masuks', function (Blueprint $table) {
+        Schema::create('barang_masuks', function (Blueprint $table) { //schema untuk mendefinisikan struktur tabel dalam database, memungkinkan untuk crud
             $table->string('id_barangmasuk')->primary(); // BM01, BM02, etc
             $table->string('nama_barang');
             $table->date('tgl_masuk');

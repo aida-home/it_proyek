@@ -45,10 +45,7 @@ Route::get('/transaksi', [TransaksiController::class, 'index'])->name('transaksi
 
 // Route untuk menampilkan form tambah transaksi
 Route::get('/transaksi/create', [TransaksiController::class, 'create'])->name('transaksi.create');
-
 Route::post('/transaksi/store', [TransaksiController::class, 'store'])->name('transaksi.store');
-
-// Route untuk menampilkan detail transaksi (jika diperlukan)
 Route::get('/transaksi/{id}/detail', [TransaksiController::class, 'show'])->name('transaksi.show');
 
 Route::get('/home', function () {
