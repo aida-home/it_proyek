@@ -10,28 +10,25 @@ class BarangMasuk extends Model
 {
     use HasFactory;
 
-    protected $table = 'barang_masuks';
+    protected $table = 'barang_masuk';
     protected $primaryKey = 'id_barangmasuk';
-    public $incrementing = false;
-    protected $keyType = 'string';
+    public $incrementing = false; // Set to false because the id is string
+    protected $keyType = 'string'; // The type of the primary key is string
 
+    // Tambahkan id_barangmasuk ke fillable fields
     protected $fillable = [
-        'id_barangmasuk',
+        'id_barangmasuk',  // <-- Pastikan ini ada
         'nama_barang',
+        'supplier',
         'tgl_masuk',
         'jumlah_masuk',
         'harga_beli',
-        'supplier'
     ];
+
 
     // Definisikan relasi dengan Supplier
     public function supplier()
     {
         return $this->belongsTo(Supplier::class, 'supplier', 'id_supplier');
-    }
-
-    public function barang()
-    {
-        return $this->belongsTo(Barang::class, 'id_barang', 'id_barang');
     }
 }
