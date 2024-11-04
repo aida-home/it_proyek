@@ -3,15 +3,12 @@
 use App\Models\Post;
 use App\Models\Barang;
 use App\Models\Kategori;
-use App\Models\Supplier;
 use App\Models\Transaksi;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\KategoriController;
-use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\TransaksiController;
-use App\Http\Controllers\BarangMasukController;
 use App\Http\Controllers\LaporanPenjualanController;
 
 Route::get('/', function () {
@@ -72,16 +69,3 @@ Route::delete('/delete-kategori/{kategori}', [KategoriController::class,'deleteK
 Route::get('/suppliers', function () {
     return view('suppliers');
 });
-
-Route::get('/suppliers', function () {
-    $suppliers = Supplier::all();
-    return view('suppliers', ['suppliers'=>$suppliers]);
-});
-
-Route::resource('suppliers', SupplierController::class);
-
-Route::get('/barangmasuk', [BarangMasukController::class, 'index'])->name('barangmasuk.index');
-Route::post('/barangmasuk', [BarangMasukController::class, 'create'])->name('barangmasuk.create');
-Route::get('/barangmasuk/{id}/edit', [BarangMasukController::class, 'edit'])->name('barangmasuk.edit');
-Route::put('/barangmasuk/{id}', [BarangMasukController::class, 'update'])->name('barangmasuk.update');
-Route::delete('/barangmasuk/{id}', [BarangMasukController::class, 'destroy'])->name('barangmasuk.destroy');
