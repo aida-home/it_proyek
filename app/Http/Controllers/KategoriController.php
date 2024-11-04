@@ -28,6 +28,12 @@ class KategoriController extends Controller
     public function showEditScreen(Kategori $kategori) {
         return view('edit-kategori', ['kategori'=>$kategori]);
     }
+
+    public function showCreateForm() {
+        // Tampilkan form untuk menambah kategori baru
+        return view('create-kategori');
+    }
+    
     public function createKategori(Request $request) {
             // Validasi input
             $request->validate([

@@ -1,0 +1,172 @@
+/* Reset margin dan padding untuk seluruh elemen */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Styling untuk body: font, warna latar, dan padding */
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #E8E8E8; /* Warna latar sesuai dengan desain */
+    padding: 20px;
+}
+
+/* Styling untuk judul utama (h1) */
+h1 {
+    text-align: justify;
+    color: #8A5E41; /* Warna teks header */
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+/* Styling untuk container */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: justify;
+    padding: 20px;
+}
+
+/* Styling untuk section: tabel */
+.table-section {
+    width: 100%;
+    max-width: 1200px;
+    background-color: #fff; /* Warna latar putih untuk section */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-top: 30px; /* Menambah jarak antara tombol dan tabel */
+}
+
+/* Styling untuk subjudul (h2) di tiap section */
+h2 {
+    color: #4e4e4e;
+    margin-bottom: 15px;
+    font-size: 24px;
+}
+
+/* Tombol Tambah Kategori */
+/* Tombol Tambah Transaksi */
+.btn, button {
+    background-color: #8A5E41; /* Warna coklat untuk tombol */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    text-decoration: none; /* Hilangkan underline pada tombol */
+}
+
+/* Hover tombol */
+.btn:hover {
+    background-color: #6b4832; /* Warna coklat lebih gelap saat hover */
+}
+
+/* Gaya untuk form group */
+.form-group {
+    margin-bottom: 20px; /* Jarak bawah antar elemen */
+    border: 2px solid #8A5E41; /* Border coklat */
+    border-radius: 5px; /* Sudut membulat pada border */
+    padding: 10px; /* Padding di dalam border */
+}
+
+/* Gaya untuk input field */
+.form-group input[type="text"] {
+    width: 100%; /* Lebar penuh */
+    padding: 10px; /* Padding di dalam input */
+    border: none; /* Hilangkan border default */
+    background-color: white; /* Latar belakang putih */
+    font-size: 16px; /* Ukuran font */
+    border-radius: 5px; /* Sudut membulat pada input */
+}
+
+/* Styling untuk tabel */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 15px; /* Menambah padding pada header dan cell tabel */
+    text-align: center;
+    font-size: 14px;
+}
+
+td {
+    padding: 15px; /* Menambah padding pada header dan cell tabel */
+    text-align: justify;
+    font-size: 14px;
+}
+
+/* Header tabel */
+th {
+    background-color: #F6F6F6;
+    color: #000000;
+}
+
+/* Styling untuk baris tabel ganjil */
+tr:nth-child(odd) {
+    background-color: #F9F9F9;
+}
+
+/* Tombol Edit dan Hapus */
+.btn-edit {
+    background-color: #FEC53D;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none; /* Hilangkan underline pada tombol */
+}
+
+.btn-edit:hover {
+    background-color: #e0a900;
+}
+
+.btn-delete {
+    background-color: #D20606;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none; /* Hilangkan underline pada tombol */
+}
+
+.btn-delete:hover {
+    background-color: #a80000;
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination a {
+    color: #8A5E41;
+    padding: 8px 16px;
+    text-decoration: none; /* Hilangkan underline pada pagination */
+    border: 1px solid #ddd;
+    margin: 0 4px;
+    border-radius: 4px;
+}
+
+.pagination a:hover {
+    background-color: #ddd;
+    color: #6b4832; /* Warna berubah saat hover */
+    border-color: #6b4832;
+}
