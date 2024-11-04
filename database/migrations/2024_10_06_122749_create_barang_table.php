@@ -13,8 +13,6 @@ class CreateBarangTable extends Migration
             $table->string('nama_barang');
             $table->integer('stok')->default(0); // Total stok dari barang_masuks
             $table->decimal('harga_jual', 15, 2);
-            $table->string('kategori');
-            $table->foreign('kategori')->references('id_kategori')->on('kategori')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
