@@ -105,7 +105,6 @@
                 </select>
 
                 <label for="kategori">Kategori</label>
-                <!-- Dropdown untuk memilih supplier -->
                 <select name="kategori" id="kategori" required>
                     @foreach ($kategori as $kategori)
                         <option value="{{ $kategori->id_kategori }}" {{ $kategori->id_kategori == $barang->kategori ? 'selected' : '' }}>
