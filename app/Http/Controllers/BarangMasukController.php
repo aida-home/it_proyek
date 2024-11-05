@@ -26,7 +26,7 @@ class BarangMasukController extends Controller
     public function create()
     {
         $suppliers = Supplier::all(); // Ambil semua supplier
-        return view('tambah-barangmasuk', compact('suppliers')); // Arahkan ke tampilan tambah-barangmasuk
+        return view('tambah-barangmasuk', compact('kategori','suppliers')); // Arahkan ke tampilan tambah-barangmasuk
     }
 
     // Metode store untuk menambah barang masuk baru ke database.
@@ -80,9 +80,9 @@ class BarangMasukController extends Controller
         // Mengambil data barang berdasarkan id
         $barang = BarangMasuk::findOrFail($id);
         $suppliers = Supplier::all(); // Ambil semua supplier
-    
+        $kategori = Kategori::all();
         // Mengirim data barang dan suppliers ke view 'ubah-barangmasuk'
-        return view('ubah-barangmasuk', compact('barang', 'suppliers'));
+        return view('ubah-barangmasuk', compact('barang', 'suppliers','kategori'));
     }
 
     // Metode update untuk memperbarui data barang masuk yang sudah ada di database.
