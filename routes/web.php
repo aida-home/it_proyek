@@ -10,6 +10,33 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\LaporanPenjualanController;
+use App\Http\Controllers\BarangMasukController;
+use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\UserController;
+
+Route::resource('suppliers', SupplierController::class);
+
+// Routing untuk Barang Masuk
+Route::get('/barangmasuk', [BarangMasukController::class, 'index'])->name('barangmasuk.index');
+// Route untuk menampilkan form tambah barangmasuk (metode GET)
+Route::get('/barangmasuk/create', [BarangMasukController::class, 'create'])->name('barangmasuk.create');
+// Route untuk menyimpan data barang masuk (metode POST)
+Route::post('/barangmasuk/create', [BarangMasukController::class, 'store'])->name('barangmasuk.store');
+Route::get('/barangmasuk/{id}/edit', [BarangMasukController::class, 'edit'])->name('barangmasuk.edit');
+Route::put('/barangmasuk/{id}', [BarangMasukController::class, 'update'])->name('barangmasuk.update');
+Route::delete('/barangmasuk/{id}', [BarangMasukController::class, 'destroy'])->name('barangmasuk.destroy');
+
+// Route untuk Dashboard
+Route::get('/beranda', function () {
+    $posts = Post::all();
+    return view('beranda', ['posts'=> $posts]);
+});
+
+Route::post('/register', [UserController::class,'register']);
+
+Route::post('/login', [UserController::class,'login']);
+
+Route::post('/logout', [UserController::class,'logout']);
 
 Route::get('/', function () {
     return view('welcome');
@@ -65,7 +92,3 @@ Route::get('/create-kategori', [KategoriController::class, 'showCreateForm']);
 Route::get('/edit-kategori/{kategori}', [KategoriController::class,'showEditScreen']);
 Route::put('/edit-kategori/{kategori}', [KategoriController::class,'actuallyUpdateKategori']);
 Route::delete('/delete-kategori/{kategori}', [KategoriController::class,'deleteKategori']);
-
-Route::get('/suppliers', function () {
-    return view('suppliers');
-});
