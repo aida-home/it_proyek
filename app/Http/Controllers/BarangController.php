@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barang;
+use App\Models\Kategori;
 use App\Models\BarangMasuk;
 use Illuminate\Http\Request;
 
@@ -12,16 +13,18 @@ class BarangController extends Controller
 // Fungsi untuk menampilkan daftar barang
 public function index()
 {
-    $barang = Barang::with('barang_masuk')->get();
-    $barang_masuks = BarangMasuk::all(); // Ambil semua barang masuk
+    $barang = Barang::with('kategori')->get();
+    $kategori = Kategori::all(); // Mengambil semua kategori
     return view('barang', compact('barang','kategori'));
 }
 
 // Fungsi untuk menampilkan form penambahan barang baru
 public function create()
 {
+    $barang = Barang::with('kategori')->get(); // Ambil daftar barang
+    $kategori = Kategori::all(); // Ambil daftar kategori
     $barang_masuks = BarangMasuk::all(); // Ambil semua barang masuk
-    return view('create-barang', compact('barang_masuk')); // Kirim kedua variabel
+    return view('create-barang', compact('kategori', 'barang_masuks')); // Kirim kedua variabel
 }
 
     // Fungsi untuk menyimpan barang baru ke database
@@ -31,6 +34,7 @@ public function create()
         $request->validate([
             'nama_barang' => 'required',
             'harga_jual' => 'required|numeric',
+            'kategori' => 'required',
         ]);
 
         // Membuat id_barang secara otomatis dalam format 001, 002, 003, dst.
@@ -59,7 +63,8 @@ public function create()
     public function edit($id)
     {
         $barang = Barang::findOrFail($id);
-        return view('barang.edit', compact('barang'));
+        $kategori = Kategori::all();
+        return view('barang.edit', compact('barang', 'kategori'));
     }
 
     // Fungsi untuk menyimpan perubahan data barang
@@ -70,6 +75,7 @@ public function create()
             'nama_barang' => 'required',
             'stok' => 'required|integer',
             'harga_jual' => 'required|numeric',
+            'kategori' => 'required'
         ]);
 
         // Update data barang di database
@@ -78,6 +84,7 @@ public function create()
             'nama_barang' => $request->nama_barang,
             'stok' => $request->stok,
             'harga_jual' => $request->harga_jual,
+            'kategori' => $request->kategori,
         ]);
 
         return redirect()->route('barang.index')->with('success', 'Barang berhasil diupdate.');
