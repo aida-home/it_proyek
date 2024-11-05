@@ -3,28 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barang;
-use App\Models\Kategori;
 use App\Models\BarangMasuk;
 use Illuminate\Http\Request;
 
 class BarangController extends Controller
 {
-    // Fungsi untuk menampilkan daftar barang
-// Fungsi untuk menampilkan daftar barang
-public function index()
-{
-    $barang = Barang::with('kategori')->get();
-    $kategori = Kategori::all(); // Mengambil semua kategori
-    return view('barang', compact('barang','kategori'));
-}
-
-// Fungsi untuk menampilkan form penambahan barang baru
 public function create()
 {
     $barang = Barang::with('kategori')->get(); // Ambil daftar barang
-    $kategori = Kategori::all(); // Ambil daftar kategori
     $barang_masuks = BarangMasuk::all(); // Ambil semua barang masuk
-    return view('create-barang', compact('kategori', 'barang_masuks')); // Kirim kedua variabel
+    return view('create-barang', compact('barang_masuks')); // Kirim kedua variabel
 }
 
     // Fungsi untuk menyimpan barang baru ke database
@@ -34,7 +22,6 @@ public function create()
         $request->validate([
             'nama_barang' => 'required',
             'harga_jual' => 'required|numeric',
-            'kategori' => 'required',
         ]);
 
         // Membuat id_barang secara otomatis dalam format 001, 002, 003, dst.
@@ -53,7 +40,6 @@ public function create()
         $barang->nama_barang = $request->nama_barang;
         $barang->stok = $totalStok; // Set stok berdasarkan total barang masuk
         $barang->harga_jual = $request->harga_jual; // Pastikan harga_jual disimpan
-        $barang->kategori = $request->kategori;
         $barang->save();
 
         return redirect()->route('barang.index')->with('success', 'Barang berhasil ditambahkan.');
@@ -63,8 +49,7 @@ public function create()
     public function edit($id)
     {
         $barang = Barang::findOrFail($id);
-        $kategori = Kategori::all();
-        return view('barang.edit', compact('barang', 'kategori'));
+        return view('barang.edit', compact('barang'));
     }
 
     // Fungsi untuk menyimpan perubahan data barang
@@ -74,8 +59,7 @@ public function create()
         $request->validate([
             'nama_barang' => 'required',
             'stok' => 'required|integer',
-            'harga_jual' => 'required|numeric',
-            'kategori' => 'required'
+            'harga_jual' => 'required|numeric'
         ]);
 
         // Update data barang di database
@@ -84,7 +68,6 @@ public function create()
             'nama_barang' => $request->nama_barang,
             'stok' => $request->stok,
             'harga_jual' => $request->harga_jual,
-            'kategori' => $request->kategori,
         ]);
 
         return redirect()->route('barang.index')->with('success', 'Barang berhasil diupdate.');

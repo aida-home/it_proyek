@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kategori;
 use App\Models\BarangMasuk;
 use Illuminate\Http\Request;
 use App\Models\Supplier; // Import Supplier model
@@ -13,10 +14,11 @@ class BarangMasukController extends Controller
     {
         // Mengambil semua data barang masuk dengan relasi supplier
         $barangMasuk = BarangMasuk::with('supplier')->get();
+        $kategori = Kategori::all(); // Mengambil semua kategori
         $suppliers = Supplier::all(); // Ambil semua supplier
     
         // Mengirim data barangMasuk dan suppliers ke view 'barangmasuk'
-        return view('barangmasuk', compact('barangMasuk', 'suppliers'));
+        return view('barangmasuk', compact('kategori','barangMasuk', 'suppliers'));
     }
     
 
@@ -33,9 +35,11 @@ class BarangMasukController extends Controller
         // Validasi data yang dimasukkan oleh user sebelum menyimpannya.
         $request->validate([
             'supplier' => 'required|exists:suppliers,id_supplier', // Pastikan supplier yang dipilih ada di database
+            'kategori' => 'required',
             'nama_barang' => 'required|string|max:255',
             'tgl_masuk' => 'required|date|before_or_equal:today',
             'jumlah_masuk' => 'required|integer',
+            'kategori' => 'required',
             'harga_beli' => 'required|numeric',
         ], [
             'tgl_masuk.before_or_equal'       
@@ -59,6 +63,7 @@ class BarangMasukController extends Controller
         BarangMasuk::create([
             'id_barangmasuk' => $newId,  // Set ID kustom
             'supplier' => $request->supplier, // Simpan ID supplier
+            'kategori' => $request->kategori, // Simpan ID supplier
             'nama_barang' => $request->nama_barang,
             'tgl_masuk' => $request->tgl_masuk,
             'jumlah_masuk' => $request->jumlah_masuk,
@@ -86,6 +91,7 @@ class BarangMasukController extends Controller
         // Validasi data yang diperbarui oleh user sebelum menyimpannya.
         $request->validate([
             'supplier' => 'required|exists:suppliers,id_supplier',        // Supplier harus valid
+            'kategori' => 'required',
             'nama_barang' => 'required|string|max:255',                   // Nama barang harus valid
             'tgl_masuk' => 'required|date',                               // Tanggal masuk harus valid
             'jumlah_masuk' => 'required|integer',                         // Jumlah masuk harus valid
@@ -98,6 +104,7 @@ class BarangMasukController extends Controller
         // Memperbarui data barang dengan data baru dari request.
         $barang->update([
             'supplier' => $request->supplier,
+            'kategori' => $request->kategori,
             'nama_barang' => $request->nama_barang,
             'tgl_masuk' => $request->tgl_masuk,
             'jumlah_masuk' => $request->jumlah_masuk,

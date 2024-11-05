@@ -12,12 +12,7 @@ class Barang extends Model
     protected $table = 'barang';
     protected $primaryKey = 'id_barang';
     public $incrementing = false; // Disable auto-increment for id_barang
-    protected $fillable = ['id_barang', 'nama_barang', 'stok', 'harga_jual', 'kategori'];
-
-    public function kategori()
-    {
-        return $this->belongsTo(Kategori::class, 'kategori', 'id_kategori');
-    }
+    protected $fillable = ['id_barang', 'nama_barang', 'stok', 'harga_jual'];
 
     public function transaksi()
     {

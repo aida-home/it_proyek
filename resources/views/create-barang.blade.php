@@ -157,20 +157,6 @@
                 @enderror
             </div>
     
-            <!-- Dropdown untuk memilih kategori dari tabel kategori -->
-            <div class="form-group">
-                <label for="kategori">Kategori:</label>
-                <select name="kategori" id="kategori" class="form-control">
-                    <option value="">Pilih Kategori</option>
-                    @foreach($kategori as $kat)
-                        <option value="{{ $kat->id_kategori }}">{{ $kat->nama_kategori }}</option>
-                    @endforeach
-                </select>
-                @error('kategori')
-                    <span class="text-danger">{{ $message }}</span>
-                @enderror
-            </div>
-    
             <!-- Tombol submit -->
             <button type="submit" class="btn btn-primary">Simpan</button>
         </form>

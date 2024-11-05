@@ -126,7 +126,6 @@
                     <th>Nama Barang</th>
                     <th>Stok</th>
                     <th>Harga Jual</th>
-                    <th>Kategori</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -137,7 +136,6 @@
                         <td>{{ $item->nama_barang }}</td>
                         <td>{{ $item->stok }}</td>
                         <td>Rp {{ number_format($item->harga_jual, 0, ',', '.') }}</td>
-                        <td>{{ $item->kategori }}</td>
                         <td>
                             <a href="{{ route('barang.edit', $item->id_barang) }}" class="btn btn-warning">Edit</a>
                             <form action="{{ route('barang.destroy', $item->id_barang) }}" method="POST" style="display:inline;">
