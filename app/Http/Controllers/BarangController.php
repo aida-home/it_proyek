@@ -8,11 +8,20 @@ use Illuminate\Http\Request;
 
 class BarangController extends Controller
 {
+    // Fungsi untuk menampilkan daftar barang
+// Fungsi untuk menampilkan daftar barang
+public function index()
+{
+    $barang = Barang::with('barang_masuk')->get();
+    $barang_masuks = BarangMasuk::all(); // Ambil semua barang masuk
+    return view('barang', compact('barang','kategori'));
+}
+
+// Fungsi untuk menampilkan form penambahan barang baru
 public function create()
 {
-    $barang = Barang::with('kategori')->get(); // Ambil daftar barang
     $barang_masuks = BarangMasuk::all(); // Ambil semua barang masuk
-    return view('create-barang', compact('barang_masuks')); // Kirim kedua variabel
+    return view('create-barang', compact('barang_masuk')); // Kirim kedua variabel
 }
 
     // Fungsi untuk menyimpan barang baru ke database
@@ -40,6 +49,7 @@ public function create()
         $barang->nama_barang = $request->nama_barang;
         $barang->stok = $totalStok; // Set stok berdasarkan total barang masuk
         $barang->harga_jual = $request->harga_jual; // Pastikan harga_jual disimpan
+        $barang->kategori = $request->kategori;
         $barang->save();
 
         return redirect()->route('barang.index')->with('success', 'Barang berhasil ditambahkan.');
@@ -59,7 +69,7 @@ public function create()
         $request->validate([
             'nama_barang' => 'required',
             'stok' => 'required|integer',
-            'harga_jual' => 'required|numeric'
+            'harga_jual' => 'required|numeric',
         ]);
 
         // Update data barang di database
