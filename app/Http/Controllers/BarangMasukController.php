@@ -26,6 +26,7 @@ class BarangMasukController extends Controller
     public function create()
     {
         $suppliers = Supplier::all(); // Ambil semua supplier
+        $kategori = Kategori::all(); 
         return view('tambah-barangmasuk', compact('kategori','suppliers')); // Arahkan ke tampilan tambah-barangmasuk
     }
 
