@@ -93,8 +93,7 @@
                 <label for="kategori">Kategori</label>
                 <select name="kategori" id="kategori" required>
                     @foreach ($kategori as $kategori)
-                        <option value="{{ $kategori->id_kategori }}" {{ $kategori->id_kategori == $barang->kategori ? 'selected' : '' }}>
-                            {{ $kategori->nama_kategori }}
+                        <option value="{{ $kategori->id_kategori }}">{{ $kategori->nama_kategori }}
                         </option>
                     @endforeach
                 </select>
