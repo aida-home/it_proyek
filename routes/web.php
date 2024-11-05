@@ -1,12 +1,10 @@
 <?php
 
 use App\Models\Post;
-use App\Models\Barang;
 use App\Models\Kategori;
 use App\Models\Transaksi;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\BarangController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\LaporanPenjualanController;
@@ -50,14 +48,6 @@ Route::get('/laporan-penjualan', function () {
     return view('laporan-penjualan');
 });
 Route::get('/laporan-penjualan', [LaporanPenjualanController::class, 'index'])->name('laporan-penjualan.index');
-
-
-Route::get('/barang', function () {
-    $barang = Barang::all();
-    return view('barang', ['barang'=> $barang]);
-});
-Route::resource('barang', BarangController::class);
-Route::get('/barang', [BarangController::class, 'index'])->name('barang.index');
 
 
 Route::get('/transaksi', function () {
