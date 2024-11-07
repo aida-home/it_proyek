@@ -29,7 +29,7 @@ class BarangMasukController extends Controller
         $kategori = Kategori::all(); 
         return view('tambah-barangmasuk', compact('kategori','suppliers')); // Arahkan ke tampilan tambah-barangmasuk
     }
-
+    
     // Metode store untuk menambah barang masuk baru ke database.
     public function store(Request $request)
     {
