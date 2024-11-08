@@ -11,6 +11,25 @@ use App\Http\Controllers\LaporanPenjualanController;
 use App\Http\Controllers\BarangMasukController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PenggunaController;
+use App\Http\Controllers\BarangController;
+
+Route::get('barang', [BarangController::class, 'index'])->name('barang.index'); // Menampilkan semua barang
+Route::get('barang/create', [BarangController::class, 'create'])->name('barang.create'); // Form untuk membuat barang baru
+Route::post('barang', [BarangController::class, 'store'])->name('barang.store'); // Menyimpan barang baru
+Route::get('barang/{id}', [BarangController::class, 'show'])->name('barang.show'); // Menampilkan detail barang
+Route::get('barang/{id_barang}/edit', [BarangController::class, 'edit'])->name('barang.edit'); // Form untuk mengedit barang
+Route::put('barang/{id}', [BarangController::class, 'update'])->name('barang.update'); // Memperbarui data barang
+Route::delete('barang/{id}', [BarangController::class, 'destroy'])->name('barang.destroy'); // Menghapus barang
+
+// Rute untuk PenggunaController
+Route::get('penggunas', [PenggunaController::class, 'index'])->name('penggunas.index'); // Menampilkan semua pengguna
+Route::get('penggunas/create', [PenggunaController::class, 'create'])->name('penggunas.create'); // Form untuk membuat pengguna baru
+Route::post('penggunas', [PenggunaController::class, 'store'])->name('penggunas.store'); // Menyimpan pengguna baru
+Route::get('penggunas/{id}', [PenggunaController::class, 'show'])->name('penggunas.show'); // Menampilkan detail pengguna
+Route::get('penggunas/{id_pengguna}/edit', [PenggunaController::class, 'edit'])->name('penggunas.edit'); // Form untuk mengedit pengguna
+Route::put('penggunas/{id}', [PenggunaController::class, 'update'])->name('penggunas.update'); // Memperbarui data pengguna
+Route::delete('penggunas/{id}', [PenggunaController::class, 'destroy'])->name('penggunas.destroy'); // Menghapus pengguna
 
 Route::resource('suppliers', SupplierController::class);
 
