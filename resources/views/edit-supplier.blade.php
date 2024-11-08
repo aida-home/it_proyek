@@ -69,9 +69,9 @@
     <h1>Edit Supplier</h1>
     <div class="form-section">
         <form action="{{ route('suppliers.update', $supplier->id_supplier) }}" method="POST">
-            @csrf
-            @method('PUT') <!-- Menggunakan metode PUT untuk memperbarui data -->
-            
+        @csrf
+        @method('PUT')
+
             <label for="nama_supplier">Nama Supplier</label>
             <input type="text" id="nama_supplier" name="nama_supplier" value="{{ $supplier->nama_supplier }}" required>
             
