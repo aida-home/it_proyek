@@ -31,23 +31,22 @@ class TransaksiController extends Controller
 
         // Generate ID Transaksi
         $lastTransaksi = Transaksi::orderBy('id_transaksi', 'desc')->first();
-        $tanggalTransaksi = $request->tanggal_transaksi;
-        $day = date('d', strtotime($tanggalTransaksi)); 
-        $month = date('m', strtotime($tanggalTransaksi)); 
-        $year = date('y', strtotime($tanggalTransaksi)); 
 
         if ($lastTransaksi) {
-            $lastIdNumber = (int) substr($lastTransaksi->id_transaksi, 2, 2);
-            $newIdNumber = str_pad($lastIdNumber + 1, 2, '0', STR_PAD_LEFT);
+            // Ambil angka terakhir dari ID transaksi sebelumnya, tambahkan 1
+            $lastIdNumber = (int) substr($lastTransaksi->id_transaksi, 2); // Ambil angka setelah "TR"
+            $newIdNumber = $lastIdNumber + 1;
         } else {
-            $newIdNumber = '01';
+            $newIdNumber = 1; // Jika belum ada transaksi, mulai dari 1
         }
-        $newId = 'TR' . $newIdNumber . $day . $month . $year;
+
+        // Format ID Transaksi dengan prefix "TR"
+        $newId = 'TR' . $newIdNumber;
 
         // Simpan transaksi
         $transaksi = new Transaksi;
         $transaksi->id_transaksi = $newId;
-        $transaksi->tanggal_transaksi = $tanggalTransaksi;
+        $transaksi->tanggal_transaksi = $request->tanggal_transaksi;
         $transaksi->total_pembayaran = 0; // Total pembayaran akan di-update nanti
         $transaksi->save();
 

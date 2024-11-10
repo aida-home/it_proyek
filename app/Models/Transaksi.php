@@ -15,6 +15,12 @@ class Transaksi extends Model
     protected $keyType = 'string';
     protected $fillable = ['id_transaksi', 'tanggal_transaksi', 'total_pembayaran'];
 
+    // Accessor untuk tanggal_transaksi
+    public function getTanggalTransaksiAttribute($value)
+    {
+        return date('d/m/Y', strtotime($value));
+    }
+
     // Relasi ke DetailTransaksi (One-to-Many)
     public function detailTransaksi()
     {

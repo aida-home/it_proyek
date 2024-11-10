@@ -33,7 +33,7 @@
                 @foreach ($laporanPenjualan as $index => $item)
                     <tr>
                         <td>{{ $index + 1 }}</td>
-                        <td>{{ $item->created_at->format('d/m/Y') }}</td>
+                        <td>{{ date('d/m/Y', strtotime($item->tanggal_transaksi)) }}</td>
                         <td>{{ $item->nama_barang }}</td>
                         <td>{{ $item->jumlah_beli }}</td>
                         <td>Rp {{ number_format($item->harga_jual, 2, ',', '.') }}</td>

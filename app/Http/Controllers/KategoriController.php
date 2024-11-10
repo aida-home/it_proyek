@@ -40,6 +40,11 @@ class KategoriController extends Controller
                 'nama_kategori' => 'required'
             ]);
     
+                // Cek apakah nama_kategori sudah ada
+            if (Kategori::where('nama_kategori', $request->nama_kategori)->exists()) {
+             return back()->withErrors(['nama_kategori' => 'Nama kategori sudah ada.']);
+            }
+
             // Ambil ID kategori terakhir
             $lastKategori = Kategori::orderBy('id_kategori', 'desc')->first();
     

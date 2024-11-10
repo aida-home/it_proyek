@@ -68,18 +68,8 @@ Route::get('/laporan-penjualan', function () {
 });
 Route::get('/laporan-penjualan', [LaporanPenjualanController::class, 'index'])->name('laporan-penjualan.index');
 
+Route::resource('transaksi', TransaksiController::class);
 
-Route::get('/transaksi', function () {
-    $transaksi = Transaksi::all();
-    return view('transaksi', ['transaksi'=> $transaksi]);
-});
-// Route untuk menampilkan daftar transaksi
-Route::get('/transaksi', [TransaksiController::class, 'index'])->name('transaksi.index');
-
-// Route untuk menampilkan form tambah transaksi
-Route::get('/transaksi/create', [TransaksiController::class, 'create'])->name('transaksi.create');
-Route::post('/transaksi/store', [TransaksiController::class, 'store'])->name('transaksi.store');
-Route::get('/transaksi/{id}/detail', [TransaksiController::class, 'show'])->name('transaksi.show');
 
 Route::get('/home', function () {
     $posts = Post::all();//menampilkan semua artikel
