@@ -94,16 +94,16 @@
             <input type="text" id="nama_barang" name="nama_barang" value="{{ $barang->nama_barang }}" required>
 
             <label for="kategori">Kategori</label>
-            <input type="text" id="kategori" name="kategori" value="{{ $dbarang->kategori }}" required>
+            <input type="text" id="kategori" name="kategori" value="{{ $barang->kategori }}" required>
 
             <label for="stok_barang">Stok Barang</label>
             <input type="number" id="stok_barang" name="stok_barang" value="{{ $barang->stok_barang }}" required min="0">
 
             <label for="harga_jual">Harga Jual</label>
-            <input type="number" id="harga_jual" name="harga_jual" value="{{ $dbarang->harga_jual }}" required min="0" step="0.01">
+            <input type="number" id="harga_jual" name="harga_jual" value="{{ $barang->harga_jual }}" required min="0" step="0.01">
 
             <button type="submit" class="btn">Simpan Perubahan</button>
-            <button type="button" onclick="location.href='{{ route('barang.inex') }}'" class="btn btn-cancel">Batal</button>
+            <button type="button" onclick="location.href='{{ route('barang.index') }}'" class="btn btn-cancel">Batal</button>
         </form>
     </div>
 </body>

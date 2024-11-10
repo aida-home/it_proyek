@@ -24,7 +24,7 @@ public function create()
     $barang = Barang::with('kategori')->get(); // Ambil daftar barang
     $kategori = Kategori::all(); // Ambil daftar kategori
     $barang_masuk = BarangMasuk::all(); // Ambil semua barang masuk
-    return view('create-barang', compact('kategori', 'barang_masuk')); // Kirim kedua variabel
+    return view('tambah-barang', compact('kategori', 'barang_masuk')); // Kirim kedua variabel
 }
 
     // Fungsi untuk menyimpan barang baru ke database
@@ -51,7 +51,7 @@ public function create()
         $barang = new Barang();
         $barang->id_barang = $newId;
         $barang->nama_barang = $request->nama_barang;
-        $barang->stok = $totalStok; // Set stok berdasarkan total barang masuk
+        $barang->stok_barang = $totalStok; // Set stok berdasarkan total barang masuk
         $barang->harga_jual = $request->harga_jual; // Pastikan harga_jual disimpan
         $barang->kategori = $request->kategori;
         $barang->save();
@@ -64,7 +64,7 @@ public function create()
     {
         $barang = Barang::findOrFail($id);
         $kategori = Kategori::all();
-        return view('barang.edit', compact('barang', 'kategori'));
+        return view('edit-barang', compact('barang', 'kategori'));
     }
 
     // Fungsi untuk menyimpan perubahan data barang
@@ -73,7 +73,7 @@ public function create()
         // Validasi data
         $request->validate([
             'nama_barang' => 'required',
-            'stok' => 'required|integer',
+            'stok_barang' => 'required|integer',
             'harga_jual' => 'required|numeric',
             'kategori' => 'required'
         ]);
@@ -82,7 +82,7 @@ public function create()
         $barang = Barang::findOrFail($id);
         $barang->update([
             'nama_barang' => $request->nama_barang,
-            'stok' => $request->stok,
+            'stok_barang' => $request->stok_barang,
             'harga_jual' => $request->harga_jual,
             'kategori' => $request->kategori,
         ]);
