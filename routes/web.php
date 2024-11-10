@@ -23,7 +23,7 @@ Route::put('barang/{id}', [BarangController::class, 'update'])->name('barang.upd
 Route::delete('barang/{id}', [BarangController::class, 'destroy'])->name('barang.destroy'); // Menghapus barang
 
 // Rute untuk PenggunaController
-Route::get('penggunas', [PenggunaController::class, 'index'])->name('penggunas.index'); // Menampilkan semua pengguna
+Route::get('pengguna', [PenggunaController::class, 'index'])->name('pengguna.index'); // Menampilkan semua pengguna
 Route::get('penggunas/create', [PenggunaController::class, 'create'])->name('penggunas.create'); // Form untuk membuat pengguna baru
 Route::post('penggunas', [PenggunaController::class, 'store'])->name('penggunas.store'); // Menyimpan pengguna baru
 Route::get('penggunas/{id}', [PenggunaController::class, 'show'])->name('penggunas.show'); // Menampilkan detail pengguna
