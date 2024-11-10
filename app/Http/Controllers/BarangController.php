@@ -3,86 +3,97 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barang;
+use App\Models\Kategori;
+use App\Models\BarangMasuk;
 use Illuminate\Http\Request;
 
 class BarangController extends Controller
 {
-    // Menyimpan barang baru
+    // Fungsi untuk menampilkan daftar barang
+// Fungsi untuk menampilkan daftar barang
+public function index()
+{
+    $barang = Barang::with('kategori')->get();
+    $kategori = Kategori::all(); // Mengambil semua kategori
+    return view('barang', compact('barang','kategori'));
+}
+
+// Fungsi untuk menampilkan form penambahan barang baru
+public function create()
+{
+    $barang = Barang::with('kategori')->get(); // Ambil daftar barang
+    $kategori = Kategori::all(); // Ambil daftar kategori
+    $barang_masuk = BarangMasuk::all(); // Ambil semua barang masuk
+    return view('create-barang', compact('kategori', 'barang_masuk')); // Kirim kedua variabel
+}
+
+    // Fungsi untuk menyimpan barang baru ke database
     public function store(Request $request)
     {
-        // Validasi data yang dikirim dari form
-        $validatedData = $request->validate([
-            'nama_barang' => 'required|string|max:255',
-            'kategori' => 'required|string|max:255',
-            'stok_barang' => 'required|integer|min:0',
-            'harga_jual' => 'required|numeric|min:0',
+        // Validasi data
+        $request->validate([
+            'nama_barang' => 'required',
+            'harga_jual' => 'required|numeric',
+            'kategori' => 'required',
         ]);
 
-        // Mendapatkan ID barang terakhir untuk membuat ID baru dengan prefix 'DB'
-        $lastBarang = Barang::orderBy('id_barang', 'desc')->first();
-        $newIdNumber = $lastBarang ? intval(substr($lastBarang->id_barang, 2)) + 1 : 1;
-        $newId = 'DB' . str_pad($newIdNumber, 2, '0', STR_PAD_LEFT);
-
-        // Buat data baru menggunakan model Barang
+        // Membuat id_barang secara otomatis dalam format 001, 002, 003, dst.
+        $latestBarang = Barang::orderBy('id_barang', 'desc')->first();
+        if (!$latestBarang) {
+            $newId = '001';
+        } else {
+            $lastIdNumber = (int) substr($latestBarang->id_barang, -3);
+            $newId = str_pad($lastIdNumber + 1, 3, '0', STR_PAD_LEFT);
+        }
+        
+        $totalStok = BarangMasuk::where('nama_barang', $request->nama_barang)->sum('jumlah_masuk');
+        // Simpan data barang ke database
         $barang = new Barang();
-        $barang->id_databarang = $newId; // Tambahkan id_barang
-        $barang->nama_barang = $validatedData['nama_barang'];
-        $barang->kategori = $validatedData['kategori'];
-        $barang->stok_barang = $validatedData['stok_barang'];
-        $barang->harga_jual = $validatedData['harga_jual'];
-        $barang->save(); // Simpan ke database
+        $barang->id_barang = $newId;
+        $barang->nama_barang = $request->nama_barang;
+        $barang->stok = $totalStok; // Set stok berdasarkan total barang masuk
+        $barang->harga_jual = $request->harga_jual; // Pastikan harga_jual disimpan
+        $barang->kategori = $request->kategori;
+        $barang->save();
 
-        // Redirect kembali ke halaman index dengan pesan sukses
         return redirect()->route('barang.index')->with('success', 'Barang berhasil ditambahkan.');
     }
 
-    // Menampilkan daftar barang (Index)
-    public function index() 
+    // Fungsi untuk menampilkan form edit barang
+    public function edit($id)
     {
-    $barang = Barang::all(); // Mengambil semua barang
-    return view('barang', compact('barang')); // Mengirimkan data ke view
+        $barang = Barang::findOrFail($id);
+        $kategori = Kategori::all();
+        return view('barang.edit', compact('barang', 'kategori'));
     }
 
-
-    // Menampilkan form untuk membuat barang baru
-    public function create()
+    // Fungsi untuk menyimpan perubahan data barang
+    public function update(Request $request, $id)
     {
-        return view('tambah-barang');
-    }
-
-    // Menampilkan form edit barang
-    public function edit($id_barang)
-    {
-        $barang = Barang::findOrFail($id_barang);
-        return view('edit-barang', compact('barang'));
-    }
-
-    // Mengupdate barang
-    public function update(Request $request, $id_barang)
-    {
+        // Validasi data
         $request->validate([
-            'nama_barang' => 'required|string|max:255',
-            'kategori' => 'required|string|max:255',
-            'stok_barang' => 'required|integer|min:0',
-            'harga_jual' => 'required|numeric|min:0'
+            'nama_barang' => 'required',
+            'stok' => 'required|integer',
+            'harga_jual' => 'required|numeric',
+            'kategori' => 'required'
         ]);
-        
-        $barang = Barang::findOrFail($id_barang);
 
+        // Update data barang di database
+        $barang = Barang::findOrFail($id);
         $barang->update([
             'nama_barang' => $request->nama_barang,
-            'kategori' => $request->kategori,
-            'stok_barang' => $request->stok_barang,
+            'stok' => $request->stok,
             'harga_jual' => $request->harga_jual,
+            'kategori' => $request->kategori,
         ]);
 
-        return redirect()->route('barang.index')->with('success', 'Barang berhasil diperbarui.');
+        return redirect()->route('barang.index')->with('success', 'Barang berhasil diupdate.');
     }
 
-    // Menghapus barang
-    public function destroy($id_barang)
+    // Fungsi untuk menghapus barang
+    public function destroy($id)
     {
-        $barang = Barang::findOrFail($id_barang);
+        $barang = Barang::findOrFail($id);
         $barang->delete();
 
         return redirect()->route('barang.index')->with('success', 'Barang berhasil dihapus.');

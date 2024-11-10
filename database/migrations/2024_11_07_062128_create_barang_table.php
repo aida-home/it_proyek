@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('barangs', function (Blueprint $table) {
+        Schema::create('barang', function (Blueprint $table) {
             $table->string('id_barang')->primary(); // Menjadikan id_barang sebagai primary key
             $table->string('nama_barang'); // Kolom untuk menyimpan nama barang
             $table->string('kategori'); // Kolom untuk menyimpan kategori barang
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('barangs');
+        Schema::dropIfExists('barang');
     }
 };

@@ -9,7 +9,7 @@ class Barang extends Model
 {
     use HasFactory;
 
-    protected $table = 'barangs'; // Nama tabel di database
+    protected $table = 'barang'; // Nama tabel di database
 
     protected $primaryKey = 'id_barang'; // Menentukan primary key
 
