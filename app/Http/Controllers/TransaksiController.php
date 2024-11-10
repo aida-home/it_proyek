@@ -71,7 +71,7 @@ class TransaksiController extends Controller
                     $detailTransaksi->save();
 
                     // Kurangi stok barang
-                    $barang->stok -= $detailTransaksi->jumlah_beli;
+                    $barang->stok_barang -= $detailTransaksi->jumlah_beli;
                     $barang->save();
 
                     // Update total transaksi
