@@ -13,7 +13,7 @@ class Pengguna extends Model
     // Jika 'id_pengguna' adalah string, tambahkan juga
     protected $keyType = 'string';
     public $incrementing = false; // Jika primary key tidak auto-increment
-    protected $table = 'penggunas'; // pastikan ini sesuai dengan nama tabel di database
+    protected $table = 'pengguna'; // pastikan ini sesuai dengan nama tabel di database
     protected $fillable = [
         'id_pengguna',
         'nama_pengguna',
