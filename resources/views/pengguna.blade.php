@@ -120,7 +120,7 @@
             @if (session('success'))
                 <div class="alert">{{ session('success') }}</div>
             @endif
-            <a href="{{ route('penggunas.create') }}" class="btn">Tambah Pengguna</a>
+            <a href="{{ route('pengguna.create') }}" class="btn">Tambah Pengguna</a>
             <table>
                 <thead>
                     <tr>
@@ -132,15 +132,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($penggunas as $pengguna)
+                    @foreach ($pengguna as $pengguna)
                     <tr>
                         <td>{{ $pengguna->id_pengguna }}</td>
                         <td>{{ $pengguna->nama_pengguna }}</td>
                         <td>{{ $pengguna->no_telepon }}</td>
                         <td>{{ $pengguna->username }}</td>
                         <td class="action-buttons">
-                            <a href="{{ route('penggunas.edit', $pengguna->id_pengguna) }}" class="btn-edit">Edit</a>
-                            <form action="{{ route('penggunas.destroy', $pengguna->id_pengguna) }}" method="POST" style="display:inline;">
+                            <a href="{{ route('pengguna.edit', $pengguna->id_pengguna) }}" class="btn-edit">Edit</a>
+                            <form action="{{ route('pengguna.destroy', $pengguna->id_pengguna) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-delete" onclick="return confirm('Anda yakin ingin menghapus data ini?')">Hapus</button>
