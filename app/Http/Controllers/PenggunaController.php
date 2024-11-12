@@ -10,8 +10,8 @@ class PenggunaController extends Controller
     // Menampilkan semua pengguna
     public function index()
     {
-        $penggunas = Pengguna::all(); // Mengambil semua data pengguna
-        return view('pengguna', compact('penggunas')); // Mengirim data ke view
+        $pengguna = Pengguna::all(); // Mengambil semua data pengguna
+        return view('pengguna', compact('pengguna')); // Mengirim data ke view
     }
 
     // Menampilkan formulir untuk menambah pengguna
@@ -27,7 +27,7 @@ class PenggunaController extends Controller
         $request->validate([
             'nama_pengguna' => 'required|string|max:255',
             'no_telepon' => 'required|string|max:15',
-            'username' => 'required|string|max:255|unique:penggunas',
+            'username' => 'required|string|max:255|unique:pengguna',
             'password' => 'required|string|min:8',
         ]);
 
@@ -44,7 +44,7 @@ class PenggunaController extends Controller
             'password' => bcrypt($request->password), // Meng-hash password
         ]);
 
-        return redirect()->route('penggunas.index')->with('success', 'Pengguna berhasil ditambahkan.'); // Redirect dengan pesan sukses
+        return redirect()->route('pengguna.index')->with('success', 'Pengguna berhasil ditambahkan.'); // Redirect dengan pesan sukses
     }
 
     // Menampilkan formulir untuk mengedit pengguna
@@ -61,7 +61,7 @@ class PenggunaController extends Controller
         $request->validate([
             'nama_pengguna' => 'required|string|max:255',
             'no_telepon' => 'required|string|max:15',
-            'username' => 'required|string|max:255|unique:penggunas,username,' . $id_pengguna, // tambahkan ID
+            'username' => 'required|string|max:255|unique:pengguna,username,' . $id_pengguna, // tambahkan ID
         ]);
         
 
@@ -73,7 +73,7 @@ class PenggunaController extends Controller
             $pengguna->update(['password' => bcrypt($request->password)]); // Meng-hash password
         }
 
-        return redirect()->route('penggunas.index')->with('success', 'Pengguna berhasil diperbarui.'); // Redirect dengan pesan sukses
+        return redirect()->route('pengguna.index')->with('success', 'Pengguna berhasil diperbarui.'); // Redirect dengan pesan sukses
     }
 
     // Menghapus pengguna
@@ -82,6 +82,6 @@ class PenggunaController extends Controller
         $pengguna = Pengguna::findOrFail($id_pengguna); // Mengambil pengguna berdasarkan ID
         $pengguna->delete(); // Menghapus pengguna
 
-        return redirect()->route('penggunas.index')->with('success', 'Pengguna berhasil dihapus.'); // Redirect dengan pesan sukses
+        return redirect()->route('pengguna.index')->with('success', 'Pengguna berhasil dihapus.'); // Redirect dengan pesan sukses
     }
 }
