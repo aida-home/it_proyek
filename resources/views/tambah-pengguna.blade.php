@@ -81,7 +81,7 @@
 <body>
     <h1>Tambah Pengguna</h1>
     <div class="form-section">
-        <form action="{{ route('penggunas.store') }}" method="POST">
+        <form action="{{ route('pengguna.store') }}" method="POST">
             @csrf
             <label for="nama_pengguna">Nama Pengguna</label>
             <input type="text" id="nama_pengguna" name="nama_pengguna" placeholder="Nama Pengguna" required>
@@ -109,7 +109,7 @@
             @enderror
             
             <button type="submit" class="btn">Simpan</button>
-            <button type="button" onclick="location.href='{{ route('penggunas.index') }}'" class="btn btn-cancel">Batal</button>
+            <button type="button" onclick="location.href='{{ route('pengguna.index') }}'" class="btn btn-cancel">Batal</button>
         </form>
     </div>
 </body>
