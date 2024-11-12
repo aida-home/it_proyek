@@ -18,6 +18,7 @@ h1 {
     color: #8A5E41; /* Warna teks header */
     font-size: 28px;
     margin-bottom: 10px;
+    margin-top: 20px;
 }
 
 /* Styling untuk container */
@@ -179,4 +180,39 @@ tr:nth-child(odd) {
     background-color: #ddd;
     color: #6b4832; /* Warna berubah saat hover */
     border-color: #6b4832;
+}
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    background-color: #6b4832; /* Coklat */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow di background */
+    position: absolute;
+    right: 0; /* Menempatkan menu di kanan */
+    top: 0; /* Menempatkan menu di atas */
+    margin-bottom: 20px;
+    width: 100%;
+    justify-content: flex-end;
+}
+nav ul li {
+    margin-right: 20px;
+}
+nav ul li a {
+    text-decoration: none;
+    color: #fff; /* Teks berwarna putih */
+    font-weight: bold;
+    padding: 10px 15px;
+    display: block;
+}
+nav ul li a:hover {
+    background-color: #8b5e3c; /* Warna coklat gelap saat hover */
+    color: #fff; /* Teks tetap putih saat hover */
+}
+footer {
+    color: #6b4832; /* Teks berwarna putih */
+    padding: 20px 0; /* Memberikan jarak di atas dan bawah */
+    text-align: center; /* Meratakan teks di tengah */
+    width: 100%;
+    margin-top: 30px; /* Memberikan jarak antara konten dan footer */
+    font-size: 16px; /* Ukuran font lebih kecil */
 }

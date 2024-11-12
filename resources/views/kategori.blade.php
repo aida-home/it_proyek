@@ -5,15 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Kategori</title>
-    <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}?v={{ time() }}">
 </head>
 <body>
-    <div class="container">
-    <h1>Kategori</h1>
-    <div class="table-section">
-        <!-- Link untuk menambahkan kategori baru -->
-        <a href="/create-kategori" class="btn">Tambah Kategori</a>
-        <table class="table table-bordered">
+        @extends('layouts.app')
+
+        @section('Kategori')
+        
+        @section('content')
+            <h1>Kategori</h1>
+            <div class="table-section">
+                <!-- Link untuk menambahkan kategori baru -->
+                <a href="/create-kategori" class="btn">Tambah Kategori</a>
+                <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -30,7 +34,7 @@
                             <td>{{ $item->nama_kategori }}</td>
                             <td>
                                 <!-- Tombol Edit -->
-                                <a href="/edit-kategori/{{$item->id_kategori}}" style="text-decoration: none;"> <!-- Menonaktifkan garis bawah -->
+                                <a href="/edit-kategori/{{$item->id_kategori}}" style="text-decoration: none;">
                                     <button class="btn-edit">Ubah</button>
                                 </a>
                                 <!-- Tombol Delete -->
@@ -45,6 +49,7 @@
                     </tbody>
                 </table>
             </div>
+            @endsection
         </div>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
 

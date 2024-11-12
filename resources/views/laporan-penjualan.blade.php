@@ -7,7 +7,11 @@
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
 </head>
 <body>
-    <div class="container">
+    @extends('layouts.app')
+
+    @section('Laporan')
+    
+    @section('content')
         <h1>Laporan Penjualan</h1>
 
         <div class="table-section">
@@ -44,6 +48,7 @@
         </table>
 
         <h3>Total Pendapatan: Rp{{ number_format($totalPendapatan, 2, ',', '.') }}</h3>
+        @endsection
     </div>
 </body>
 </html>

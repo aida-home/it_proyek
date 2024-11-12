@@ -7,7 +7,11 @@
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
 </head>
 <body>
-    <div class="container">
+    @extends('layouts.app')
+
+    @section('Kategori')
+    
+    @section('content')
         <h1>Daftar Transaksi</h1>
 
         <div class="table-section">
@@ -38,6 +42,7 @@
                 </tbody>
             </table>
         </div>
+        @endsection
     </div>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
 
