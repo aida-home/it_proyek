@@ -4,11 +4,11 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePenggunasTable extends Migration
+class CreatePenggunaTable extends Migration
 {
     public function up()
     {
-        Schema::create('penggunas', function (Blueprint $table) {
+        Schema::create('pengguna', function (Blueprint $table) {
             $table->string('id_pengguna')->primary(); // Teks dengan primary key
             $table->string('nama_pengguna');
             $table->string('no_telepon');
@@ -21,6 +21,6 @@ class CreatePenggunasTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('penggunas');
+        Schema::dropIfExists('pengguna');
     }
 }
