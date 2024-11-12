@@ -83,7 +83,7 @@
             </div>
         @endif
         
-        <form action="{{ route('penggunas.update', $pengguna->id_pengguna) }}" method="POST">
+        <form action="{{ route('pengguna.update', $pengguna->id_pengguna) }}" method="POST">
             @csrf
             @method('PUT')
 
@@ -100,7 +100,7 @@
             <input type="password" id="password" name="password" placeholder="Masukkan Password (Kosongkan jika tidak ingin diubah)">
             
             <button type="submit" class="btn">Simpan Perubahan</button>
-            <button type="button" onclick="location.href='{{ route('penggunas.index') }}'" class="btn btn-cancel">Batal</button>
+            <button type="button" onclick="location.href='{{ route('pengguna.index') }}'" class="btn btn-cancel">Batal</button>
         </form>
     </div>
 </body>
