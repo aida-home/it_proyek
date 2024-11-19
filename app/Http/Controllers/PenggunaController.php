@@ -57,11 +57,11 @@ class PenggunaController extends Controller
     // Memperbarui data pengguna
     public function update(Request $request, $id_pengguna)
     {
-        // Validasi data yang diterima dari formulir
+
         $request->validate([
             'nama_pengguna' => 'required|string|max:255',
             'no_telepon' => 'required|string|max:15',
-            'username' => 'required|string|max:255|unique:pengguna,username,' . $id_pengguna, // tambahkan ID
+            'username' => 'required|string|max:255|unique:pengguna,username,' . $id_pengguna . ',id_pengguna', // tambahkan ID
         ]);
         
 
