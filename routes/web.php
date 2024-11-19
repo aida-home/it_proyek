@@ -14,6 +14,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\BarangController;
 
+// Rute untuk BarangController
 Route::get('barang', [BarangController::class, 'index'])->name('barang.index'); // Menampilkan semua barang
 Route::get('barang/create', [BarangController::class, 'create'])->name('barang.create'); // Form untuk membuat barang baru
 Route::post('barang', [BarangController::class, 'store'])->name('barang.store'); // Menyimpan barang baru
