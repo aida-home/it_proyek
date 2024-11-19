@@ -25,10 +25,4 @@ class Barang extends Model
         'stok_barang',
         'harga_jual'
     ];
-
-        // Definisikan relasi ke model Kategori
-        public function kategori()
-        {
-            return $this->belongsTo(Kategori::class, 'id_kategori'); 
-        }
 }
