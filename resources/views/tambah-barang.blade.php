@@ -6,22 +6,57 @@
     <title>Tambah Barang</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-            margin: 0;
+            font-family: Roboto, sans-serif;
+            background-color: #f9f4f4; /* Pastel pink background color */
             padding: 20px;
         }
 
         h1 {
-            color: #8A5E41;
-            font-size: 36px;
-            font-weight: bold;
-            margin-bottom: 20px;
             text-align: center;
+            color: #8A5E41; /* Header color */
+        }
+
+        .form-section {
+            max-width: 400px; /* Limit form width */
+            margin: auto; /* Center form */
+            padding: 20px;
+            border: 1px solid #8A5E41; /* Border color */
+            border-radius: 8px;
+            background-color: #ffffff; /* Form background color */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow */
+        }
+
+        input[type="text"], input[type="number"] {
+            width: 100%; /* Full-width inputs */
+            padding: 10px;
+            margin-bottom: 15px; /* Spacing between inputs */
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            background-color: #fff;
+            box-sizing: border-box;
+        }
+
+        .btn-save {
+            padding: 12px 0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+            background-color: #8A5E41; /* Save button color */
+            transition: background-color 0.3s ease;
+            width: 100%; /* Full-width button */
+            font-size: 16px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .btn-save:hover {
+            background-color: #7A4B31; /* Hover color */
         }
 
         .btn {
-            background-color: #8A5E41;
+            background-color: #8A5E41; /* Brown for 'Back' button */
             color: white;
             padding: 10px 15px;
             border: none;
@@ -37,58 +72,39 @@
             background-color: #7A4B31;
         }
 
-        input[type="text"], input[type="number"] {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            font-size: 16px;
-            transition: border-color 0.3s;
+        .btn-cancel {
+            background-color: #d50000; /* Cancel button color */
         }
 
-        input:focus {
-            border-color: #8A5E41;
-            outline: none;
+        .btn-cancel:hover {
+            background-color: #a70000; /* Hover color for cancel button */
         }
 
-        .btn-save {
-            background-color: #8A5E41;
-            color: white;
-            padding: 12px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            width: 100%;
-            font-size: 16px;
-        }
-
-        .btn-save:hover {
-            background-color: #7A4B31;
-        }
-
-        .form-section {
-            background-color: white;
-            padding: 30px;
-            border-radius: 5px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            margin: 0 auto;
-            max-width: 600px; /* Max width for better layout */
-            margin-top: 20px;
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block; /* Label above input */
+            color: #8A5E41; /* Label text color */
         }
     </style>
 </head>
 <body>
     <h1>Tambah Barang</h1>
-
     <div class="form-section">
         <form action="{{ route('barang.store') }}" method="POST">
             @csrf
-            <input type="text" name="nama_barang" placeholder="Nama Barang" required>
-            <input type="text" name="kategori" placeholder="Kategori" required>
-            <input type="number" name="stok_barang" placeholder="Stok Barang" required min="0">
-            <input type="number" name="harga_jual" placeholder="Harga Jual" required min="0" step="0.01">
+            <label for="nama_barang">Nama Barang</label>
+            <input type="text" name="nama_barang" id="nama_barang" placeholder="Nama Barang" required>
+
+            <label for="kategori">Kategori</label>
+            <input type="text" name="kategori" id="kategori" placeholder="Kategori" required>
+
+            <label for="stok_barang">Stok Barang</label>
+            <input type="number" name="stok_barang" id="stok_barang" placeholder="Stok Barang" required min="0">
+
+            <label for="harga_jual">Harga Jual</label>
+            <input type="number" name="harga_jual" id="harga_jual" placeholder="Harga Jual" required min="0" step="0.01">
+
             <button type="submit" class="btn-save">Simpan</button>
         </form>
     </div>
