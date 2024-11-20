@@ -25,10 +25,5 @@
     <div class="container">
         @yield('content')
     </div>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; {{ date('Y') }} RPS Collection</p>
-    </footer>
 </body>
 </html>
