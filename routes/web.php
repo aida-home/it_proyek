@@ -26,10 +26,11 @@ Route::delete('barang/{id}', [BarangController::class, 'destroy'])->name('barang
 Route::get('pengguna', [PenggunaController::class, 'index'])->name('pengguna.index'); // Menampilkan semua pengguna
 Route::get('pengguna/create', [PenggunaController::class, 'create'])->name('pengguna.create'); // Form untuk membuat pengguna baru
 Route::post('pengguna', [PenggunaController::class, 'store'])->name('pengguna.store'); // Menyimpan pengguna baru
-Route::get('pengguna/{id}', [PenggunaController::class, 'show'])->name('pengguna.show'); // Menampilkan detail pengguna
+Route::get('pengguna/{id_pengguna}', [PenggunaController::class, 'show'])->name('pengguna.show'); // Menampilkan detail pengguna
 Route::get('pengguna/{id_pengguna}/edit', [PenggunaController::class, 'edit'])->name('pengguna.edit'); // Form untuk mengedit pengguna
-Route::put('pengguna/{id}', [PenggunaController::class, 'update'])->name('pengguna.update'); // Memperbarui data pengguna
-Route::delete('pengguna/{id}', [PenggunaController::class, 'destroy'])->name('pengguna.destroy'); // Menghapus pengguna
+Route::put('pengguna/{id_pengguna}', [PenggunaController::class, 'update'])->name('pengguna.update'); // Memperbarui data pengguna
+Route::delete('pengguna/{id_pengguna}', [PenggunaController::class, 'destroy'])->name('pengguna.destroy'); // Menghapus pengguna
+
 
 Route::resource('suppliers', SupplierController::class);
 

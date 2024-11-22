@@ -12,9 +12,16 @@ class PenggunaSeeder extends Seeder
         // Menghapus semua data pengguna sebelumnya (opsional)
         Pengguna::truncate(); 
 
-        // Menambahkan data pengguna baru
+        // Mengambil pengguna terakhir
+        $lastPengguna = Pengguna::orderBy('id_pengguna', 'desc')->first();
+        
+        // Menentukan ID baru
+        $newIdNumber = $lastPengguna ? (int) substr($lastPengguna->id_pengguna, 1) + 1 : 1;
+        $newId = 'P' . str_pad($newIdNumber, 3, '0', STR_PAD_LEFT); // Format ID: P000, P001, dst.
+
+        // Menambahkan data pengguna baru dengan ID otomatis
         Pengguna::create([
-            'id_pengguna' => 'admin001', // Ganti dengan ID yang unik
+            'id_pengguna' => $newId, // ID baru yang dihitung otomatis
             'username' => 'sayaadmin',
             'nama_pengguna' => 'Administrator',
             'no_telepon' => '08123456789',
@@ -22,5 +29,3 @@ class PenggunaSeeder extends Seeder
         ]);
     }
 }
-
-

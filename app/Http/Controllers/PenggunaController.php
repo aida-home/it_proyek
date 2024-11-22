@@ -30,13 +30,13 @@ class PenggunaController extends Controller
             'username' => ['required', 'string', 'max:255', 'unique:pengguna,username'],
             'nama_pengguna' => 'required|string|max:255',
             'no_telepon' => 'required|string|max:15',
-            'password' => 'required|string|min:8|confirmed',
+            'password' => 'required|string|min:8',
         ]);
 
         // Membuat ID pengguna baru dengan prefix 'P'
         $lastPengguna = Pengguna::orderBy('id_pengguna', 'desc')->first();
         $newIdNumber = $lastPengguna ? intval(substr($lastPengguna->id_pengguna, 1)) + 1 : 1;
-        $newId = 'P' . str_pad($newIdNumber, 3, '0', STR_PAD_LEFT);
+        $newId = 'P' . str_pad($newIdNumber, 3, '0', STR_PAD_LEFT); // Menghasilkan ID seperti P001, P002, dst.
 
         // Membuat pengguna baru
         Pengguna::create([

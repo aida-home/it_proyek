@@ -125,7 +125,7 @@
                 <tbody>
                     @foreach ($pengguna as $user)
                     <tr>
-                        <td>{{ str_pad($user->id_pengguna, 2, '0', STR_PAD_LEFT) }}</td>
+                        <td>{{ $user->id_pengguna }}</td>
                         <td>{{ $user->nama_pengguna }}</td>
                         <td>{{ $user->no_telepon }}</td>
                         <td>{{ $user->username }}</td>

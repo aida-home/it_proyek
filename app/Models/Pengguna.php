@@ -10,7 +10,6 @@ class Pengguna extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    // Tentukan kolom yang digunakan untuk otentikasi
     protected $table = 'pengguna';
     protected $primaryKey = 'id_pengguna';
     protected $fillable = [
@@ -21,10 +20,16 @@ class Pengguna extends Authenticatable
         'password',
     ];
 
+    // Jika ingin memastikan ID ditampilkan dalam format yang benar
+    public function getIdPenggunaAttribute($value)
+    {
+        return $value; // Mengembalikan nilai ID tanpa modifikasi
+    }
+
     // Menambahkan kolom yang digunakan untuk login
     public function getAuthIdentifierName()
     {
-        return 'username'; // Menggunakan kolom username sebagai pengganti email
+        return 'username';
     }
 
     public function getAuthPassword()
