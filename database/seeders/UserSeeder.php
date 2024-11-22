@@ -16,13 +16,5 @@ class UserSeeder extends Seeder
             'password' => bcrypt('admin123'),
             'role' => 'admin',
         ]);
-
-        // Menambahkan user default untuk user biasa
-        User::create([
-            'username' => 'Regular User',
-            'email' => 'user@example.com',
-            'password' => bcrypt('user123'),
-            'role' => 'user',
-        ]);
     }
 }
