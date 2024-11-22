@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}"> <!-- Include CSS -->
 </head>
 <body>
-    @extends('layouts.app')
+    @extends('layouts.sidebar')
 
     @section('content')
         <h1>Barang Masuk</h1>
