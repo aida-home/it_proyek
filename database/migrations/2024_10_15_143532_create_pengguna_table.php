@@ -9,10 +9,9 @@ class CreatePenggunaTable extends Migration
     public function up()
     {
         Schema::create('pengguna', function (Blueprint $table) {
-            $table->string('id_pengguna')->primary(); // Teks dengan primary key
-            $table->string('nama_pengguna');
+            $table->id('id_pengguna');  // Gunakan auto-increment
+            $table->string('username')->unique();
             $table->string('no_telepon');
-            $table->string('username');
             $table->string('password');
             $table->timestamps();
         });
