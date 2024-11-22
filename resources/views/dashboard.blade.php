@@ -125,7 +125,7 @@
         <h2>Logo</h2>
         <a href="/dashboard">Dashboard</a>
         <a href="/pengguna">Pengguna</a>
-        <a href="/supplier">Supplier</a>
+        <a href="/suppliers">Supplier</a>
         <a href="/kategori">Kategori</a>
         <a href="/barang">Barang</a>
         <a href="/barangmasuk">Barang Masuk</a>
@@ -166,7 +166,7 @@
             <div class="card">
                 <h3>10</h3>
                 <p>Supplier</p>
-                <a href="/supplier" class="more-info">More info</a>
+                <a href="/suppliers" class="more-info">More info</a>
             </div>
             <div class="card">
                 <h3>350</h3>
