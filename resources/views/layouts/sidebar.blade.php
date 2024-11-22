@@ -9,18 +9,23 @@
 <body>
     <!-- Sidebar -->
     <div class="sidebar">
-        <nav>
-            <ul>
-                <li><a href="{{ url('/dashboard') }}">Dashboard</a></li>
-                <li><a href="{{ url('/pengguna') }}">Pengguna</a></li>
-                <li><a href="{{ url('/suppliers') }}">Supplier</a></li>
-                <li><a href="{{ url('/kategori') }}">Kategori</a></li>
-                <li><a href="{{ url('/barang') }}">Barang</a></li>
-                <li><a href="{{ url('/barangmasuk') }}">Barang Masuk</a></li>
-                <li><a href="{{ url('/transaksi') }}">Transaksi</a></li>
-                <li><a href="{{ url('/laporan-penjualan') }}">Laporan</a></li>
-            </ul>
-        </nav>
+        <h2>Logo</h2>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/pengguna">Pengguna</a>
+        <a href="/suppliers">Supplier</a>
+        <a href="/kategori">Kategori</a>
+        <a href="/barang">Barang</a>
+        <a href="/barangmasuk">Barang Masuk</a>
+        <a href="/transaksi">Transaksi</a>
+        <a href="/laporan-penjualan">Laporan</a>
+    </div>
+
+    <div class="header">
+        <h1>Dashboard</h1>
+        <button class="logout-btn" onclick="document.getElementById('logout-form').submit();">Logout</button>
+        <form id="logout-form" action="{{ route('logout.submit') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
     </div>
 
     <!-- Konten Utama -->
