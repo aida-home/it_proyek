@@ -7,55 +7,76 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}"> <!-- Include CSS -->
 </head>
 <body>
-    <!-- Sidebar -->
-    @include('layouts.sidebar')
+    @extends('layouts.app')
 
-    <!-- Konten Utama -->
-    <div class="content-wrapper">
+    @section('content')
         <h1>Barang Masuk</h1>
-        <div class="container">
-            <div class="subtitle">Tabel Data Barang Masuk</div> <!-- Judul di dalam box -->
-            <div class="box">
-                <a href="{{ route('barangmasuk.create') }}" class="btn">Tambah Barang Masuk</a> <!-- Tombol Tambah -->
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID Barang Masuk</th>
-                            <th>Nama Barang</th>
-                            <th>Kategori</th>
-                            <th>Supplier</th>
-                            <th>Tanggal Masuk</th>
-                            <th>Jumlah Masuk</th>
-                            <th>Harga Beli</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($barangMasuk as $barang)
-                            <tr>
-                                <td>{{ str_pad($barang->id_barangmasuk, 2, '0', STR_PAD_LEFT) }}</td>
-                                <td>{{ $barang->nama_barang }}</td>
-                                <td>{{ $barang->kategori }}</td>
-                                <td>{{ $barang->supplier }}</td>
-                                <td>{{ $barang->tgl_masuk }}</td>
-                                <td>{{ $barang->jumlah_masuk }}</td>
-                                <td>Rp {{ number_format($barang->harga_beli, 0, ',', '.') }}</td>
-                                <td>
-                                    <div class="action-buttons">
-                                        <a href="{{ route('barangmasuk.edit', $barang->id_barangmasuk) }}" class="btn btn-edit">Edit</a>
-                                        <form action="{{ route('barangmasuk.destroy', $barang->id_barangmasuk) }}" method="POST" style="display:inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-delete" onclick="return confirm('Anda yakin ingin menghapus data ini?')">Hapus</button>
-                                        </form>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+        <div class="table-section">
+            <!-- Link untuk menambahkan barang masuk -->
+            <a href="{{ route('barangmasuk.create') }}" class="btn">Tambah Barang Masuk</a>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>ID Barang Masuk</th>
+                        <th>Nama Barang</th>
+                        <th>Kategori</th>
+                        <th>Supplier</th>
+                        <th>Tanggal Masuk</th>
+                        <th>Jumlah Masuk</th>
+                        <th>Harga Beli</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($barangMasuk as $barang)
+                    <tr>
+                        <td>{{ str_pad($barang->id_barangmasuk, 2, '0', STR_PAD_LEFT) }}</td>
+                        <td>{{ $barang->nama_barang }}</td>
+                        <td>{{ $barang->kategori }}</td>
+                        <td>{{ $barang->supplier }}</td>
+                        <td>{{ $barang->tgl_masuk }}</td>
+                        <td>{{ $barang->jumlah_masuk }}</td>
+                        <td>Rp {{ number_format($barang->harga_beli, 0, ',', '.') }}</td>
+                        <td>
+                            <div class="action-buttons">
+                                <!-- Tombol Edit -->
+                                <a href="{{ route('barangmasuk.edit', $barang->id_barangmasuk) }}" class="btn btn-edit">Ubah</a>
+                                <!-- Tombol Hapus -->
+                                <form action="{{ route('barangmasuk.destroy', $barang->id_barangmasuk) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-delete" onclick="return confirm('Anda yakin ingin menghapus data ini?')">Hapus</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
-    </div>
+    @endsection
+
+    <script src="{{ asset('assets/js/custom.js') }}"></script>
+
+    <script>
+        // Pesan dengan SweetAlert
+        @if(session('success'))
+            Swal.fire({
+                icon: "success",
+                title: "BERHASIL",
+                text: "{{ session('success') }}",
+                showConfirmButton: false,
+                timer: 2000
+            });
+        @elseif(session('error'))
+            Swal.fire({
+                icon: "error",
+                title: "GAGAL!",
+                text: "{{ session('error') }}",
+                showConfirmButton: false,
+                timer: 2000
+            });
+        @endif
+    </script>
 </body>
 </html>
