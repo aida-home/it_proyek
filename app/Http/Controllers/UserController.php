@@ -2,43 +2,82 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use Illuminate\Support\Facades\Auth; // Perbaiki namespace Auth
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function login(Request $request) {
-        $incomingFields = $request->validate([
-            'loginname' => 'required',
-            'loginpassword' => 'required' // Perbaiki nama field
+    // Menampilkan form register
+    public function showRegisterForm()
+    {
+        return view('register');
+    }
+
+    // Proses registrasi
+    public function register(Request $request)
+    {
+        // Validasi input
+        $validatedData = $request->validate([
+            'username' => ['required', 'min:3', 'max:10'],
+            'email' => ['required', 'email', 'unique:users'],
+            'password' => ['required', 'min:8', 'max:10'],
+        ]);
+    
+        // Menyimpan data user baru
+        User::create([
+            'username' => $validatedData['username'],
+            'email' => $validatedData['email'],
+            'password' => Hash::make($validatedData['password']),
+            'role' => 'user', // Default role
+        ]);
+    
+        // Arahkan ke halaman login setelah registrasi
+        return redirect('/login')->with('success', 'Registrasi berhasil. Silakan login.');
+    }
+    
+    // Menampilkan form login
+    public function showLoginForm()
+    {
+        return view('login');
+    }
+
+    // Proses login
+    public function login(Request $request)
+    {
+        // Validasi input
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required', 'min:8', 'max:10'],
         ]);
 
-        if (Auth::attempt(['name' => $incomingFields['loginname'], 'password' => $incomingFields['loginpassword']])) {
-            $request->session()->regenerate();
-            return redirect('/beranda'); // Pindahkan redirect ke sini agar tidak terjadi redirect saat login gagal
+        // Cek kredensial dan login
+        if (Auth::attempt($credentials)) {
+            return redirect('/dashboard');
         }
 
         return back()->withErrors([
-            'loginname' => 'Login failed, please check your credentials.',
+            'email' => 'Email yang anda masukkan salah.',
         ]);
     }
 
-    public function logout() {
+    // Proses logout
+    public function logout()
+    {
         Auth::logout();
-        return redirect('/beranda');
+        return redirect('/login');
     }
 
-    public function register(Request $request) {
-        $incomingFields = $request->validate([
-            'name' => ['required', 'min:3', 'max:10'],
-            'email' => ['required', 'email'],
-            'password' => ['required', 'min:8', 'max:10'] // Pisahkan dengan benar
+    // Menampilkan halaman dashboard
+    public function dashboard()
+    {
+        // Pastikan bahwa hanya user yang sudah login yang bisa mengakses dashboard
+        $user = Auth::user();
+        return view('dashboard', [
+            'username' => $user->username,
+            'role' => $user->role,
         ]);
-
-        $incomingFields['password'] = bcrypt($incomingFields['password']);
-        User::create($incomingFields); // Perbaiki metode menjadi create
-
-        return 'Hello from my controller';
     }
+    
 }
