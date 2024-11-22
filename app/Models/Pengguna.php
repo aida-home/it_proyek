@@ -3,22 +3,34 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class Pengguna extends Model
+class Pengguna extends Authenticatable
 {
-    use HasFactory;
+    use HasFactory, Notifiable;
 
+    // Tentukan kolom yang digunakan untuk otentikasi
+    protected $table = 'pengguna';
     protected $primaryKey = 'id_pengguna';
-    
-    // Jika 'id_pengguna' adalah string, tambahkan juga
-    protected $keyType = 'string';
-    public $incrementing = false; // Jika primary key tidak auto-increment
-    protected $table = 'pengguna'; // pastikan ini sesuai dengan nama tabel di database
     protected $fillable = [
         'id_pengguna',
+        'username',
         'nama_pengguna',
         'no_telepon',
-        'username',
         'password',
     ];
+
+    // Menambahkan kolom yang digunakan untuk login
+    public function getAuthIdentifierName()
+    {
+        return 'username'; // Menggunakan kolom username sebagai pengganti email
+    }
+
+    public function getAuthPassword()
+    {
+        return $this->password;
+    }
 }
+
+

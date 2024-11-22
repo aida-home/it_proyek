@@ -104,13 +104,25 @@
                 </ul>
             </div>
         @endif
-
-        <form action="{{ route('login.submit') }}" method="POST">
+        <form method="POST" action="{{ route('login') }}">
             @csrf
-            <input name="username" type="text" placeholder="Masukkan Username" required>
-            <input name="password" type="password" placeholder="Masukkan Password" required>
+        
+            <!-- Username Input -->
+            <div>
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+        
+            <!-- Password Input -->
+            <div>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+        
             <button type="submit">Login</button>
         </form>
+              
+        
     </div>
     @endauth
 </body>

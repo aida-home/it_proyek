@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pengguna;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Pengguna;
 use Illuminate\Support\Facades\Hash;
 
 class PenggunaController extends Controller
@@ -27,65 +27,67 @@ class PenggunaController extends Controller
     {
         // Validasi data yang diterima dari formulir
         $request->validate([
+            'username' => ['required', 'string', 'max:255', 'unique:pengguna,username'],
             'nama_pengguna' => 'required|string|max:255',
             'no_telepon' => 'required|string|max:15',
-            'username' => 'required|string|max:255|unique:pengguna',
-            'password' => 'required|string|min:8',
+            'password' => 'required|string|min:8|confirmed',
         ]);
 
-        // Mendapatkan ID supplier terakhir untuk membuat ID baru dengan prefix 'SP'
+        // Membuat ID pengguna baru dengan prefix 'P'
         $lastPengguna = Pengguna::orderBy('id_pengguna', 'desc')->first();
-        $newIdNumber = $lastPengguna ? intval(substr($lastPengguna->id_pengguna, 2)) + 1 : 1;
-        $newId = 'P' . str_pad($newIdNumber, 2, '0', STR_PAD_LEFT);
+        $newIdNumber = $lastPengguna ? intval(substr($lastPengguna->id_pengguna, 1)) + 1 : 1;
+        $newId = 'P' . str_pad($newIdNumber, 3, '0', STR_PAD_LEFT);
+
         // Membuat pengguna baru
         Pengguna::create([
             'id_pengguna' => $newId,
             'nama_pengguna' => $request->nama_pengguna,
             'no_telepon' => $request->no_telepon,
             'username' => $request->username,
-            'password' => bcrypt($request->password), // Meng-hash password
+            'password' => bcrypt($request->password), // Hash password
         ]);
 
-        return redirect()->route('pengguna.index')->with('success', 'Pengguna berhasil ditambahkan.'); // Redirect dengan pesan sukses
+        return redirect()->route('pengguna.index')->with('success', 'Pengguna berhasil ditambahkan.');
     }
 
     // Menampilkan formulir untuk mengedit pengguna
     public function edit($id_pengguna)
     {
-        $pengguna = Pengguna::findOrFail($id_pengguna);
-        return view('edit-pengguna', compact('pengguna')); // Mengirim data pengguna ke view
+        $pengguna = Pengguna::findOrFail($id_pengguna); // Ambil data berdasarkan ID
+        return view('edit-pengguna', compact('pengguna'));
     }
 
     // Memperbarui data pengguna
     public function update(Request $request, $id_pengguna)
     {
-
+        // Validasi data
         $request->validate([
             'nama_pengguna' => 'required|string|max:255',
             'no_telepon' => 'required|string|max:15',
-            'username' => 'required|string|max:255|unique:pengguna,username,' . $id_pengguna . ',id_pengguna', // tambahkan ID
+            'username' => 'required|string|max:255|unique:pengguna,username,' . $id_pengguna . ',id_pengguna',
         ]);
-        
 
-        $pengguna = Pengguna::findOrFail($id_pengguna); // Mengambil pengguna berdasarkan ID
-        $pengguna->update($request->except('password')); // Memperbarui pengguna kecuali password
+        $pengguna = Pengguna::findOrFail($id_pengguna);
+        $pengguna->update($request->except('password'));
 
-        // Mengupdate password jika diberikan
+        // Jika password diisi, update password
         if ($request->filled('password')) {
-            $pengguna->update(['password' => bcrypt($request->password)]); // Meng-hash password
+            $pengguna->update(['password' => bcrypt($request->password)]);
         }
 
-        return redirect()->route('pengguna.index')->with('success', 'Pengguna berhasil diperbarui.'); // Redirect dengan pesan sukses
+        return redirect()->route('pengguna.index')->with('success', 'Pengguna berhasil diperbarui.');
     }
 
     // Menghapus pengguna
     public function destroy($id_pengguna)
     {
-        $pengguna = Pengguna::findOrFail($id_pengguna); // Mengambil pengguna berdasarkan ID
-        $pengguna->delete(); // Menghapus pengguna
+        $pengguna = Pengguna::findOrFail($id_pengguna);
+        $pengguna->delete();
 
-        return redirect()->route('pengguna.index')->with('success', 'Pengguna berhasil dihapus.'); // Redirect dengan pesan sukses
+        return redirect()->route('pengguna.index')->with('success', 'Pengguna berhasil dihapus.');
     }
+
+    // Menampilkan halaman login
     public function showLoginForm()
     {
         return view('login');
@@ -94,19 +96,19 @@ class PenggunaController extends Controller
     // Proses login
     public function login(Request $request)
     {
-        // Validasi input
         $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required', 'min:8', 'max:10'],
+            'username' => ['required', 'string'],
+            'password' => ['required', 'string', 'min:8'],
         ]);
 
-        // Cek kredensial dan login
         if (Auth::attempt($credentials)) {
-            return redirect('/dashboard');
+            // Login berhasil
+            return redirect()->route('dashboard');
         }
 
+        // Login gagal
         return back()->withErrors([
-            'email' => 'Email yang anda masukkan salah.',
+            'username' => 'Username atau password salah.',
         ]);
     }
 
@@ -114,17 +116,15 @@ class PenggunaController extends Controller
     public function logout()
     {
         Auth::logout();
-        return redirect('/login');
+        return redirect()->route('login');
     }
 
     // Menampilkan halaman dashboard
     public function dashboard()
     {
-        // Pastikan bahwa hanya user yang sudah login yang bisa mengakses dashboard
         $user = Auth::user();
         return view('dashboard', [
             'username' => $user->username,
-            'role' => $user->role,
         ]);
     }
 }

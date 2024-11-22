@@ -10,14 +10,14 @@ class UserSeeder extends Seeder
 {
     public function run()
     {
-        // Cek apakah admin sudah ada
-        if (!Pengguna::where('username', 'Admin')->exists()) {
-            Pengguna::create([
-                'username' => 'Admin',
-                'no_telepon' => '08123456789',
-                'password' => Hash::make('admin123'),
-            ]);
-        }
+        Pengguna::create([
+            'id_pengguna' => 'admin001',  // ID Pengguna (pastikan sesuai format)
+            'nama_pengguna' => 'Administrator',
+            'no_telepon' => '08123456789',
+            'username' => 'Admin',  // Username yang digunakan untuk login
+            'password' => Hash::make('admin123'),  // Password di-hash dengan bcrypt
+        ]);
     }
 }
+
 
