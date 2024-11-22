@@ -10,7 +10,6 @@ use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\LaporanPenjualanController;
 use App\Http\Controllers\BarangMasukController;
 use App\Http\Controllers\SupplierController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\BarangController;
 
@@ -52,15 +51,15 @@ Route::get('/beranda', function () {
 
 
 // Route untuk login
-Route::middleware('guest')->get('/login', [UserController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [UserController::class, 'login'])->name('login.submit');
+Route::middleware('guest')->get('/login', [PenggunaController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [PenggunaController::class, 'login'])->name('login.submit');
 
 // Route untuk logout
-Route::post('/logout', [UserController::class, 'logout'])->name('logout.submit')->middleware('auth');
+Route::post('/logout', [PenggunaController::class, 'logout'])->name('logout.submit')->middleware('auth');
 
 Route::middleware('auth')->group(function() {
     // Rute untuk dashboard
-    Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
+    Route::get('/dashboard', [PenggunaController::class, 'dashboard'])->name('dashboard');
 });
 
 // Route home
