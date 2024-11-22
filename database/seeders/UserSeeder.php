@@ -11,8 +11,8 @@ class UserSeeder extends Seeder
     {
         // Menambahkan user default untuk admin
         User::create([
-            'username' => 'Admin User',
-            'email' => 'admin@example.com',
+            'username' => 'Admin',
+            'email' => 'admin@gmail.com',
             'password' => bcrypt('admin123'),
             'role' => 'admin',
         ]);
