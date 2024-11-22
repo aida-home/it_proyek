@@ -72,15 +72,24 @@
             font-size: 14px;
             margin-top: 10px;
         }
+
+        /* Styling untuk pesan selamat datang */
+        .welcome-message {
+            font-size: 18px;
+            color: #8A5E41;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
     @auth
-    <p>Selamat datang, {{ Auth::user()->username }}!</p>
-    <form action="{{ route('logout.submit') }}" method="POST">
-        @csrf
-        <button>Log Out</button>
-    </form>
+    <div class="login-container">
+        <p class="welcome-message">Selamat datang, {{ Auth::user()->username }}!</p>
+        <form action="{{ route('logout.submit') }}" method="POST">
+            @csrf
+            <button>Log Out</button>
+        </form>
+    </div>
     @else
     <div class="login-container">
         <h1>Welcome Back to<br>RPS Collection!</h1>
@@ -98,7 +107,7 @@
 
         <form action="{{ route('login.submit') }}" method="POST">
             @csrf
-            <input name="email" type="email" placeholder="Masukkan Email" required>
+            <input name="username" type="text" placeholder="Masukkan Username" required>
             <input name="password" type="password" placeholder="Masukkan Password" required>
             <button type="submit">Login</button>
         </form>
