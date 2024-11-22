@@ -180,13 +180,5 @@
             </div>
         </div>
     </div>
-    <footer>
-        &copy; 2024 Situs Web Sederhana | <a href="#">Kebijakan Privasi</a>
-        <div class="social-icons">
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-        </div>
-    </footer>
 </body>
 </html>
