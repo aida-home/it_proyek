@@ -50,18 +50,22 @@ Route::get('/beranda', function () {
     return view('beranda', ['posts'=> $posts]);
 });
 
-Route::post('/register', [UserController::class,'register']);
 
-Route::post('/login', [UserController::class,'login']);
+// Route untuk login
+Route::middleware('guest')->get('/login', [UserController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [UserController::class, 'login'])->name('login.submit');
 
-Route::post('/logout', [UserController::class,'logout']);
+// Route untuk logout
+Route::post('/logout', [UserController::class, 'logout'])->name('logout.submit')->middleware('auth');
 
-Route::get('/', function () {
-    return view('welcome');
+Route::middleware('auth')->group(function() {
+    // Rute untuk dashboard
+    Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
+// Route home
+Route::get('/', function () {
+    return view('welcome');
 });
 
 Route::get('/laporan-penjualan', function () {
