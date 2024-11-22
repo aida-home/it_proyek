@@ -181,38 +181,66 @@ tr:nth-child(odd) {
     color: #6b4832; /* Warna berubah saat hover */
     border-color: #6b4832;
 }
+/* Reset and Global Styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Sidebar Styling */
+nav {
+    width: 16%;
+    height: 100vh;
+    background-color: #A65B2A;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 10px 0; /* Mengurangi padding atas dan bawah */
+}
+
 nav ul {
     list-style-type: none;
     padding: 0;
-    display: flex;
-    background-color: #6b4832; /* Coklat */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow di background */
-    position: absolute;
-    right: 0; /* Menempatkan menu di kanan */
-    top: 0; /* Menempatkan menu di atas */
-    margin-bottom: 20px;
-    width: 100%;
-    justify-content: flex-end;
+    margin: 0;
 }
+
 nav ul li {
-    margin-right: 20px;
+    padding: 10px 15px; /* Mengurangi padding agar lebih ke kiri */
+    font-size: 14px; /* Ukuran font lebih kecil */
+    font-weight: bold; /* Membuat tulisan menjadi tebal */
+    border-bottom: 1px solid #81471E; /* Garis pembatas antar menu */
 }
+
 nav ul li a {
+    color: white;
     text-decoration: none;
-    color: #fff; /* Teks berwarna putih */
-    font-weight: bold;
-    padding: 10px 15px;
     display: block;
+    transition: all 0.3s ease; /* Efek transisi untuk hover */
 }
-nav ul li a:hover {
-    background-color: #8b5e3c; /* Warna coklat gelap saat hover */
-    color: #fff; /* Teks tetap putih saat hover */
+
+nav ul li:hover {
+    background-color: white; /* Latar belakang hover putih penuh */
+    color: #A65B2A; /* Warna teks coklat saat hover */
 }
-footer {
-    color: #6b4832; /* Teks berwarna putih */
-    padding: 20px 0; /* Memberikan jarak di atas dan bawah */
-    text-align: center; /* Meratakan teks di tengah */
-    width: 100%;
-    margin-top: 30px; /* Memberikan jarak antara konten dan footer */
-    font-size: 16px; /* Ukuran font lebih kecil */
+
+nav ul li:hover a {
+    color: #A65B2A; /* Warna teks di dalam hover */
+}
+
+nav ul li:hover {
+    border-left: 5px solid #A65B2A; /* Membuat sekat vertikal di sebelah kiri */
+}
+
+/* Main Content Styling */
+.container {
+    margin-left: 16%;
+    padding: 20px;
+    background-color: #F6F6F6;
+    min-height: 100vh;
 }
