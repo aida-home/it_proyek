@@ -1,80 +1,191 @@
-/* Styling Sidebar */
+/* Styling dasar untuk layout */
+body {
+    font-family: 'Montserrat', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    font-weight: 600; 
+    background-color: #f4f4f4;
+}
+
+/* Sidebar */
 .sidebar {
-    width: 20%;
+    font-family: 'Montserrat', Arial, sans-serif;
+    height: 100%;
+    width: 220px;
+    position: fixed;
+    top: 0;
+    left: 0;
     background-color: #8A5E41;
-    color: #fff;
-    height: 100vh;
-    padding: 20px;
+    color: white;
+    padding-top: 20px;
 }
 
 .sidebar h2 {
+    font-family: 'Montserrat', Arial, sans-serif;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    font-size: 22px;
 }
 
 .sidebar ul {
-    list-style: none;
-    padding: 0;
+    list-style-type: none;
+    padding: 0; /* Hilangkan padding bawaan */
+    margin: 0; /* Hilangkan margin bawaan */
 }
 
-.sidebar ul li {
-    margin: 10px 0;
-}
-
-.sidebar ul li a {
-    color: white;
-    text-decoration: none;
+.sidebar a {
+    font-family: 'Montserrat', Arial, sans-serif;
     display: block;
+    color: white;
+    padding: 10px 30px; /* Tambahkan padding kiri-kanan */
+    text-decoration: none;
+    font-size: 15px; 
+    font-weight: 600; 
+    margin: 5px 0; /* Tambahkan jarak antar-menu */
+    border-bottom: 1px solid #a67450;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.sidebar a:hover {
+    background-color: white;
+    color: #8A5E41;
+    border-radius: 0;
 }
 
 /* Header */
 .header {
-    background-color: #8A5E41;
-    padding: 10px;
-    text-align: right;
-    color: white;
+    background-color: #ffffff;
+    height: 60px;
+    margin-left: 220px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px; /* Tambahkan padding kanan-kiri */
+    border-bottom: 1px solid #ccc;
 }
 
-.header .logout-btn {
-    background-color: red;
-    color: white;
+.header h1 {
+    font-size: 18px;
+    color: #8A5E41;
+}
+
+.logout-btn {
+    background-color: transparent;
     border: none;
-    padding: 5px 10px;
+    color: #8A5E41;
+    font-size: 16px;
+    font-weight: bold; 
     cursor: pointer;
 }
 
-/* Table */
-.table-bordered {
-    width: 100%;
-    border: 1px solid #ccc;
-    border-collapse: collapse;
+.logout-btn:hover {
+    color: red;
+}
+
+/* Content */
+.content {
+    margin-left: 240px; /* Jarak lebih jauh dari sidebar */
+    margin-top: 20px; /* Margin di atas konten */
+    margin-right: 30px; /* Margin kanan */
+    margin-bottom: 30px; /* Margin bawah */
+}
+
+.dashboard-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 kolom dalam satu baris */
+    gap: 20px; /* Jarak antar card */
     margin-top: 20px;
 }
 
-.table-bordered th,
-.table-bordered td {
-    border: 1px solid #ccc;
-    padding: 10px;
+.card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 15px;  /* Padding sedikit lebih kecil */
+    text-align: left;
+    color: #8A5E41;
+    position: relative;
+    width: 200px;
+    height: 120px; /* Tinggi card sedikit lebih kecil */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Agar More Info tetap di bawah */
+}
+
+.card-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;  /* Mengurangi jarak bawah antara teks dan ikon */
+}
+
+.icon {
+    width: 30px;
+    height: 30px;
+    background-color: rgba(255, 182, 193, 0.6); /* Warna bulat */
+    border-radius: 50%;
+    position: relative;
+}
+
+.card:nth-child(1) .icon {
+    background-color: rgba(173, 216, 230, 0.6); /* Biru muda */
+}
+
+.card:nth-child(2) .icon {
+    background-color: rgba(255, 239, 153, 0.6); /* Kuning terang */
+}
+
+.card:nth-child(3) .icon {
+    background-color: rgba(255, 182, 193, 0.6); /* Pink muda */
+}
+
+.card:nth-child(4) .icon {
+    background-color: rgba(255, 228, 196, 0.6); /* Krem muda */
+}
+
+.card:nth-child(5) .icon {
+    background-color: rgba(255, 215, 179, 0.6); /* Orange muda */
+}
+
+.card:nth-child(6) .icon {
+    background-color: rgba(255, 211, 249, 0.6); /* Lavender */
+}
+
+.card:nth-child(7) .icon {
+    background-color: rgba(255, 204, 204, 0.6); /* Merah muda */
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     text-align: left;
 }
 
-.table-bordered th {
-    background-color: #f4f4f4;
+.text h3 {
+    font-size: 13px; /* Ukuran font lebih kecil */
+    margin: 0;
 }
 
-/* Buttons */
-.btn {
-    background-color: #8A5E41;
+.text p {
+    font-size: 16px; /* Ukuran font angka lebih besar */
+    margin: 5px 0 0;
+}
+
+.more-info {
+    margin-top: 5px; /* Mengurangi jarak dengan teks */
+    text-align: center;
+    display: inline-block;
     color: white;
-    padding: 10px 15px;
+    font-size: 12px; /* Ukuran font tombol lebih kecil */
     text-decoration: none;
+    font-weight: bold;
+    background-color: #8A5E41; /* Latar belakang coklat */
+    padding: 6px 12px;
     border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
 
-.btn-edit {
-    background-color: #007bff;
-}
-
-.btn-delete {
-    background-color: red;
+.more-info:hover {
+    background-color: #6f4f2b;
 }

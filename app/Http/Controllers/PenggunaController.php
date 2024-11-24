@@ -5,10 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Pengguna;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+use App\Models\Barang;
+use App\Models\BarangMasuk;
+use App\Models\Kategori;
+use App\Models\Supplier;
+use App\Models\Transaksi;
 
 class PenggunaController extends Controller
 {
+
     // Menampilkan semua pengguna
     public function index()
     {
@@ -119,12 +124,26 @@ class PenggunaController extends Controller
         return redirect()->route('login');
     }
 
-    // Menampilkan halaman dashboard
     public function dashboard()
     {
-        $user = Auth::user();
-        return view('dashboard', [
-            'username' => $user->username,
-        ]);
+        // Hitung data dari model
+        $penggunaCount = Pengguna::count();
+        $barangCount = Barang::count();
+        $barangMasukCount = BarangMasuk::count();
+        $kategoriCount = Kategori::count();
+        $supplierCount = Supplier::count();
+        $transaksiCount = Transaksi::count();
+        $laporanPenjualanCount = Transaksi::distinct('id')->count(); // Contoh logika laporan
+
+        // Kirim data ke view
+        return view('dashboard', compact(
+            'penggunaCount',
+            'barangCount',
+            'barangMasukCount',
+            'kategoriCount',
+            'supplierCount',
+            'transaksiCount',
+            'laporanPenjualanCount'
+        ));
     }
 }
