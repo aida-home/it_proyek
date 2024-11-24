@@ -1,0 +1,108 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #8A5E41; /* Warna background cokelat */
+    font-family: 'Montserrat', Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Container form login */
+.login-container {
+    background-color: #fff;
+    border-radius: 10px; /* Membuat sudut lebih bulat */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Shadow lebih lembut */
+    padding: 40px 30px;
+    width: 400px; /* Lebar form */
+    text-align: center;
+}
+
+/* Judul pada form login (dalam satu baris) */
+.login-container h1 {
+    font-size: 20px; /* Ukuran font lebih kecil agar tidak meluber */
+    font-family: 'Montserrat', Arial, sans-serif;
+    color: #8A5E41;
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-align: center; /* Teks menjadi rata kiri */
+}
+
+/* Input dan button styling */
+.login-container input,
+.login-container button {
+    width: 100%;
+    padding: 10px; /* Ukuran padding lebih kecil */
+    margin: 8px 0; /* Mengurangi jarak antar elemen */
+    border-radius: 8px; /* Sudut lebih bulat */
+    font-size: 13px; /* Ukuran font lebih besar */
+    font-family: 'Montserrat', Arial, sans-serif;
+    box-sizing: border-box; /* Memastikan padding dan border dihitung dalam lebar elemen */
+}
+
+/* Styling untuk input */
+.login-container input {
+    border: 1px solid #8A5E41;
+    transition: border-color 0.3s; /* Efek transisi saat input difokuskan */
+}
+
+/* Styling saat input difokuskan */
+.login-container input:focus {
+    border-color: #8A5E41;
+    outline: none;
+}
+
+/* Styling tombol login */
+.login-container button {
+    background-color: #8A5E41;
+    color: white;
+    border: none;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Efek transisi saat hover */
+    margin-top: 20px; /* Menambahkan jarak di atas tombol */
+}
+
+/* Efek hover pada tombol */
+.login-container button:hover {
+    background-color: #6f4c32;
+}
+
+/* Styling untuk pesan error */
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+/* Styling untuk pesan selamat datang */
+.welcome-message {
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-size: 20px;
+    color: #8A5E41;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+/* Menambahkan gaya pada input dan label untuk tampil di dalam field */
+.login-container label {
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+    color: #8A5E41;
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-size: 14px;
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"] {
+    padding-left: 10px;
+    font-family: 'Montserrat', Arial, sans-serif;
+}
+
+/* Penyesuaian margin di form */
+.login-container form {
+    margin-top: 10px; /* Mengurangi jarak atas form */
+}

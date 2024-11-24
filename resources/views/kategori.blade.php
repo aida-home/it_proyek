@@ -5,15 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Kategori</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}?v={{ time() }}">
 </head>
 <body>
-        @extends('layouts.app')
+        @extends('layouts.sidebar')
 
-        @section('Kategori')
-        
+        @section('title', 'Kategori')
+
+        @section('header', 'Kategori')
+
         @section('content')
-            <h1>Kategori</h1>
             <div class="table-section">
                 <!-- Link untuk menambahkan kategori baru -->
                 <a href="/create-kategori" class="btn">Tambah Kategori</a>

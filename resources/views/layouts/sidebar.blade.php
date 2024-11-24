@@ -3,13 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Dashboard')</title>
+    <title>@yield('title', 'Dashboard', 'Kategori')</title>
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}?v={{ time() }}">
 </head>
 <body>
     <!-- Sidebar -->
     <div class="sidebar">
-        <h2>Logo</h2>
+        <div class="logo">
+            <a href="/dashboard">
+                <img src="{{ asset('assets/img/logo.png') }}" alt="Logo Dashboard">
+            </a>
+        </div>
+    
         <ul>
             <li><a href="/dashboard">Dashboard</a></li>
             <li><a href="/pengguna">Pengguna</a></li>
@@ -24,7 +29,7 @@
 
     <!-- Header -->
     <div class="header">
-        <h1>@yield('header', 'Dashboard')</h1>
+        <h1>@yield('header', 'Dashboard', 'Kategori')</h1>
         <button class="logout-btn" onclick="document.getElementById('logout-form').submit();">Logout</button>
         <form id="logout-form" action="{{ route('logout.submit') }}" method="POST" style="display: none;">
             @csrf
