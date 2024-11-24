@@ -17,12 +17,16 @@ class KategoriController extends Controller
             $request->validate([
                 'nama_kategori' => 'required'
             ]);
+
+            if (Kategori::where('nama_kategori', $request->nama_kategori)->exists()) {
+                return back()->withErrors(['nama_kategori' => 'Nama kategori sudah ada.']);
+               }
     
             // Update nama kategori
             $kategori->update([
                 'nama_kategori' => $request->nama_kategori,
             ]);
-    
+
             return redirect('/kategori')->with('success', 'Kategori berhasil diupdate.');    
     }
     public function showEditScreen(Kategori $kategori) {

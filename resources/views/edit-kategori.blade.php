@@ -17,6 +17,9 @@
             <div class="form-group">
                 <input type="text" name="nama_kategori" value="{{ $kategori->nama_kategori }}" placeholder="Nama Kategori" required>
             </div>
+            @error('nama_kategori')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
             <button type="submit">Simpan</button>
         </form>
     </div>
