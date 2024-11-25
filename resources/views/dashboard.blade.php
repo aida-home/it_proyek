@@ -64,7 +64,7 @@
                 </div>
                 <div class="icon"></div>
             </div>
-            <a href="/Suppliers" class="more-info">More info</a>
+            <a href="/suppliers" class="more-info">More info</a>
         </div>
         <div class="card">
             <div class="card-content">
