@@ -79,9 +79,9 @@
             <label for="id_barang_masuk">Barang Masuk</label>
             <select name="id_barang_masuk" id="id_barang_masuk" required>
                 <option value="">Pilih Barang Masuk</option>
-                @foreach($barangMasuk as $item)
-                    <option value="{{ $item->id_barang_masuk }}">
-                        {{ $item->nama_barang }} - {{ $item->kategori }} - Stok: {{ $item->stok_barang }}
+                @foreach($barangMasuk as $barang)
+                    <option value="{{ $barang->id_barang_masuk }}">
+                        {{ $barang->nama_barang }} - {{ $barang->kategori }} - Stok: {{ $barang->stok_barang }}
                     </option>
                 @endforeach
             </select>
