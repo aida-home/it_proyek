@@ -83,7 +83,7 @@
             <input type="text" id="nama_supplier" name="nama_supplier" value="{{ $supplier->nama_supplier }}" required>
             
             <label for="no_telp">No. Telepon</label>
-            <input type="text" id="no_telp" name="no_telp" value="{{ $supplier->no_telp }}" required>
+            <input type="number" id="no_telp" name="no_telp" value="{{ $supplier->no_telp }}" required>
             
             <label for="alamat">Alamat</label>
             <input type="text" id="alamat" name="alamat" value="{{ $supplier->alamat }}" required>
@@ -96,5 +96,28 @@
         </form>
     </div>
     @endsection
+    <script src="{{ asset('assets/js/custom.js') }}"></script>
+
+    <script>
+        //message with sweetalert
+        @if(session('success'))
+            Swal.fire({
+                icon: "success",
+                title: "BERHASIL",
+                text: "{{ session('success') }}",
+                showConfirmButton: false,
+                timer: 2000
+            });
+        @elseif(session('error'))
+            Swal.fire({
+                icon: "error",
+                title: "GAGAL!",
+                text: "{{ session('error') }}",
+                showConfirmButton: false,
+                timer: 2000
+            });
+        @endif
+
+    </script>
 </body>
 </html>

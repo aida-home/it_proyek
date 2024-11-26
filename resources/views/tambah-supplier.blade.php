@@ -81,7 +81,7 @@
             <input type="text" id="nama_supplier" name="nama_supplier" placeholder="Nama Supplier" required>
             
             <label for="no_telp">No. Telepon</label>
-            <input type="text" id="no_telp" name="no_telp" placeholder="No. Telepon" required>
+            <input type="number" id="no_telp" name="no_telp" placeholder="No. Telepon" required>
             
             <label for="alamat">Alamat</label>
             <input type="text" id="alamat" name="alamat" placeholder="Alamat" required>

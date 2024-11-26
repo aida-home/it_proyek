@@ -12,7 +12,7 @@ class CreateSuppliersTable extends Migration
             $table->id(); 
             $table->string('id_supplier')->unique(); 
             $table->string('nama_supplier');
-            $table->string('no_telp'); 
+            $table->integer('no_telp'); 
             $table->text('alamat');
             $table->timestamps();
         });

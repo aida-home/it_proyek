@@ -97,7 +97,7 @@
             @enderror
 
             <label for="no_telepon">No. Telepon</label>
-            <input type="text" id="no_telepon" name="no_telepon" placeholder="No. Telepon" required>
+            <input type="number" id="no_telepon" name="no_telepon" placeholder="No. Telepon" required>
             @error('no_telepon')
                 <div class="error-message">{{ $message }}</div>
             @enderror

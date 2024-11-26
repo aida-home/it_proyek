@@ -26,7 +26,7 @@ class SupplierController extends Controller
         // Validasi data yang dikirimkan
         $request->validate([
             'nama_supplier' => 'required|string|max:255',
-            'no_telp' => 'required|string|max:15',
+            'no_telp' => 'required|integer|max:15',
             'alamat' => 'required|string',
         ]);
 
@@ -59,7 +59,7 @@ class SupplierController extends Controller
         // Validasi data yang diperbarui
         $request->validate([
             'nama_supplier' => 'required|string|max:255',
-            'no_telp' => 'required|string|max:15',
+            'no_telp' => 'required|integer|max:15',
             'alamat' => 'required|string',
         ]);
 
