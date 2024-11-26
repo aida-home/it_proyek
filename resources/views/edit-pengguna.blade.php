@@ -80,15 +80,6 @@
 
     @section('content')
     <div class="form-section">
-        @if ($errors->any())
-            <div class="error">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
         
         <form action="{{ route('pengguna.update', $pengguna->id_pengguna) }}" method="POST">
             @csrf
@@ -111,5 +102,27 @@
         </form>
     </div>
     @endsection
+
+    <script>
+        //message with sweetalert
+        @if(session('success'))
+            Swal.fire({
+                icon: "success",
+                title: "BERHASIL",
+                text: "{{ session('success') }}",
+                showConfirmButton: false,
+                timer: 2000
+            });
+        @elseif(session('error'))
+            Swal.fire({
+                icon: "error",
+                title: "GAGAL!",
+                text: "{{ session('error') }}",
+                showConfirmButton: false,
+                timer: 2000
+            });
+        @endif
+
+    </script>
 </body>
 </html>
