@@ -106,17 +106,24 @@ table, th, td {
     border: 1px solid #ddd;
 }
 
-th, td {
-    padding: 15px; /* Menambah padding pada header dan cell tabel */
-    text-align: center;
+/* Gaya untuk <th>: bold dan berwarna */
+th {
+    font-weight: 700; /* Teks tebal */
     font-size: 14px;
+    background-color: #F6F6F6; /* Latar belakang header */
+    color: #000000; /* Warna teks */
+    text-align: justify; /* Teks rata tengah */
+    padding: 15px;
 }
 
+/* Gaya untuk <td>: normal */
 td {
-    padding: 15px; /* Menambah padding pada header dan cell tabel */
-    text-align: justify;
+    font-weight: 500; /* Teks normal (tidak bold) */
     font-size: 14px;
+    text-align: justify; /* Teks rata kiri-kanan */
+    padding: 15px;
 }
+
 
 /* Header tabel */
 th {
@@ -129,36 +136,44 @@ tr:nth-child(odd) {
     background-color: #F9F9F9;
 }
 
-/* Tombol Edit dan Hapus */
+/* Tombol Edit: Teks tebal (bold) dan warna hitam */
+/* Tombol Edit */
 .btn-edit {
-    background-color: #FEC53D;
-    color: white;
+    font-family: 'Montserrat', sans-serif; 
+    background-color: #FEC53D; /* Warna latar kuning */
+    color: black; /* Warna teks putih */
+    font-weight: 500; /* Tidak bold */
     border: none;
     border-radius: 5px;
     padding: 5px 10px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    text-decoration: none; /* Hilangkan underline pada tombol */
+    text-decoration: none; /* Hilangkan underline */
 }
 
 .btn-edit:hover {
-    background-color: #e0a900;
+    background-color: #e0a900; /* Warna lebih gelap saat hover */
 }
 
+
+/* Tombol Hapus: Teks tebal (bold) */
 .btn-delete {
-    background-color: #D20606;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 5px 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    text-decoration: none; /* Hilangkan underline pada tombol */
+    font-family: 'Montserrat', sans-serif; 
+    background-color: #D20606; /* Warna latar merah */
+    color: white; /* Warna teks putih */
+    font-weight: 500; 
+    border: none; /* Hilangkan border default */
+    border-radius: 5px; /* Sudut membulat */
+    padding: 5px 10px; /* Padding di dalam tombol */
+    cursor: pointer; /* Pointer saat hover */
+    transition: background-color 0.3s ease; /* Efek transisi warna */
+    text-decoration: none; /* Hilangkan underline */
 }
 
 .btn-delete:hover {
-    background-color: #a80000;
+    background-color: #a80000; /* Warna lebih gelap saat hover */
 }
+
 
 /* Pagination */
 .pagination {
@@ -196,3 +211,37 @@ body, html {
     background-color: #F6F6F6;
     min-height: 100vh;
 }
+/* Gaya untuk label (Tanggal Awal, Tanggal Akhir) */
+label {
+    font-size: 12px; /* Ukuran font lebih kecil */
+    color: #4e4e4e; /* Warna abu gelap */
+    margin-right: 5px; /* Jarak sedikit dari input */
+}
+
+/* Gaya untuk input tanggal */
+input[type="date"] {
+    border: 2px solid #8A5E41; /* Warna coklat */
+    border-radius: 5px; /* Sudut membulat */
+    padding: 5px; /* Kurangi padding untuk ukuran kecil */
+    font-family: 'Montserrat', sans-serif; /* Font konsisten */
+    font-size: 12px; /* Ukuran font kecil */
+    color: #4e4e4e; /* Warna teks */
+    background-color: #fff; /* Latar belakang putih */
+    outline: none; /* Hilangkan garis fokus bawaan */
+    width: 150px; /* Lebar lebih kecil */
+    box-sizing: border-box; /* Pastikan padding tidak memengaruhi ukuran */
+}
+
+/* Efek fokus pada input tanggal */
+input[type="date"]:focus {
+    border-color: #6b4832; /* Warna coklat lebih gelap saat fokus */
+    box-shadow: 0 0 4px rgba(107, 72, 50, 0.5); /* Efek bayangan */
+}
+
+/* Gaya untuk teks total pendapatan */
+h3 {
+    font-size: 14px; /* Ukuran font lebih kecil */
+    color: #4e4e4e; /* Warna abu gelap */
+    font-weight: 700; /* Teks tetap tebal */
+}
+

@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Edit Kategori</title>
-    <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}?v={{ time() }}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     @extends('layouts.sidebar')
@@ -15,11 +16,10 @@
     @section('header', 'Ubah Kategori')
 
     @section('content')
-    <div class="container">
+    <div class="table-section">
         <form action="/edit-kategori/{{$kategori->id_kategori}}" method="POST">
             @csrf
-            @method('PUT')
-            <div class="table-section"> 
+            @method('PUT') 
             <div class="form-group">
                 <input type="text" name="nama_kategori" value="{{ $kategori->nama_kategori }}" placeholder="Nama Kategori" required>
             </div>

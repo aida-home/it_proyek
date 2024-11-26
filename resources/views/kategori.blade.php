@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Kategori</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}?v={{ time() }}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
         @extends('layouts.sidebar')
@@ -22,19 +22,18 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th>No</th>
                             <th>ID Kategori</th>
                             <th>Nama Kategori</th>
                             <th>Aksi</th> <!-- Kolom Aksi -->
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($kategori as $index => $item)
+                        @foreach ($kategori as $item)
                         <tr>
-                            <td>{{ $index + 1 }}</td>
                             <td>{{ $item->id_kategori }}</td>
                             <td>{{ $item->nama_kategori }}</td>
                             <td>
+                                <div class="action-buttons">
                                 <!-- Tombol Edit -->
                                 <a href="/edit-kategori/{{$item->id_kategori}}" style="text-decoration: none;">
                                     <button class="btn-edit">Ubah</button>
@@ -53,6 +52,7 @@
             </div>
             @endsection
         </div>
+    </div>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
 
     <script>
