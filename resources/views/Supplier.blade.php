@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <title>Data Supplier</title>
     <style>
         body {
@@ -96,9 +97,14 @@
     </style>
 </head>
 <body>
-    <h1>Data Supplier</h1>
+    @extends('layouts.sidebar')
+
+    @section('title', 'Supplier')
+
+    @section('header', 'Supplier')
+
+    @section('content')
     <div class="container">
-        <div class="subtitle">Daftar Supplier</div>
         <div class="box">
             <a href="{{ route('suppliers.create') }}" class="btn">Tambah Supplier</a> <!-- Tombol untuk menambah supplier -->
             <table>
@@ -131,6 +137,7 @@
                 </tbody>
             </table>
         </div>
+        @endsection
     </div>
 </body>
 </html>

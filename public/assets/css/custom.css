@@ -90,7 +90,7 @@ h2 {
     padding: 10px; /* Padding di dalam input */
     border: none; /* Hilangkan border default */
     background-color: white; /* Latar belakang putih */
-    font-size: 16px; /* Ukuran font */
+    font-size: 14px; /* Ukuran font */
     border-radius: 5px; /* Sudut membulat pada input */
 }
 
@@ -187,54 +187,6 @@ body, html {
     padding: 0;
     box-sizing: border-box;
     font-family: Arial, sans-serif;
-}
-
-/* Sidebar Styling */
-nav {
-    width: 16%;
-    height: 100vh;
-    background-color: #A65B2A;
-    color: white;
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding: 10px 0; /* Mengurangi padding atas dan bawah */
-}
-
-nav ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-nav ul li {
-    padding: 10px 15px; /* Mengurangi padding agar lebih ke kiri */
-    font-size: 14px; /* Ukuran font lebih kecil */
-    font-weight: bold; /* Membuat tulisan menjadi tebal */
-    border-bottom: 1px solid #81471E; /* Garis pembatas antar menu */
-}
-
-nav ul li a {
-    color: white;
-    text-decoration: none;
-    display: block;
-    transition: all 0.3s ease; /* Efek transisi untuk hover */
-}
-
-nav ul li:hover {
-    background-color: white; /* Latar belakang hover putih penuh */
-    color: #A65B2A; /* Warna teks coklat saat hover */
-}
-
-nav ul li:hover a {
-    color: #A65B2A; /* Warna teks di dalam hover */
-}
-
-nav ul li:hover {
-    border-left: 5px solid #A65B2A; /* Membuat sekat vertikal di sebelah kiri */
 }
 
 /* Main Content Styling */

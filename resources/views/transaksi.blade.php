@@ -5,14 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Transaksi</title>
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    @extends('layouts.app')
+    @extends('layouts.sidebar')
 
-    @section('Kategori')
-    
+    @section('title', 'Transaksi')
+
+    @section('header', 'Transaksi')
+
     @section('content')
-        <h1>Daftar Transaksi</h1>
 
         <div class="table-section">
             <!-- Link untuk menambahkan transaksi baru -->

@@ -4,11 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detail Transaksi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
 
 </head>
 <body>
-    <div class="container">
+    @extends('layouts.sidebar')
+
+    @section('title', 'Transaksi')
+
+    @section('header', 'Transaksi')
+
+    @section('content')
+    <div class="form-container">
         <h1>Detail Transaksi {{ $transaksi->id_transaksi }}</h1>
 
         <div class="table-section"> <!-- Tambahkan div dengan kelas table-section -->
@@ -50,5 +58,6 @@
             </table>
         <a href="{{ route('transaksi.index') }}" class="btn">Kembali</a>
     </div>
+    @endsection
 </body>
 </html>

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Pengguna</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -103,10 +104,15 @@
     </style>
 </head>
 <body>
-    <h1>Data Pengguna</h1>
+    @extends('layouts.sidebar')
+
+    @section('title', 'Pengguna')
+
+    @section('header', 'Pengguna')
+
+    @section('content')
 
     <div class="container">
-        <div class="subtitle">Daftar Pengguna</div>
         <div class="box">
             @if (session('success'))
                 <div class="alert">{{ session('success') }}</div>
@@ -145,5 +151,6 @@
             </table>
         </div>
     </div>
+    @endsection
 </body>
 </html>

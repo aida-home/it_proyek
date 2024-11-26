@@ -3,11 +3,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tambah Kategori</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}?v={{ time() }}">
 </head>
 <body>
+    @extends('layouts.sidebar')
+
+    @section('title', 'Kategori')
+
+    @section('header', 'Kategori')
+
+    @section('content')
 <div class="form-container">
-            <h2>Tambah Data Kategori</h2>
             <form action="/create-kategori" method="POST">
                 @csrf
                 <div class="table-section"> 
@@ -22,5 +29,6 @@
             </form>
         </div>
     </div>
+    @endsection
 </body>
 </html>
