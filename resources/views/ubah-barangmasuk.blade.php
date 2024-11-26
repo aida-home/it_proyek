@@ -86,7 +86,13 @@
     </style>
 </head>
 <body>
-    <h1>Ubah Barang Masuk</h1> <!-- Judul halaman -->
+    @extends('layouts.sidebar')
+
+    @section('title', 'Ubah Barang Masuk')
+
+    @section('header', 'Ubah Barang Masuk')
+
+    @section('content')
     <div class="form-section">
         <!-- Form untuk mengubah data barang masuk -->
         <form action="{{ route('barangmasuk.update', $barang->id_barangmasuk) }}" method="POST">
@@ -145,5 +151,6 @@
             <button type="button" onclick="location.href='{{ route('barangmasuk.index') }}'" class="btn btn-cancel">Batal</button>
         </form>
     </div>
+    @endsection
 </body>
 </html>

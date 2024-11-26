@@ -66,7 +66,13 @@
     </style>
 </head>
 <body>
-    <h1>Tambah Supplier</h1>
+    @extends('layouts.sidebar')
+
+    @section('title', 'Tambah Supplier')
+
+    @section('header', 'Tambah Supplier')
+
+    @section('content')
     <div class="form-section">
         <form action="{{ route('suppliers.store') }}" method="POST">
             @csrf
@@ -86,5 +92,6 @@
             <button type="button" onclick="location.href='{{ route('suppliers.index') }}'" class="btn btn-cancel">Batal</button>
         </form>
     </div>
+    @endsection
 </body>
 </html>

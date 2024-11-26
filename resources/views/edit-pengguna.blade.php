@@ -71,7 +71,13 @@
     </style>
 </head>
 <body>
-    <h1>Edit Pengguna</h1>
+    @extends('layouts.sidebar')
+
+    @section('title', 'Ubah Pengguna')
+
+    @section('header', 'Ubah Pengguna')
+
+    @section('content')
     <div class="form-section">
         @if ($errors->any())
             <div class="error">
@@ -103,5 +109,6 @@
             <button type="button" onclick="location.href='{{ route('pengguna.index') }}'" class="btn btn-cancel">Batal</button>
         </form>
     </div>
+    @endsection
 </body>
 </html>

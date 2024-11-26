@@ -79,7 +79,13 @@
     </style>
 </head>
 <body>
-    <h1>Tambah Pengguna</h1>
+    @extends('layouts.sidebar')
+
+    @section('title', 'Tambah Pengguna')
+
+    @section('header', 'Tambah Pengguna')
+
+    @section('content')
     <div class="form-section">
         <form action="{{ route('pengguna.store') }}" method="POST">
             @csrf
@@ -112,5 +118,6 @@
             <button type="button" onclick="location.href='{{ route('pengguna.index') }}'" class="btn btn-cancel">Batal</button>
         </form>
     </div>
+    @endsection
 </body>
 </html>

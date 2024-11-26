@@ -82,12 +82,11 @@
 <body>
     @extends('layouts.sidebar')
 
-    @section('title', 'Barang')
+    @section('title', 'Ubah Barang')
 
-    @section('header', 'Barang')
+    @section('header', 'Ubah Barang')
 
     @section('content')
-    <h1>Edit Barang</h1>
     <div class="form-section">
         @if ($errors->any())
             <div class="error">

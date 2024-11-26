@@ -89,7 +89,13 @@
     </style>
 </head>
 <body>
-    <h1>Tambah Barang</h1>
+    @extends('layouts.sidebar')
+
+    @section('title', 'Tambah Barang')
+
+    @section('header', 'Tambah Barang')
+
+    @section('content')
     <div class="form-section">
         <form action="{{ route('barang.store') }}" method="POST">
             @csrf
@@ -112,5 +118,6 @@
     <div style="text-align: center; margin-top: 20px;">
         <a href="{{ route('barang.index') }}" class="btn">Kembali ke Daftar Barang</a>
     </div>
+    @endsection
 </body>
 </html>

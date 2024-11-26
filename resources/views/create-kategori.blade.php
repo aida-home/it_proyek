@@ -9,9 +9,9 @@
 <body>
     @extends('layouts.sidebar')
 
-    @section('title', 'Kategori')
+    @section('title', 'Tambah Kategori')
 
-    @section('header', 'Kategori')
+    @section('header', 'Tambah Kategori')
 
     @section('content')
 <div class="form-container">

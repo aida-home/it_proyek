@@ -11,9 +11,9 @@
 <body>
     @extends('layouts.sidebar')
 
-    @section('title', 'Transaksi')
+    @section('title', 'Detail Transaksi')
 
-    @section('header', 'Transaksi')
+    @section('header', 'Detail Transaksi')
 
     @section('content')
     <div class="form-container">

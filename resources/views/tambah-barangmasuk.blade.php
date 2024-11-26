@@ -77,7 +77,13 @@
     </style>
 </head>
 <body>
-    <h1>Tambah Barang Masuk</h1>
+    @extends('layouts.sidebar')
+
+    @section('title', 'Tambah Barang Masuk')
+
+    @section('header', 'Tambah Barang Masuk')
+
+    @section('content')
     <div class="form-section">
         <form action="{{ route('barangmasuk.create') }}" method="POST">
             @csrf
@@ -126,5 +132,6 @@
             <button type="button" onclick="location.href='{{ route('barangmasuk.index') }}'" class="btn btn-cancel">Batal</button>
         </form>
     </div>
+    @endsection
 </body>
 </html>

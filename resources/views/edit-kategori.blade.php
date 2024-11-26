@@ -8,8 +8,14 @@
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
 </head>
 <body>
+    @extends('layouts.sidebar')
+
+    @section('title', 'Ubah Kategori')
+
+    @section('header', 'Ubah Kategori')
+
+    @section('content')
     <div class="container">
-        <h1>Ubah Data Kategori</h1>
         <form action="/edit-kategori/{{$kategori->id_kategori}}" method="POST">
             @csrf
             @method('PUT')
@@ -47,5 +53,6 @@
     @endif
 
     </script>
+@endsection
 </body>
 </html>

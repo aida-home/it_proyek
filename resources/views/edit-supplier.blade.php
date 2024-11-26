@@ -66,7 +66,13 @@
     </style>
 </head>
 <body>
-    <h1>Edit Supplier</h1>
+    @extends('layouts.sidebar')
+
+    @section('title', 'Ubah Supplier')
+
+    @section('header', 'Ubah Supplier')
+
+    @section('content')
     <div class="form-section">
         <form action="{{ route('suppliers.update', $supplier->id_supplier) }}" method="POST">
         @csrf
@@ -88,5 +94,6 @@
             <button type="button" onclick="location.href='{{ route('suppliers.index') }}'" class="btn btn-cancel">Batal</button>
         </form>
     </div>
+    @endsection
 </body>
 </html>
