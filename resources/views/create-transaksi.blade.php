@@ -24,6 +24,7 @@
                 <div class="form-group">
                     <label for="tanggal_transaksi">Tanggal Transaksi:</label>
                     <input type="date" class="form-control" name="tanggal_transaksi" max="{{ date('Y-m-d') }}" required>
+                    <small class="form-text text-muted" style="color: #888; font-size: 12px; font-weight: normal;">*Tanggal hanya dimasukkan sekali.</small>
                 </div>
 
                 <!-- Pilihan Barang -->
@@ -53,6 +54,7 @@
 
                 <!-- Tombol Tambah Barang -->
                 <button type="button" class="btn btn-primary" id="tambahBarang">Tambah Barang</button>
+                <small class="form-text text-muted" style="color: #888; font-size: 12px; font-weight: normal;">*Tambahkan sekali untuk 1 jenis barang</small>
 
                 <hr>
 
