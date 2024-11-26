@@ -5,14 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Laporan Penjualan</title>
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    @extends('layouts.app')
+    @extends('layouts.sidebar')
 
-    @section('Laporan')
-    
+    @section('title', 'Laporan Penjualan')
+
+    @section('header', 'Laporan Penjualan')
+
     @section('content')
-        <h1>Laporan Penjualan</h1>
 
         <div class="table-section">
             <form action="{{ route('laporan-penjualan.index') }}" method="GET">

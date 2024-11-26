@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <title>Barang Masuk</title>
     <style>
         /* Global Styles */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Montserrat',Arial, sans-serif;
             background-color: #f9f9f9;
             margin: 0;
             padding: 20px;
@@ -96,10 +97,14 @@
     </style>
 </head>
 <body>
-    <h1>Barang Masuk</h1>
+    @extends('layouts.sidebar')
 
+    @section('title', 'Barang Masuk')
+
+    @section('header', 'Barang Masuk')
+
+    @section('content')
     <div class="container">
-        <div class="subtitle">Tabel Data Barang Masuk</div>
         <div class="box">
             <!-- Tombol Tambah -->
             <a href="{{ route('barangmasuk.create') }}" class="btn">Tambah Barang Masuk</a>
@@ -108,8 +113,8 @@
             <table>
                 <thead>
                     <tr>
-                        <th>ID Barang Masuk</th>
-                        <th>Nama Barang</th>
+                        <th>ID</th>
+                        <th>Barang</th>
                         <th>Kategori</th>
                         <th>Supplier</th>
                         <th>Tanggal Masuk</th>
@@ -146,5 +151,6 @@
             </table>
         </div>
     </div>
+    @endsection
 </body>
 </html>
