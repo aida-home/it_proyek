@@ -2,8 +2,9 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use App\Models\Barang;
+use App\Models\NotifikasiLog;
+use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 
 class CekStokBarang extends Command
@@ -13,14 +14,18 @@ class CekStokBarang extends Command
 
     public function handle()
     {
-        // Ambang batas stok
-        $threshold = 10; 
+        $threshold = 10; // Ambang batas stok
 
-        // Barang dengan stok di bawah threshold
-        $barangMenipis = Barang::where('stok_barang', '<', $threshold)->get();
+        // Barang dengan stok di bawah threshold dan belum dikirim notifikasi
+        $barangMenipis = Barang::where('stok_barang', '<', $threshold)
+            ->whereNotIn('id_barang', NotifikasiLog::pluck('id_barang')) // Filter berdasarkan log
+            ->get();
 
         foreach ($barangMenipis as $barang) {
             $this->kirimNotifikasi($barang);
+
+            // Simpan ke log
+            NotifikasiLog::create(['id_barang' => $barang->id_barang]);
         }
 
         $this->info('Pengecekan stok selesai.');
@@ -30,7 +35,7 @@ class CekStokBarang extends Command
     {
         $apiKey = "eV5dYotqwXQvvykMfvv9"; // Ganti dengan API Key Fonnte
         $url = "https://api.fonnte.com/send";
-        $target = "6283824320186"; // Ganti dengan nomor tujuan
+        $target = "6283824320186"; // Ganti dengan nomor WhatsApp tujuan
 
         $message = "Stok barang '{$barang->nama_barang}' menipis!\n" .
                    "Kategori: {$barang->kategori}\n" .

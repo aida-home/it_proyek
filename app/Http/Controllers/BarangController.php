@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Barang;
 use Illuminate\Http\Request;
+use App\Models\NotifikasiLog;
 
 class BarangController extends Controller
 {
@@ -87,4 +88,18 @@ class BarangController extends Controller
 
         return redirect()->route('barang.index')->with('success', 'Barang berhasil dihapus.');
     }
+
+    public function updateStok(Request $request, $id)
+{
+    $barang = Barang::findOrFail($id);
+    $barang->stok_barang = $request->input('stok_barang');
+    $barang->save();
+
+    // Hapus log untuk barang ini
+    NotifikasiLog::where('id_barang', $barang->id_barang)->delete();
+
+    return response()->json(['message' => 'Stok berhasil diperbarui.']);
 }
+
+}
+
