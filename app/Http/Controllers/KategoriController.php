@@ -27,7 +27,7 @@ class KategoriController extends Controller
                 'nama_kategori' => $request->nama_kategori,
             ]);
 
-            return redirect('/kategori')->with('success', 'Kategori berhasil diupdate.');    
+            return redirect('/kategori')->with('success', 'Kategori berhasil diubah.');    
     }
     public function showEditScreen(Kategori $kategori) {
         return view('edit-kategori', ['kategori'=>$kategori]);

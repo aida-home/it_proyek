@@ -41,7 +41,7 @@
                         <td>Rp {{ number_format($barang->harga_jual, 0, ',', '.') }}</td> <!-- Format harga jual dengan dua angka desimal dan awalan Rp -->
                         <td>
                             <div class="action-buttons">
-                                <a href="{{ route('barang.edit', $barang->id_barang) }}" class="btn-edit">Edit</a>
+                                <a href="{{ route('barang.edit', $barang->id_barang) }}" class="btn-edit">Ubah</a>
                                 <form action="{{ route('barang.destroy', $barang->id_barang) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')

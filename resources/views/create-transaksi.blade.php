@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Create Transaksi</title>
-    <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}?v={{ time() }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/styleform.css') }}?v={{ time() }}">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -33,7 +33,7 @@
                     <select class="form-control" id="barang" name="barang">
                         <option value="">Pilih Barang</option>
                         @foreach ($barang as $item)
-                            <option value="{{ $item->id_barang }}" data-harga="{{ $item->harga_jual }}">
+                            <option value="{{ $item->id_barang }}" data-harga="{{ $item->harga_jual }}" data-stock="{{ $item->stok_barang }}">
                                 {{ $item->nama_barang }}
                             </option>
                         @endforeach
@@ -102,10 +102,18 @@
             var idBarang = $('#barang').val();
             var jumlahBeli = $('#jumlah_beli').val();
             var hargaJual = $('#harga_jual').val();
+            var stok = $('#barang option:selected').data('stock');
             var subtotal = jumlahBeli * hargaJual;
 
+            // Cek apakah jumlah beli melebihi stok
             if (!idBarang || !jumlahBeli || jumlahBeli <= 0) {
                 alert('Harap isi semua field dan jumlah beli harus lebih dari 0.');
+                return;
+            }
+
+            // Pastikan stok cukup
+            if (jumlahBeli > parseInt(stok)) {
+                alert('Stok tidak mencukupi. Stok tersedia: ' + stok);
                 return;
             }
 

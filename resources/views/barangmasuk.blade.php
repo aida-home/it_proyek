@@ -47,7 +47,7 @@
                             <td>
                                 <div class="action-buttons">
                                     <!-- Tombol Edit -->
-                                    <a href="{{ route('barangmasuk.edit', $barang->id_barangmasuk) }}" class="btn btn-edit">Edit</a>
+                                    <a href="{{ route('barangmasuk.edit', $barang->id_barangmasuk) }}" class="btn btn-edit">Ubah</a>
                                     <!-- Tombol Hapus -->
                                     <form action="{{ route('barangmasuk.destroy', $barang->id_barangmasuk) }}" method="POST" style="display:inline;">
                                         @csrf
