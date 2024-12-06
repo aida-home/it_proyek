@@ -1,7 +1,7 @@
 <?php
-
 namespace App\Models;
 
+use App\Http\Controllers\BarangController;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -25,4 +25,17 @@ class Barang extends Model
         'stok_barang',
         'harga_jual'
     ];
-}
+
+    protected static function boot()
+    {
+        parent::boot();
+    
+        static::updated(function ($barang) {
+            // Pastikan menggunakan nama kolom yang benar: stok_barang
+            if ($barang->stok_barang < 10) {
+                (new BarangController())->kirimNotifikasiWhatsApp($barang);
+            }
+        });
+    }
+} 
+

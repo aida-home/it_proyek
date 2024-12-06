@@ -13,6 +13,9 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\BarangController;
 
+
+Route::get('/cek-stok', [BarangController::class, 'cekStok']);
+
 // Rute untuk BarangController
 Route::get('barang', [BarangController::class, 'index'])->name('barang.index'); // Menampilkan semua barang
 Route::get('barang/create', [BarangController::class, 'create'])->name('barang.create'); // Form untuk membuat barang baru

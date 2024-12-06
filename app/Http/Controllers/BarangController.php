@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\Models\Barang;
 use App\Models\BarangMasuk;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
+
 
 class BarangController extends Controller
 {
@@ -88,4 +90,47 @@ class BarangController extends Controller
 
         return redirect()->route('barang.index')->with('success', 'Barang berhasil dihapus.');
     }
-}
+
+        public function cekStok()
+        {
+            // Menggunakan stok_barang untuk query yang benar
+            $stokHampirHabis = Barang::where('stok_barang', '<', 10)->get();
+    
+            foreach ($stokHampirHabis as $barang) {
+                $this->kirimNotifikasiWhatsApp($barang);
+            }
+        }
+    
+        public function kirimNotifikasiWhatsApp($barang)
+        {
+            $apiKey = "eV5dYotqwXQvvykMfvv9"; // API key Fonnte
+            $nomorTarget = "6283824320186"; // Nomor WhatsApp tujuan
+    
+            // Memastikan penggunaan nama kolom yang tepat
+            $pesan = "⚠️ Stok Barang Hampir Habis ⚠️\n\n" .
+                     "Nama Barang: {$barang->nama_barang}\n" .  // Gunakan nama_barang, bukan nama
+                     "Sisa Stok: {$barang->stok_barang}\n" .   // Gunakan stok_barang, bukan stok
+                     "Segera lakukan pemesanan ulang.";
+    
+            // Mengirim request ke API Fonnte untuk mengirimkan WhatsApp
+            $response = Http::withHeaders([
+                'Authorization' => $apiKey
+            ])->post('https://api.fonnte.com/send', [
+                'target' => $nomorTarget,
+                'message' => $pesan,
+                'countryCode' => '62',
+            ]);
+    
+            // Menangani hasil response dari API
+            if ($response->successful()) {
+                echo "Notifikasi berhasil dikirim untuk barang {$barang->nama_barang}.\n";
+            } else {
+                // Menampilkan pesan error jika gagal mengirim
+                $errorMessage = $response->json()['message'] ?? 'Tidak ada pesan error.';
+                echo "Gagal mengirim notifikasi untuk barang {$barang->nama_barang}. Error: {$errorMessage}\n";
+            }
+        }
+    }   
+
+
+
