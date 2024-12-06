@@ -37,7 +37,7 @@
                 <tbody>
                     @foreach ($barangMasuk as $barang)
                         <tr>
-                            <td>{{ str_pad($barang->id_barangmasuk, 2, '0', STR_PAD_LEFT) }}</td>
+                            <td>{{ $barang->id_barangmasuk }}</td>
                             <td>{{ $barang->nama_barang }}</td>
                             <td>{{ $barang->kategori }}</td>
                             <td>{{ $barang->supplier }}</td>
