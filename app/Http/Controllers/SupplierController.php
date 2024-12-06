@@ -33,7 +33,7 @@ class SupplierController extends Controller
         // Mendapatkan ID supplier terakhir untuk membuat ID baru dengan prefix 'SP'
         $lastSupplier = Supplier::orderBy('id_supplier', 'desc')->first();
         $newIdNumber = $lastSupplier ? intval(substr($lastSupplier->id_supplier, 2)) + 1 : 1;
-        $newId = 'S' . str_pad($newIdNumber, 2, '0', STR_PAD_LEFT);
+        $newId = 'S' . $newIdNumber;
 
         // Membuat supplier baru dengan ID yang baru dibuat
         Supplier::create([
