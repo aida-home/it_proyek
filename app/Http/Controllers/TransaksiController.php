@@ -32,15 +32,10 @@ class TransaksiController extends Controller
         // Generate ID Transaksi
         $lastTransaksi = Transaksi::orderBy('id_transaksi', 'desc')->first();
 
-        if ($lastTransaksi) {
-            // Ambil angka terakhir dari ID transaksi sebelumnya, tambahkan 1
-            $lastIdNumber = (int) substr($lastTransaksi->id_transaksi, 2); // Ambil angka setelah "TR"
-            $newIdNumber = $lastIdNumber + 1;
-        } else {
-            $newIdNumber = 1; // Jika belum ada transaksi, mulai dari 1
-        }
+        $newIdNumber = $lastTransaksi 
+            ? ((int) substr($lastTransaksi->id_transaksi, 2) + 1) 
+            : 1;
 
-        // Format ID Transaksi dengan prefix "TR"
         $newId = 'TR' . $newIdNumber;
 
         // Simpan transaksi
@@ -52,35 +47,31 @@ class TransaksiController extends Controller
 
         // Simpan detail transaksi
         foreach ($request->barang as $item) {
-            $barang = Barang::where('id_barang', $item['id_barang'])->first();
+            $barang = Barang::find($item['id_barang']);
 
-            // Pastikan data barang ditemukan
             if ($barang) {
                 $detailTransaksi = new DetailTransaksi;
                 $detailTransaksi->id_detail_transaksi = $this->generateNewIdDetailTransaksi();
                 $detailTransaksi->id_transaksi = $newId;
-                $detailTransaksi->id_barang = $barang->id_barang;
-                $detailTransaksi->nama_barang = $barang->nama_barang;
+                $detailTransaksi->id_barang = $barang->id_barang; // Simpan referensi
+                $detailTransaksi->nama_barang = $barang->nama_barang; // Tetap tersimpan meskipun barang dihapus
                 $detailTransaksi->harga_jual = $barang->harga_jual;
-                
-                // Pastikan jumlah_beli valid
-                if (isset($item['jumlah_beli']) && $item['jumlah_beli'] > 0) {
-                    $detailTransaksi->jumlah_beli = $item['jumlah_beli'];
-                    $detailTransaksi->subtotal = $item['jumlah_beli'] * $barang->harga_jual;
-                    $detailTransaksi->save();
+                $detailTransaksi->jumlah_beli = $item['jumlah_beli'];
+                $detailTransaksi->subtotal = $item['jumlah_beli'] * $barang->harga_jual;
+                $detailTransaksi->save();
 
-                    // Kurangi stok barang
-                    $barang->stok_barang -= $detailTransaksi->jumlah_beli;
-                    $barang->save();
+                // Kurangi stok barang
+                $barang->stok_barang -= $detailTransaksi->jumlah_beli;
+                $barang->save();
 
-                    // Update total transaksi
-                    $transaksi->total_pembayaran += $detailTransaksi->subtotal;
-                }
+                // Update total transaksi
+                $transaksi->total_pembayaran += $detailTransaksi->subtotal;
             }
         }
 
         // Simpan total transaksi
         $transaksi->save();
+
         return redirect()->route('transaksi.index')->with('success', 'Transaksi berhasil disimpan.');
     }
 
@@ -91,32 +82,27 @@ class TransaksiController extends Controller
         return view('transaksi', compact('transaksi'));
     }
 
+    // Menampilkan Detail Transaksi
+    public function show($id)
+    {
+        $transaksi = Transaksi::with('detailTransaksi')->find($id);
+
+        if (!$transaksi) {
+            return redirect()->route('transaksi.index')->with('error', 'Transaksi tidak ditemukan.');
+        }
+
+        return view('detail-transaksi', compact('transaksi'));
+    }
+
     // Fungsi untuk membuat ID detail transaksi baru
     private function generateNewIdDetailTransaksi()
     {
         $lastDetail = DetailTransaksi::orderBy('id_detail_transaksi', 'desc')->first();
-        if ($lastDetail) {
-            $lastIdNumber = (int) substr($lastDetail->id_detail_transaksi, 2, 2);
-            $newIdNumber = str_pad($lastIdNumber + 1, 2, '0', STR_PAD_LEFT);
-        } else {
-            $newIdNumber = '01';
-        }
+
+        $newIdNumber = $lastDetail 
+            ? str_pad(((int) substr($lastDetail->id_detail_transaksi, 2) + 1), 2, '0', STR_PAD_LEFT)
+            : '01';
 
         return 'DT' . $newIdNumber;
-    }
-
-    // Menampilkan Detail Transaksi
-    public function show($id)
-    {
-        // Mengambil transaksi beserta detail transaksi
-        $transaksi = Transaksi::with('detailTransaksi')->find($id);
-
-        // Cek apakah transaksi ditemukan
-        if (!$transaksi) {
-            return redirect()->route('transaksi.index')->with('error', 'Transaksi tidak ditemukan');
-        }
-
-        // Menampilkan halaman detail transaksi
-        return view('detail-transaksi', compact('transaksi'));
     }
 }

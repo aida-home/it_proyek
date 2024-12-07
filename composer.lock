@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ed9cdcb7df49cd5090fa675539d5726c",
+    "content-hash": "970490e858db2383d386128f9ac81c32",
     "packages": [
         {
             "name": "brick/math",
@@ -2736,16 +2736,16 @@
         },
         {
             "name": "phpoffice/phpspreadsheet",
-            "version": "1.29.5",
+            "version": "1.29.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPOffice/PhpSpreadsheet.git",
-                "reference": "727cb704d5479fe4ddc291497ee471c4ec08f1b6"
+                "reference": "7ca7e325dca3adb6a598385aab81f527b8d6c75d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPOffice/PhpSpreadsheet/zipball/727cb704d5479fe4ddc291497ee471c4ec08f1b6",
-                "reference": "727cb704d5479fe4ddc291497ee471c4ec08f1b6",
+                "url": "https://api.github.com/repos/PHPOffice/PhpSpreadsheet/zipball/7ca7e325dca3adb6a598385aab81f527b8d6c75d",
+                "reference": "7ca7e325dca3adb6a598385aab81f527b8d6c75d",
                 "shasum": ""
             },
             "require": {
@@ -2835,9 +2835,9 @@
             ],
             "support": {
                 "issues": "https://github.com/PHPOffice/PhpSpreadsheet/issues",
-                "source": "https://github.com/PHPOffice/PhpSpreadsheet/tree/1.29.5"
+                "source": "https://github.com/PHPOffice/PhpSpreadsheet/tree/1.29.4"
             },
-            "time": "2024-11-22T05:57:44+00:00"
+            "time": "2024-11-10T16:26:22+00:00"
         },
         {
             "name": "phpoption/phpoption",

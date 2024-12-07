@@ -2,7 +2,6 @@
 
 use App\Models\Post;
 use App\Models\Kategori;
-use App\Models\Transaksi;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\KategoriController;
@@ -12,6 +11,7 @@ use App\Http\Controllers\BarangMasukController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\BarangController;
+
 
 
 Route::get('/cek-stok', [BarangController::class, 'cekStok']);
@@ -75,6 +75,7 @@ Route::get('/laporan-penjualan', function () {
     return view('laporan-penjualan');
 });
 Route::get('/laporan-penjualan', [LaporanPenjualanController::class, 'index'])->name('laporan-penjualan.index');
+Route::get('/laporan-penjualan/export', [LaporanPenjualanController::class, 'export'])->name('laporan-penjualan.export');
 
 Route::resource('transaksi', TransaksiController::class);
 

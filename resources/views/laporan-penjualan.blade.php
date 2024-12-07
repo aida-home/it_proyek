@@ -22,6 +22,7 @@
                 <label for="end_date">Tanggal akhir:</label>
                 <input type="date" name="end_date" id="end_date" value="{{ $endDate }}" placeholder="">                
                 <button type="submit">Filter</button>
+                <a href="{{ route('laporan-penjualan.export', ['start_date' => $startDate, 'end_date' => $endDate]) }}" class="btn">Unduh Laporan</a>
             </form>
         <table class="table table-bordered">
             <thead>

@@ -30,10 +30,16 @@ class SupplierController extends Controller
             'alamat' => 'required|string',
         ]);
 
-        // Mendapatkan ID supplier terakhir untuk membuat ID baru dengan prefix 'SP'
-        $lastSupplier = Supplier::orderBy('id_supplier', 'desc')->first();
-        $newIdNumber = $lastSupplier ? intval(substr($lastSupplier->id_supplier, 2)) + 1 : 1;
-        $newId = 'S' . $newIdNumber;
+            $lastSupplier = Supplier::orderBy('id_supplier', 'desc')->first();
+    
+            if ($lastSupplier) {
+                $lastIdNumber = (int) substr($lastSupplier->id_supplier, 1);
+                $newIdNumber = $lastIdNumber + 1;
+            } else {
+                $newIdNumber = 1;
+            }
+    
+            $newId = 'S' . $newIdNumber;
 
         // Membuat supplier baru dengan ID yang baru dibuat
         Supplier::create([
