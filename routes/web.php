@@ -3,15 +3,17 @@
 use App\Models\Post;
 use App\Models\Kategori;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SAWController;
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\KategoriController;
-use App\Http\Controllers\TransaksiController;
-use App\Http\Controllers\LaporanPenjualanController;
-use App\Http\Controllers\BarangMasukController;
-use App\Http\Controllers\SupplierController;
-use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\PenggunaController;
+use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\BarangMasukController;
+use App\Http\Controllers\LaporanPenjualanController;
 
+Route::get('/export-saw', [SAWController::class, 'exportDataSAW']);
 
 
 Route::get('/cek-stok', [BarangController::class, 'cekStok']);
