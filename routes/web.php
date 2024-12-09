@@ -80,6 +80,8 @@ Route::get('/laporan-penjualan', [LaporanPenjualanController::class, 'index'])->
 Route::get('/laporan-penjualan/export', [LaporanPenjualanController::class, 'export'])->name('laporan-penjualan.export');
 
 Route::resource('transaksi', TransaksiController::class);
+Route::post('/transaksi/store', [TransaksiController::class, 'store'])->name('transaksi.store');
+
 
 
 Route::get('/home', function () {

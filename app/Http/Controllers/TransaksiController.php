@@ -36,7 +36,8 @@ class TransaksiController extends Controller
             ? ((int) substr($lastTransaksi->id_transaksi, 2) + 1) 
             : 1;
 
-        $newId = 'TR' . $newIdNumber;
+        // Generate ID transaksi dengan format TR000001, TR000002, ...
+        $newId = 'TR' . str_pad($newIdNumber, 6, '0', STR_PAD_LEFT);
 
         // Simpan transaksi
         $transaksi = new Transaksi;
@@ -51,6 +52,7 @@ class TransaksiController extends Controller
 
             if ($barang) {
                 $detailTransaksi = new DetailTransaksi;
+                // Generate ID detail transaksi dengan format DT000001, DT000002, ...
                 $detailTransaksi->id_detail_transaksi = $this->generateNewIdDetailTransaksi();
                 $detailTransaksi->id_transaksi = $newId;
                 $detailTransaksi->id_barang = $barang->id_barang; // Simpan referensi
@@ -100,9 +102,10 @@ class TransaksiController extends Controller
         $lastDetail = DetailTransaksi::orderBy('id_detail_transaksi', 'desc')->first();
 
         $newIdNumber = $lastDetail 
-            ? str_pad(((int) substr($lastDetail->id_detail_transaksi, 2) + 1), 2, '0', STR_PAD_LEFT)
-            : '01';
+            ? ((int) substr($lastDetail->id_detail_transaksi, 2) + 1) 
+            : 1;
 
-        return 'DT' . $newIdNumber;
+        // Generate ID detail transaksi dengan format DT000001, DT000002, ...
+        return 'DT' . str_pad($newIdNumber, 6, '0', STR_PAD_LEFT);
     }
 }
