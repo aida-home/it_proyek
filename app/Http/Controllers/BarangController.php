@@ -104,7 +104,7 @@ class BarangController extends Controller
         public function kirimNotifikasiWhatsApp($barang)
         {
             $apiKey = "eV5dYotqwXQvvykMfvv9"; // API key Fonnte
-            $nomorTarget = "6283824320186"; // Nomor WhatsApp tujuan
+            $nomorTarget = "6283862166822"; // Nomor WhatsApp tujuan
     
             // Memastikan penggunaan nama kolom yang tepat
             $pesan = "⚠️ Stok Barang Hampir Habis ⚠️\n\n" .
