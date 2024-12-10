@@ -7,6 +7,7 @@
     <title>Create Transaksi</title>
     <link rel="stylesheet" href="{{ asset('assets/css/styleform.css') }}?v={{ time() }}">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/font/css/all.min.css') }}">
 </head>
 <body>
     @extends('layouts.sidebar')
@@ -114,9 +115,9 @@
             $('#tambahBarang').click(function () {
                 const namaBarang = $('#barang option:selected').text();
                 const idBarang = $('#barang').val();
-                const jumlahBeli = $('#jumlah_beli').val();
-                const hargaJual = $('#harga_jual').val();
-                const stok = $('#barang option:selected').data('stock');
+                const jumlahBeli = parseInt($('#jumlah_beli').val());
+                const hargaJual = parseInt($('#harga_jual').val());
+                const stok = parseInt($('#barang option:selected').data('stock'));
                 const subtotal = jumlahBeli * hargaJual;
 
                 if (!idBarang || !jumlahBeli || jumlahBeli <= 0) {
@@ -124,26 +125,58 @@
                     return;
                 }
 
-                if (jumlahBeli > parseInt(stok)) {
+                if (jumlahBeli > stok) {
                     alert('Stok tidak mencukupi. Stok tersedia: ' + stok);
                     return;
                 }
 
-                totalTransaksi += subtotal;
+                let found = false;
 
-                const newRow = `
-                    <tr>
-                        <td><input type="hidden" name="barang[${idBarang}][id_barang]" value="${idBarang}">${namaBarang}</td>
-                        <td><input type="hidden" name="barang[${idBarang}][jumlah_beli]" value="${jumlahBeli}">${jumlahBeli}</td>
-                        <td>${formatRupiah(hargaJual)}</td>
-                        <td>${formatRupiah(subtotal)}</td>
-                        <td><button type="button" class="btn btn-danger btn-delete">Hapus</button></td>
-                    </tr>
-                `;
+                // Cek apakah barang sudah ada di daftar
+                $('#daftarBarang tr').each(function () {
+                    const existingId = $(this).find('input[name*="id_barang"]').val();
+                    if (existingId === idBarang) {
+                        found = true;
 
-                $('#daftarBarang').append(newRow);
-                $('#totalTransaksi').text(formatRupiah(totalTransaksi));
+                        // Update jumlah beli dan subtotal
+                        const existingJumlah = parseInt($(this).find('input[name*="jumlah_beli"]').val());
+                        const newJumlah = existingJumlah + jumlahBeli;
 
+                        if (newJumlah > stok) {
+                            alert('Stok tidak mencukupi. Stok tersedia: ' + stok);
+                            return false; // Exit loop
+                        }
+
+                        const newSubtotal = newJumlah * hargaJual;
+                        $(this).find('input[name*="jumlah_beli"]').val(newJumlah);
+                        $(this).find('td:nth-child(2)').text(newJumlah);
+                        $(this).find('td:nth-child(4)').text(formatRupiah(newSubtotal));
+
+                        // Update total transaksi
+                        totalTransaksi += subtotal;
+                        $('#totalTransaksi').text(formatRupiah(totalTransaksi));
+                    }
+                });
+
+                if (!found) {
+                    // Tambah barang baru ke daftar
+                    totalTransaksi += subtotal; // Pastikan totalTransaksi diperbarui di sini
+
+                    const newRow = `
+                        <tr>
+                            <td><input type="hidden" name="barang[${idBarang}][id_barang]" value="${idBarang}">${namaBarang}</td>
+                            <td><input type="hidden" name="barang[${idBarang}][jumlah_beli]" value="${jumlahBeli}">${jumlahBeli}</td>
+                            <td>${formatRupiah(hargaJual)}</td>
+                            <td>${formatRupiah(subtotal)}</td>
+                            <td><button type="button" class="btn btn-danger btn-delete">Hapus</button></td>
+                        </tr>
+                    `;
+
+                    $('#daftarBarang').append(newRow);
+                    $('#totalTransaksi').text(formatRupiah(totalTransaksi)); // Update total transaksi di tampilan
+                }
+
+                // Reset input form
                 $('#barang').val('');
                 $('#harga_jual').val('');
                 $('#jumlah_beli').val('1');

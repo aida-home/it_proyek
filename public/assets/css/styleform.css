@@ -42,6 +42,10 @@ body {
     max-height: 385px;
 }
 
+.select2-container .select2-selection--single {
+    height: 38px; /* Sesuaikan dengan tinggi form */
+}
+
 .form-group {
     margin-bottom: 15px;
 }

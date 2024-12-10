@@ -3,7 +3,7 @@ body {
     font-family: 'Montserrat', Arial, sans-serif;
     margin: 0;
     padding: 0;
-    font-weight: 600; 
+    font-weight: 600;
     background-color: #f4f4f4;
 }
 
@@ -17,7 +17,7 @@ body {
     left: 0;
     background-color: #8A5E41;
     color: white;
-    padding-top: 10px; /* Kurangi padding atas */
+    padding-top: 10px;
 }
 
 .sidebar .logo {
@@ -25,18 +25,18 @@ body {
 }
 
 .sidebar .logo a:hover {
-    background-color: transparent; /* Hilangkan efek hover */
+    background-color: transparent;
     transform: none;
     opacity: 1;
     box-shadow: none;
 }
 
 .sidebar .logo img {
-    max-width: 100px; /* Ukuran maksimum logo */
-    height: auto; /* Menjaga aspek rasio */
+    max-width: 100px;
+    height: auto;
     display: inline-block;
-    transition: none; /* Hilangkan efek transisi */
-    pointer-events: none; /* Nonaktifkan interaksi mouse */
+    transition: none;
+    pointer-events: none;
 }
 
 .sidebar h2 {
@@ -44,23 +44,24 @@ body {
     text-align: center;
     margin-bottom: 30px;
     font-size: 22px;
+    color: #fff;
 }
 
 .sidebar ul {
     list-style-type: none;
-    padding: 0; /* Hilangkan padding bawaan */
-    margin: 0; /* Hilangkan margin bawaan */
+    padding: 0;
+    margin: 0;
 }
 
 .sidebar a {
     font-family: 'Montserrat', Arial, sans-serif;
     display: block;
     color: white;
-    padding: 10px 30px; /* Tambahkan padding kiri-kanan */
+    padding: 10px 30px;
     text-decoration: none;
-    font-size: 15px; 
-    font-weight: 600; 
-    margin: 5px 0; /* Tambahkan jarak antar-menu */
+    font-size: 15px;
+    font-weight: 600;
+    margin: 5px 0;
     border-bottom: 1px solid #a67450;
     transition: background-color 0.3s, color 0.3s;
 }
@@ -71,6 +72,24 @@ body {
     border-radius: 0;
 }
 
+/* Data Master */
+.sidebar .has-submenu > a {
+    position: relative;
+}
+
+.sidebar .submenu {
+    display: none; /* Menyembunyikan submenu */
+    list-style-type: none;
+    padding-left: 20px; /* Memberikan indentasi pada submenu */
+}
+
+.sidebar .has-submenu.open .submenu {
+    display: block; /* Menampilkan submenu ketika parent memiliki class 'open' */
+}
+
+.sidebar .submenu a {
+    padding: 10px 30px 10px 50px; /* Menambah padding untuk submenu */
+}
 
 /* Header */
 .header {
@@ -87,7 +106,6 @@ body {
     z-index: 10; /* Pastikan header tetap di atas konten lainnya */
 }
 
-
 .header h1 {
     font-size: 18px;
     color: #8A5E41;
@@ -98,7 +116,7 @@ body {
     border: none;
     color: #8A5E41;
     font-size: 16px;
-    font-weight: bold; 
+    font-weight: bold;
     cursor: pointer;
 }
 
@@ -144,11 +162,15 @@ body {
 }
 
 .icon {
-    width: 30px;
-    height: 30px;
-    background-color: rgba(255, 182, 193, 0.6); /* Warna bulat */
-    border-radius: 50%;
-    position: relative;
+    font-size: 20px; /* Ukuran ikon */
+    color: #8A5E41; /* Warna ikon */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px; /* Tinggi ikon */
+    width: 40px; /* Lebar ikon */
+    border-radius: 50%; /* Bentuk bulat */
+    background-color: rgba(0, 123, 255, 0.6); /* Contoh warna latar belakang */
 }
 
 .card:nth-child(1) .icon {
@@ -178,6 +200,7 @@ body {
 .card:nth-child(7) .icon {
     background-color: rgba(255, 204, 204, 0.6); /* Merah muda */
 }
+
 
 .text {
     display: flex;
@@ -211,5 +234,5 @@ body {
 }
 
 .more-info:hover {
-    background-color: #6f4f2b;
+    background-color: #6f4f2b; /* Warna hover lebih gelap */
 }
