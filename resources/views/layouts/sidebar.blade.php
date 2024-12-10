@@ -7,7 +7,6 @@
         'Ubah Supplier', 'Tambah Kategori', 'Ubah Kategori', 'Tambah Barang', 'Ubah Barang', 'Tambah Barang Masuk', 'Ubah Barang Masuk', 'Tambah Transaksi', 'Detail Transaksi')</title>
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}?v={{ time() }}">
     <link rel="stylesheet" href="{{ asset('assets/font/css/all.min.css') }}">
-    <script src="{{ asset('assets/js/sidebar.js') }}?v={{ time() }}"></script>
 </head>
 <body>
     <!-- Sidebar -->
