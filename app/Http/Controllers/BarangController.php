@@ -100,6 +100,15 @@ class BarangController extends Controller
                 $this->kirimNotifikasiWhatsApp($barang);
             }
         }
+
+        public function searchBarang(Request $request)
+        {
+            $term = $request->get('term'); // Ambil kata kunci pencarian
+            $barang = Barang::where('nama_barang', 'LIKE', '%' . $term . '%') // Cari berdasarkan nama_barang
+                            ->get(['id_barang', 'nama_barang']); // Ambil ID dan nama
+        
+            return response()->json($barang); // Kirim data dalam format JSON
+        }
     
         public function kirimNotifikasiWhatsApp($barang)
         {
