@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Dashboard','Pengguna', 'Kategori', 'Supplier', 'Barang', 'Barang Masuk', 'Transaksi', 'Laporan Penjualan', 'Tambah Pengguna', 'Ubah Pengguna', 'Tambah Supplier', 
-        'Ubah Supplier', 'Tambah Kategori', 'Ubah Kategori', 'Tambah Barang', 'Ubah Barang', 'Tambah Barang Masuk', 'Ubah Barang Masuk', 'Tambah Transaksi', 'Detail Transaksi')</title>
+    <title>@yield('title', 'Dashboard', 'Pengguna', 'Kategori', 'Supplier', 'Barang', 'Barang Masuk', 'Transaksi', 'Laporan Penjualan', 'Tambah Pengguna', 'Ubah Pengguna', 'Tambah Supplier', 'Ubah Supplier', 'Tambah Kategori', 'Ubah Kategori', 'Tambah Barang', 'Ubah Barang', 'Tambah Barang Masuk', 'Ubah Barang Masuk', 'Tambah Transaksi', 'Detail Transaksi')</title>
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}?v={{ time() }}">
     <link rel="stylesheet" href="{{ asset('assets/font/css/all.min.css') }}">
 </head>
+
 <body>
     <!-- Sidebar -->
     <div class="sidebar">
@@ -18,7 +19,7 @@
         </div>
 
         <ul>
-            <li><a href="/dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="/dashboard" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
             <li><a href="/pengguna"><i class="fas fa-users"></i> Pengguna</a></li>
 
             <!-- Data Master -->
@@ -38,8 +39,7 @@
 
     <!-- Header -->
     <div class="header">
-        <h1>@yield('header', 'Dashboard', 'Pengguna', 'Kategori', 'Supplier', 'Barang', 'Barang Masuk', 'Transaksi', 'Laporan Penjualan', 'Tambah Pengguna', 'Ubah Pengguna', 'Tambah Supplier', 
-        'Ubah Supplier', 'Tambah Kategori', 'Ubah Kategori', 'Tambah Barang', 'Ubah Barang', 'Tambah Barang Masuk', 'Ubah Barang Masuk', 'Tambah Transaksi', 'Detail Transaksi')</h1>
+        <h1>@yield('header', 'Dashboard', 'Pengguna', 'Kategori', 'Supplier', 'Barang', 'Barang Masuk', 'Transaksi', 'Laporan Penjualan', 'Tambah Pengguna', 'Ubah Pengguna', 'Tambah Supplier', 'Ubah Supplier', 'Tambah Kategori', 'Ubah Kategori', 'Tambah Barang', 'Ubah Barang', 'Tambah Barang Masuk', 'Ubah Barang Masuk', 'Tambah Transaksi', 'Detail Transaksi')</h1>
         <button class="logout-btn" onclick="document.getElementById('logout-form').submit();">
             <i class="fas fa-sign-out-alt"></i> Logout
         </button>
@@ -55,13 +55,33 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const submenuToggles = document.querySelectorAll('.submenu-toggle');
-    
+            // Menangani toggle submenu
+            const submenuToggles = document.querySelectorAll(".submenu-toggle");
+
             submenuToggles.forEach(toggle => {
-                toggle.addEventListener('click', function(e) {
+                toggle.addEventListener("click", function(e) {
                     e.preventDefault();
                     const parent = this.parentElement;
+
+                    // Tutup semua submenu lain
+                    document.querySelectorAll('.has-submenu').forEach(item => {
+                        if (item !== parent) item.classList.remove('open');
+                    });
+
+                    // Toggle submenu saat ini
                     parent.classList.toggle('open');
+                });
+            });
+
+            // Menangani state menu aktif
+            const menuLinks = document.querySelectorAll(".sidebar ul li a");
+            menuLinks.forEach(link => {
+                link.addEventListener("click", function() {
+                    // Hapus class active dari semua link
+                    menuLinks.forEach(item => item.classList.remove("active"));
+
+                    // Tambahkan class active ke menu yang diklik
+                    this.classList.add("active");
                 });
             });
         });
