@@ -37,7 +37,7 @@
                     <p>{{ $barangCount }}</p>
                 </div>
                 <div class="icon">
-                    <i class="fas fa-cogs"></i> <!-- Icon Font Awesome -->
+                    <i class="fas fa-cube"></i> <!-- Icon Font Awesome -->
                 </div>
             </div>
             <a href="/barang" class="more-info">More info</a>

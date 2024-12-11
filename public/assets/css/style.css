@@ -62,7 +62,6 @@ body {
     font-size: 15px;
     font-weight: 600;
     margin: 5px 0;
-    border-bottom: 1px solid #a67450;
     transition: background-color 0.3s, color 0.3s;
 }
 

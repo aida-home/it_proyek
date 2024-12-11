@@ -17,7 +17,6 @@
 
     @section('content')
     <div class="form-container">
-        <h1>Detail Transaksi {{ $transaksi->id_transaksi }}</h1>
 
         <div class="table-section"> <!-- Tambahkan div dengan kelas table-section -->
             <div class="mb-3">
@@ -40,9 +39,9 @@
                     @foreach($transaksi->detailTransaksi as $detail)
                     <tr>
                         <td>{{ $detail->nama_barang }}</td>
-                        <td>Rp {{ number_format($detail->harga_jual ?? 0, 2, ',', '.') }}</td>
+                        <td>Rp {{ number_format($detail->harga_jual ?? 0, 0, ',', '.') }}</td>
                         <td>{{ $detail->jumlah_beli }}</td>
-                        <td>Rp {{ number_format($detail->subtotal, 2, ',', '.') }}</td>
+                        <td>Rp {{ number_format($detail->subtotal, 0, ',', '.') }}</td>
                     </tr>
                     @php
                         $total_pembayaran += $detail->subtotal;
@@ -52,7 +51,7 @@
                 <tfoot>
                     <tr>
                         <td colspan="3"><strong>Total Pendapatan</strong></td>
-                        <td><strong>Rp {{ number_format($total_pembayaran, 2, ',', '.') }}</strong></td>
+                        <td><strong>Rp {{ number_format($total_pembayaran, 0, ',', '.') }}</strong></td>
                     </tr>
                 </tfoot>
             </table>
