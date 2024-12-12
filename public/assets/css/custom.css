@@ -59,6 +59,7 @@ h2 {
     font-size: 14px;
     transition: background-color 0.3s ease;
     text-decoration: none; /* Hilangkan underline pada tombol */
+    font-family: 'Montserrat', sans-serif;
 }
 
 /* Hover tombol */
@@ -73,6 +74,8 @@ h2 {
     padding: 10px;
     border-radius: 5px;
     margin-bottom: 20px;
+    font-weight: lighter;
+    font-size: 14px;
 }
 
 /* Gaya untuk pesan error */
@@ -80,21 +83,21 @@ h2 {
     color: #d9534f; /* Merah untuk pesan error */
     font-size: 14px; /* Ukuran lebih kecil dari teks biasa */
     margin-top: 5px; /* Jarak dengan elemen input */
+    font-family: 'Montserrat', sans-serif;
 }
 
 /* Gaya untuk setiap pesan error */
 .error-message p {
     margin: 0 0 5px; /* Jarak antar paragraf */
     line-height: 1.5; /* Tinggi baris */
+    font-family: 'Montserrat', sans-serif;
 }
 
 
 /* Gaya untuk form group */
 .form-group {
     margin-bottom: 20px; /* Jarak bawah antar elemen */
-    border: 2px solid #8A5E41; /* Border coklat */
     border-radius: 5px; /* Sudut membulat pada border */
-    padding: 10px; /* Padding di dalam border */
 }
 
 
@@ -102,10 +105,11 @@ h2 {
 .form-group input[type="text"] {
     width: 100%; /* Lebar penuh */
     padding: 10px; /* Padding di dalam input */
-    border: none; /* Hilangkan border default */
+    border: 1px solid #8A5E41; /* Border coklat */
     background-color: white; /* Latar belakang putih */
     font-size: 14px; /* Ukuran font */
     border-radius: 5px; /* Sudut membulat pada input */
+    font-family: 'Montserrat', sans-serif;
 }
 
 /* Styling untuk tabel */

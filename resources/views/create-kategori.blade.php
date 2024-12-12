@@ -19,7 +19,7 @@
                 @csrf
                 <div class="table-section"> 
                 <div class="form-group">
-                    <input type="text" name="nama_kategori" placeholder="Masukkan Nama Kategori" required>
+                    <input type="text" class="form-control" name="nama_kategori" placeholder="Masukkan Nama Kategori" required>
                             <!-- Menampilkan pesan error jika ada -->
                 </div>
             @error('nama_kategori')
