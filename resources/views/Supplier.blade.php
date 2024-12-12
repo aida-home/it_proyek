@@ -21,7 +21,7 @@
             <table>
                 <thead>
                     <tr>
-                        <th>ID Supplier</th>
+                        <th>No</th>
                         <th>Nama Supplier</th>
                         <th>No. Telepon</th>
                         <th>Alamat</th>
@@ -29,9 +29,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($suppliers as $supplier)
+                    @foreach ($suppliers as $index => $supplier)
                         <tr>
-                            <td>{{ $supplier->id_supplier }}</td>
+                            <td>{{ $index + 1 }}</td> 
                             <td>{{ $supplier->nama_supplier }}</td>
                             <td>{{ $supplier->no_telp }}</td>
                             <td>{{ $supplier->alamat }}</td>

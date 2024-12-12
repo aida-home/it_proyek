@@ -22,7 +22,7 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>ID Pengguna</th>
+                        <th>No</th>
                         <th>Nama Pengguna</th>
                         <th>No. Telepon</th>
                         <th>Username</th>
@@ -30,9 +30,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($pengguna as $user)
+                    @foreach ($pengguna as $index => $user)
                     <tr>
-                        <td>{{ $user->id_pengguna }}</td>
+                        <td>{{ $index + 1 }}</td> 
                         <td>{{ $user->nama_pengguna }}</td>
                         <td>{{ $user->no_telepon }}</td>
                         <td>{{ $user->username }}</td>

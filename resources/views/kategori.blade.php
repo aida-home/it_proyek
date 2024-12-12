@@ -22,15 +22,15 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th>ID Kategori</th>
+                            <th>No</th>
                             <th>Nama Kategori</th>
                             <th>Aksi</th> <!-- Kolom Aksi -->
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($kategori as $item)
+                        @foreach ($kategori as $index => $item)
                         <tr>
-                            <td>{{ $item->id_kategori }}</td>
+                            <td>{{ $index + 1 }}</td> 
                             <td>{{ $item->nama_kategori }}</td>
                             <td>
                                 <div class="action-buttons">

@@ -23,7 +23,7 @@
             <table>
                 <thead>
                     <tr>
-                        <th>ID Barang</th>
+                        <th>No</th>
                         <th>Nama Barang</th>
                         <th>Kategori</th>
                         <th>Stok Barang</th>
@@ -32,9 +32,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($barang as $barang)
+                    @foreach ($barang as $index => $barang) <!-- Menambahkan indeks untuk nomor urut -->
                     <tr>
-                        <td>{{ $barang->id_barang }}</td>
+                        <td>{{ $index + 1 }}</td> <!-- Menampilkan nomor urut -->
                         <td>{{ $barang->nama_barang }}</td>
                         <td>{{ $barang->kategori }}</td>
                         <td>{{ $barang->stok_barang }}</td>
@@ -50,11 +50,9 @@
                             </div>
                         </td>
                     </tr>
-                    @endforeach             
+                    @endforeach              
                 </tbody>                
-            </table>
-        </div>
-    </div>
+            </table>            
     @endsection
     <script src="{{ asset('assets/js/custom.js') }}"></script>
 

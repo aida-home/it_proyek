@@ -23,16 +23,16 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>ID Transaksi</th>
+                        <th>No</th>
                         <th>Tanggal Transaksi</th>
                         <th>Total Pembayaran</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($transaksi as $item)
+                    @foreach ($transaksi as $index => $item)
                         <tr>
-                            <td>{{ $item->id_transaksi }}</td>
+                            <td>{{ $index + 1 }}</td> 
                             <td>{{ $item->tanggal_transaksi }}</td>
                             <td>Rp {{ number_format($item->total_pembayaran, 2, ',', '.') }}</td>
                             <td>

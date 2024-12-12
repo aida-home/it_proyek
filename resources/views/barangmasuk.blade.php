@@ -19,12 +19,12 @@
         <div class="box">
             <!-- Tombol Tambah -->
             <a href="{{ route('barangmasuk.create') }}" class="btn">Tambah Barang Masuk</a>
-
+    
             <!-- Tabel Data Barang Masuk -->
             <table>
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>No</th>
                         <th>Barang</th>
                         <th>Kategori</th>
                         <th>Supplier</th>
@@ -35,9 +35,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($barangMasuk as $barang)
+                    @foreach ($barangMasuk as $index => $barang) <!-- Menambahkan $index untuk nomor urut -->
                         <tr>
-                            <td>{{ $barang->id_barangmasuk }}</td>
+                            <td>{{ $index + 1 }}</td> <!-- Menampilkan nomor urut mulai dari 1 -->
                             <td>{{ $barang->nama_barang }}</td>
                             <td>{{ $barang->kategori }}</td>
                             <td>{{ $barang->supplier }}</td>
@@ -61,7 +61,7 @@
                 </tbody>
             </table>
         </div>
-    </div>
+    </div>    
     @endsection
     <script src="{{ asset('assets/js/custom.js') }}"></script>
 
