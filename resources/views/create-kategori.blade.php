@@ -26,6 +26,7 @@
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
                 <button type="submit" class="save-btn">Simpan</button> <!-- Ubah warna tombol simpan menjadi coklat -->
+                <button type="button" onclick="location.href= 'kategori'" class="btn btn-cancel">Batal</button>
             </form>
         </div>
     </div>
