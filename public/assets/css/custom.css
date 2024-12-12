@@ -75,6 +75,20 @@ h2 {
     margin-bottom: 20px;
 }
 
+/* Gaya untuk pesan error */
+.error-message {
+    color: #d9534f; /* Merah untuk pesan error */
+    font-size: 14px; /* Ukuran lebih kecil dari teks biasa */
+    margin-top: 5px; /* Jarak dengan elemen input */
+}
+
+/* Gaya untuk setiap pesan error */
+.error-message p {
+    margin: 0 0 5px; /* Jarak antar paragraf */
+    line-height: 1.5; /* Tinggi baris */
+}
+
+
 /* Gaya untuk form group */
 .form-group {
     margin-bottom: 20px; /* Jarak bawah antar elemen */

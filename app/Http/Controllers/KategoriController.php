@@ -9,8 +9,9 @@ class KategoriController extends Controller
 {
     public function deleteKategori(Kategori $kategori) {
         //hapus kategori
+        $nama_kategori = $kategori->nama_kategori;
         $kategori->delete();
-        return redirect('/kategori');
+        return redirect('/kategori')->with('success', 'Kategori ' . $nama_kategori . ' berhasil dihapus.');
     }
     public function actuallyUpdateKategori(Kategori $kategori, Request $request) {
             // Validasi input
@@ -20,14 +21,14 @@ class KategoriController extends Controller
 
             if (Kategori::where('nama_kategori', $request->nama_kategori)->exists()) {
                 return back()->withErrors(['nama_kategori' => 'Nama kategori sudah ada.']);
-               }
+            }
     
             // Update nama kategori
             $kategori->update([
                 'nama_kategori' => $request->nama_kategori,
             ]);
 
-            return redirect('/kategori')->with('success', 'Kategori berhasil diubah.');    
+            return redirect('/kategori')->with('success', 'Kategori berhasil diperbarui.');    
     }
     public function showEditScreen(Kategori $kategori) {
         return view('edit-kategori', ['kategori'=>$kategori]);
@@ -46,7 +47,7 @@ class KategoriController extends Controller
     
                 // Cek apakah nama_kategori sudah ada
             if (Kategori::where('nama_kategori', $request->nama_kategori)->exists()) {
-             return back()->withErrors(['nama_kategori' => 'Nama kategori sudah ada.']);
+                return back()->withErrors(['nama_kategori' => 'Nama kategori sudah ada.']);
             }
 
             // Ambil ID kategori terakhir
