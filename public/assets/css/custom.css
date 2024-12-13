@@ -113,11 +113,26 @@ h2 {
 }
 
 /* Styling untuk tabel */
+/* Styling untuk tabel */
 table {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: collapse; /* Menghilangkan jarak antar garis tabel */
     margin-top: 30px;
     margin-bottom: 20px;
+    table-layout: fixed; /* Memastikan kolom memiliki lebar tetap */
+    border: 1px solid #ddd;
+}
+
+/* Kolom khusus untuk 'No' */
+table th:nth-child(1), 
+table td:nth-child(1) {
+    width: 5%; /* Lebar kolom 'No' lebih kecil */
+}
+
+/* Kolom khusus untuk 'Aksi' (selalu kolom terakhir) */
+table th:last-child, 
+table td:last-child {
+    width: 17%; /* Lebar kolom terakhir untuk tombol */
 }
 
 table, th, td {
