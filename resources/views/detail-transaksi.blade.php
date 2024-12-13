@@ -26,6 +26,7 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
+                        <th>No</th>
                         <th>Nama Barang</th>
                         <th>Harga Jual</th>
                         <th>Jumlah Beli</th>
@@ -36,8 +37,9 @@
                     @php
                         $total_pembayaran = 0;
                     @endphp
-                    @foreach($transaksi->detailTransaksi as $detail)
+                    @foreach($transaksi->detailTransaksi as $index => $detail)
                     <tr>
+                        <td>{{ $index + 1 }}</td>
                         <td>{{ $detail->nama_barang }}</td>
                         <td>Rp {{ number_format($detail->harga_jual ?? 0, 0, ',', '.') }}</td>
                         <td>{{ $detail->jumlah_beli }}</td>
@@ -50,7 +52,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="3"><strong>Total Pendapatan</strong></td>
+                        <td colspan="4"><strong>Total Pendapatan</strong></td>
                         <td><strong>Rp {{ number_format($total_pembayaran, 0, ',', '.') }}</strong></td>
                     </tr>
                 </tfoot>

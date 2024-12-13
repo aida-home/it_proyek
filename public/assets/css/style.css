@@ -136,6 +136,7 @@ body {
     grid-template-columns: repeat(4, 1fr); /* 4 kolom dalam satu baris */
     gap: 20px; /* Jarak antar card */
     margin-top: 20px;
+    padding-bottom: 20px; /* Memberikan ruang ekstra di bawah */
 }
 
 .card {
@@ -147,7 +148,7 @@ body {
     color: #333333;
     position: relative;
     width: 200px;
-    height: 120px; /* Tinggi card sedikit lebih kecil */
+    height: 100px; /* Tinggi card sedikit lebih kecil */
     display: flex;
     flex-direction: column;
     justify-content: space-between; /* Agar More Info tetap di bawah */
@@ -196,9 +197,6 @@ body {
     background-color: rgba(255, 211, 249, 0.6); /* Lavender */
 }
 
-.card:nth-child(7) .icon {
-    background-color: rgba(255, 204, 204, 0.6); /* Merah muda */
-}
 
 
 .text {
@@ -234,4 +232,18 @@ body {
 
 .more-info:hover {
     background-color: #6f4f2b; /* Warna hover lebih gelap */
+}
+.popular-items {
+    width: 50%; /* Menyesuaikan lebar kontainer dengan 80% dari lebar layar */
+    max-width: 450px;
+    background-color: white; /* Latar belakang grafik */
+    padding: 10px 20px;
+    border-radius: 8px; /* Membuat sudut lebih halus */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Menambahkan bayangan */
+    margin-top: 20px; /* Jarak dari elemen di atas */
+}
+    
+#popularChart {
+    width: 50%; /* Mengatur lebar chart agar responsif */
+    height: 200px !important; /* Ukuran tinggi grafik, bisa dikurangi lagi */
 }

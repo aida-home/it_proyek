@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pengguna;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Barang;
-use App\Models\BarangMasuk;
 use App\Models\Kategori;
+use App\Models\Pengguna;
 use App\Models\Supplier;
 use App\Models\Transaksi;
+use App\Models\BarangMasuk;
+use Illuminate\Http\Request;
+use App\Models\DetailTransaksi;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class PenggunaController extends Controller
 {
@@ -133,7 +135,21 @@ class PenggunaController extends Controller
         $kategoriCount = Kategori::count();
         $supplierCount = Supplier::count();
         $transaksiCount = Transaksi::count();
-        $laporanPenjualanCount = Transaksi::distinct('id')->count(); // Contoh logika laporan
+        $laporanPenjualanCount = Transaksi::distinct('id')->count(); 
+
+        $currentYear = date('Y'); // Tahun saat ini
+
+        $barangPopuler = DB::table('detail_transaksi')
+            ->join('transaksi', 'detail_transaksi.id_transaksi', '=', 'transaksi.id_transaksi')
+            ->select(
+                'detail_transaksi.nama_barang',
+                DB::raw('SUM(detail_transaksi.jumlah_beli) as total_terjual')
+            )
+            ->whereYear('transaksi.tanggal_transaksi', $currentYear) // Filter berdasarkan tahun
+            ->groupBy('detail_transaksi.nama_barang')
+            ->orderByDesc('total_terjual')
+            ->limit(5) // Ambil 5 barang teratas
+            ->get();
 
         // Kirim data ke view
         return view('dashboard', compact(
@@ -143,7 +159,8 @@ class PenggunaController extends Controller
             'kategoriCount',
             'supplierCount',
             'transaksiCount',
-            'laporanPenjualanCount'
+            'laporanPenjualanCount',
+            'barangPopuler'
         ));
     }
 }
