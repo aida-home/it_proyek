@@ -133,22 +133,22 @@ body {
 
 .dashboard-cards {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 kolom dalam satu baris */
-    gap: 20px; /* Jarak antar card */
+    grid-template-columns: repeat(6, 1fr); /* 4 kolom dalam satu baris */
+    gap: 10px; /* Jarak antar card */
     margin-top: 20px;
     padding-bottom: 20px; /* Memberikan ruang ekstra di bawah */
 }
 
 .card {
     background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 15px;  /* Padding sedikit lebih kecil */
+    border-radius: 5px;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+    padding: 10px;  /* Padding sedikit lebih kecil */
     text-align: left;
     color: #333333;
     position: relative;
-    width: 200px;
-    height: 100px; /* Tinggi card sedikit lebih kecil */
+    width: 140px;
+    height: 60px; /* Tinggi card sedikit lebih kecil */
     display: flex;
     flex-direction: column;
     justify-content: space-between; /* Agar More Info tetap di bawah */
@@ -240,7 +240,7 @@ body {
     padding: 10px 20px;
     border-radius: 8px; /* Membuat sudut lebih halus */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Menambahkan bayangan */
-    margin-top: 20px; /* Jarak dari elemen di atas */
+    margin-top: 15px; /* Jarak dari elemen di atas */
 }
     
 #popularChart {

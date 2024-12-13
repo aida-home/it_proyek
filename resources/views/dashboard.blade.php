@@ -30,7 +30,6 @@
                         <i class="fas fa-users"></i> <!-- Icon Font Awesome -->
                     </div>
                 </div>
-                <a href="/pengguna" class="more-info">More info</a>
             </div>
 
             <div class="card">
@@ -43,7 +42,6 @@
                         <i class="fas fa-cube"></i> <!-- Icon Font Awesome -->
                     </div>
                 </div>
-                <a href="/barang" class="more-info">More info</a>
             </div>
 
             <div class="card">
@@ -56,7 +54,6 @@
                         <i class="fas fa-box-open"></i> <!-- Icon Font Awesome -->
                     </div>
                 </div>
-                <a href="/barangmasuk" class="more-info">More info</a>
             </div>
 
             <div class="card">
@@ -69,7 +66,6 @@
                         <i class="fas fa-tags"></i> <!-- Icon Font Awesome -->
                     </div>
                 </div>
-                <a href="/kategori" class="more-info">More info</a>
             </div>
 
             <div class="card">
@@ -82,7 +78,6 @@
                         <i class="fas fa-truck"></i> <!-- Icon Font Awesome -->
                     </div>
                 </div>
-                <a href="/suppliers" class="more-info">More info</a>
             </div>
 
             <div class="card">
@@ -95,16 +90,20 @@
                         <i class="fas fa-exchange-alt"></i> <!-- Icon Font Awesome -->
                     </div>
                 </div>
-                <a href="/transaksi" class="more-info">More info</a>
             </div>
         </div>
 
         <div class="popular-items">
-            <h3>Barang Populer RPS Collection Tahun ini</h3>
+            <h4 style="text-align: center;">Barang Populer RPS Collection Tahun <span id="currentYear"></span></h4>
             <canvas id="popularChart"></canvas>
         </div>
 
         <script>
+            // Ambil tahun saat ini
+            const currentYear = new Date().getFullYear();
+
+            // Masukkan tahun ke elemen dengan ID 'currentYear'
+            document.getElementById("currentYear").textContent = currentYear;
             var ctx = document.getElementById('popularChart').getContext('2d');
             var popularChart = new Chart(ctx, {
                 type: 'bar',
