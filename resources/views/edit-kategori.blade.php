@@ -16,12 +16,11 @@
     @section('header', 'Ubah Kategori')
 
     @section('content')
-    <div class="table-section">
+    <div class="form-container">
         <form action="/edit-kategori/{{$kategori->id_kategori}}" method="POST">
             @csrf
             @method('PUT') 
             <div class="form-group">
-                <label for="nama_kategori">Nama Kategori</label>
                 <input type="text" name="nama_kategori" value="{{ $kategori->nama_kategori }}" placeholder="Nama Kategori" required>
             </div>
             @error('nama_kategori')
