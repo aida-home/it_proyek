@@ -4,81 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">    
+    <link href="{{ asset('assets/css/form.css') }}" rel="stylesheet"> <!-- Link ke form.css -->
     <title>Edit Barang</title>
-    <style>
-        body {
-            font-family: Roboto, sans-serif;
-            background-color: #f9f4f4; /* Pastel pink background */
-            padding: 20px;
-        }
-
-        h1 {
-            text-align: center;
-            color: #8A5E41; /* Consistent header color */
-        }
-
-        .form-section {
-            max-width: 400px;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #8A5E41; /* Consistent border color */
-            border-radius: 8px;
-            background-color: #ffffff; /* Form background color */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for depth */
-        }
-
-        input[type="text"], input[type="number"], input[type="date"], select {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 14px;
-            background-color: #fff;
-            box-sizing: border-box;
-        }
-
-        select:focus, input:focus {
-            outline: none;
-            border-color: #ff80ab; /* Border color on focus */
-        }
-
-        .btn {
-            padding: 12px 0;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            color: white;
-            background-color: #8A5E41;
-            transition: background-color 0.3s ease;
-            width: 100%;
-            font-size: 16px;
-            margin-bottom: 10px;
-        }
-
-        .btn:hover {
-            background-color: #7A4B31;
-        }
-
-        .btn-cancel {
-            background-color: #d50000;
-        }
-
-        .btn-cancel:hover {
-            background-color: #a70000;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            font-weight: bold;
-            margin-bottom: 5px;
-            display: block;
-            color: #8A5E41;
-        }
-    </style>
 </head>
 <body>
     @extends('layouts.sidebar')
@@ -88,7 +15,7 @@
     @section('header', 'Ubah Barang')
 
     @section('content')
-    <div class="form-section">
+    <div class="form-container"> <!-- Menambahkan class form-container -->
         @if ($errors->any())
             <div class="error">
                 <ul>
@@ -123,11 +50,12 @@
                 <input type="number" id="harga_jual" name="harga_jual" value="{{ $barang->harga_jual }}" required min="0" step="0.01">
             </div>
 
-            <button type="submit" class="btn">Simpan Perubahan</button>
-            <button type="button" onclick="location.href='{{ route('barang.index') }}'" class="btn btn-cancel">Batal</button>
+            <button type="submit" class="save-btn">Simpan Perubahan</button> <!-- Mengganti kelas tombol menjadi save-btn -->
+            <button type="button" onclick="location.href='{{ route('barang.index') }}'" class="btn-cancel">Batal</button> <!-- Mengganti kelas tombol menjadi btn-cancel -->
         </form>
-        @endsection
     </div>
+    @endsection
+
     <script src="{{ asset('assets/js/custom.js') }}"></script>
 
     <script>
@@ -149,7 +77,6 @@
                 timer: 2000
             });
         @endif
-
-    </script>
+    </script>
 </body>
 </html>

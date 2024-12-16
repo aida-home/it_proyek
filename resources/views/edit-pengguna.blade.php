@@ -4,72 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="{{ asset('assets/css/form.css') }}" rel="stylesheet"> <!-- Link ke form.css -->
     <title>Edit Pengguna</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-            padding: 20px;
-        }
-
-        h1 {
-            text-align: center;
-            color: #8A5E41;
-            font-size: 48px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .form-section {
-            max-width: 400px;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #8A5E41;
-            border-radius: 8px;
-            background-color: #ffffff;
-        }
-
-        label {
-            font-weight: bold;
-            margin-bottom: 5px;
-            display: block;
-        }
-
-        input[type="text"], input[type="password"], input[type="number"] {
-            width: calc(100% - 20px);
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-
-        .btn {
-            padding: 12px 0;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            color: white;
-            background-color: #8A5E41;
-            transition: background-color 0.3s ease;
-            width: 100%;
-            text-align: center;
-            font-size: 16px;
-            margin-bottom: 10px;
-        }
-
-        .btn:hover {
-            background-color: #7A4B31;
-        }
-
-        .btn-cancel {
-            background-color: #d50000;
-        }
-
-        .error {
-            color: red;
-            margin-bottom: 20px;
-        }
-    </style>
 </head>
 <body>
     @extends('layouts.sidebar')
@@ -79,8 +15,7 @@
     @section('header', 'Ubah Pengguna')
 
     @section('content')
-    <div class="form-section">
-        
+    <div class="form-container"> <!-- Menambahkan form-container -->
         <form action="{{ route('pengguna.update', $pengguna->id_pengguna) }}" method="POST">
             @csrf
             @method('PUT')
@@ -97,14 +32,16 @@
             <label for="password">Password</label>
             <input type="password" id="password" name="password" placeholder="Masukkan Password (Kosongkan jika tidak ingin diubah)">
             
-            <button type="submit" class="btn">Simpan Perubahan</button>
-            <button type="button" onclick="location.href='{{ route('pengguna.index') }}'" class="btn btn-cancel">Batal</button>
+            <button type="submit" class="save-btn">Simpan Perubahan</button> <!-- Mengganti kelas tombol menjadi save-btn -->
+            <button type="button" onclick="location.href='{{ route('pengguna.index') }}'" class="btn-cancel">Batal</button> <!-- Mengganti kelas tombol menjadi btn-cancel -->
         </form>
     </div>
     @endsection
 
+    <script src="{{ asset('assets/js/custom.js') }}"></script>
+
     <script>
-        //message with sweetalert
+        // message with sweetalert
         @if(session('success'))
             Swal.fire({
                 icon: "success",
@@ -122,7 +59,6 @@
                 timer: 2000
             });
         @endif
-
-    </script>
+    </script>
 </body>
 </html>
