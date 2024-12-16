@@ -58,7 +58,7 @@ class BarangMasukController extends Controller
         }
     
         // Format ID baru menjadi BM01, BM02, dst.
-        $newId = 'BM' . $newIdNumber;
+        $newId = 'BM' . str_pad($newIdNumber, 6, '0', STR_PAD_LEFT);
     
         // Menyimpan data barang masuk yang valid ke database.
         BarangMasuk::create([

@@ -38,7 +38,7 @@ class BarangController extends Controller
         // Mendapatkan ID barang terakhir untuk membuat ID baru dengan prefix 'DB'
         $lastBarang = Barang::orderBy('id_barang', 'desc')->first();
         $newIdNumber = $lastBarang ? intval(substr($lastBarang->id_barang, 2)) + 1 : 1;
-        $newId = 'DB' . str_pad($newIdNumber, 2, '0', STR_PAD_LEFT);
+        $newId = 'DB' . str_pad($newIdNumber, 6, '0', STR_PAD_LEFT);
 
         // Buat data baru di tabel Barang
         $barang = new Barang();

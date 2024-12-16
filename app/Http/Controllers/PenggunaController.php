@@ -43,7 +43,7 @@ class PenggunaController extends Controller
         // Membuat ID pengguna baru dengan prefix 'P'
         $lastPengguna = Pengguna::orderBy('id_pengguna', 'desc')->first();
         $newIdNumber = $lastPengguna ? intval(substr($lastPengguna->id_pengguna, 1)) + 1 : 1;
-        $newId = 'P' . str_pad($newIdNumber, 3, '0', STR_PAD_LEFT); // Menghasilkan ID seperti P001, P002, dst.
+        $newId = 'P' . str_pad($newIdNumber, 6, '0', STR_PAD_LEFT); // Menghasilkan ID seperti P001, P002, dst.
 
         // Membuat pengguna baru
         Pengguna::create([

@@ -65,7 +65,7 @@ class KategoriController extends Controller
             }
     
             // Format ID baru menjadi KT1, KT2, dst.
-            $newId = 'KT' . $newIdNumber;
+            $newId = 'KT' . str_pad($newIdNumber, 6, '0', STR_PAD_LEFT);
     
             // Buat kategori baru
             Kategori::create([

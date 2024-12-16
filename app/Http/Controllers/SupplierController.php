@@ -39,7 +39,7 @@ class SupplierController extends Controller
                 $newIdNumber = 1;
             }
     
-            $newId = 'S' . $newIdNumber;
+            $newId = 'S' . str_pad($newIdNumber, 6, '0', STR_PAD_LEFT);
 
         // Membuat supplier baru dengan ID yang baru dibuat
         Supplier::create([
