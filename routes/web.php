@@ -76,6 +76,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/edit-kategori/{kategori}', [KategoriController::class,'showEditScreen']);
     Route::put('/edit-kategori/{kategori}', [KategoriController::class,'actuallyUpdateKategori']);
     Route::delete('/delete-kategori/{kategori}', [KategoriController::class,'deleteKategori']);
+
+    // Route untuk menampilkan hasil perhitungan SAW
+    Route::get('/barang-terbaik', [SAWController::class, 'hitungBarangTerbaik'])->name('barang-terbaik');
 });
 
 // Posts
