@@ -23,7 +23,12 @@ class SAWController extends Controller
             ->groupBy('barang.id_barang', 'barang.nama_barang', 'barang.harga_jual', 'barang_masuk.harga_beli')
             ->get();
 
-        // 2. Normalisasi data
+                    // 2. Cari nilai maksimum/minimum untuk normalisasi
+        $maxJumlahTerjual = $barangData->max('jumlah_terjual');
+        $maxProfit = $barangData->max('profit');
+        $minHargaJual = $barangData->min('harga_jual');
+
+        // 3. Normalisasi data
         $maxJumlahTerjual = $barangData->max('jumlah_terjual');
         $maxProfit = $barangData->max('profit');
         $minHargaJual = $barangData->min('harga_jual');
@@ -39,7 +44,7 @@ class SAWController extends Controller
             ];
         });
 
-        // 3. Hitung nilai preferensi
+        // 4. Hitung nilai preferensi
         $bobot = [
             'jumlah_terjual' => 0.2605,
             'harga_jual' => 0.1063,
@@ -57,10 +62,15 @@ class SAWController extends Controller
             ];
         });
 
-        // 4. Urutkan berdasarkan nilai preferensi
+        // 5. Urutkan berdasarkan nilai preferensi
         $barangTerbaik = $barangPreferensi->sortByDesc('nilai_preferensi');
 
-        // 5. Kirim data ke view
-        return view('barang-terbaik', ['barangTerbaik' => $barangTerbaik]);
+        // 6. Kirim data ke view
+        return view('barang-terbaik', [
+            'barangData' => $barangData,
+            'barangNormalisasi' => $barangNormalisasi,
+            'barangTerbaik' => $barangTerbaik,
+            'bobot' => $bobot,
+        ]);
     }
 }
