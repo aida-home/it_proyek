@@ -17,7 +17,7 @@ class PenggunaSeeder extends Seeder
         
         // Menentukan ID baru
         $newIdNumber = $lastPengguna ? (int) substr($lastPengguna->id_pengguna, 1) + 1 : 1;
-        $newId = 'P' . str_pad($newIdNumber, 3, '0', STR_PAD_LEFT); // Format ID: P000, P001, dst.
+        $newId = 'P' . str_pad($newIdNumber, 6, '0', STR_PAD_LEFT); // Format ID: P000, P001, dst.
 
         // Menambahkan data pengguna baru dengan ID otomatis
         Pengguna::create([
