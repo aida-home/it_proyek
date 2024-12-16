@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Dashboard', 'Pengguna', 'Kategori', 'Supplier', 'Barang', 'Barang Masuk', 'Transaksi', 'Laporan Penjualan', 'Tambah Pengguna', 'Ubah Pengguna', 'Tambah Supplier', 'Ubah Supplier', 'Tambah Kategori', 'Ubah Kategori', 'Tambah Barang', 'Ubah Barang', 'Tambah Barang Masuk', 'Ubah Barang Masuk', 'Tambah Transaksi', 'Detail Transaksi')</title>
+    <title>@yield('title', 'Dashboard', 'Pengguna', 'Kategori', 'Supplier', 'Barang', 'Barang Masuk', 'Transaksi', 'Laporan Penjualan', 'Tambah Pengguna', 'Ubah Pengguna', 'Tambah Supplier', 'Ubah Supplier', 'Tambah Kategori', 'Ubah Kategori', 'Tambah Barang', 'Ubah Barang', 'Tambah Barang Masuk', 'Ubah Barang Masuk', 'Tambah Transaksi', 'Detail Transaksi', 'Barang Terbaik')</title>
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}?v={{ time() }}">
     <link rel="stylesheet" href="{{ asset('assets/font/css/all.min.css') }}">
 </head>
@@ -34,12 +34,13 @@
             <li><a href="/barang"><i class="fas fa-cube"></i> Barang</a></li>
             <li><a href="/transaksi"><i class="fas fa-exchange-alt"></i> Transaksi</a></li>
             <li><a href="/laporan-penjualan"><i class="fas fa-chart-line"></i> Laporan</a></li>
+            <li><a href="/barang-terbaik"><i class="fa-solid fa-medal"></i> Barang Terbaik</a></li>            
         </ul>
     </div>
 
     <!-- Header -->
     <div class="header">
-        <h1>@yield('header', 'Dashboard', 'Pengguna', 'Kategori', 'Supplier', 'Barang', 'Barang Masuk', 'Transaksi', 'Laporan Penjualan', 'Tambah Pengguna', 'Ubah Pengguna', 'Tambah Supplier', 'Ubah Supplier', 'Tambah Kategori', 'Ubah Kategori', 'Tambah Barang', 'Ubah Barang', 'Tambah Barang Masuk', 'Ubah Barang Masuk', 'Tambah Transaksi', 'Detail Transaksi')</h1>
+        <h1>@yield('header', 'Dashboard', 'Pengguna', 'Kategori', 'Supplier', 'Barang', 'Barang Masuk', 'Transaksi', 'Laporan Penjualan', 'Tambah Pengguna', 'Ubah Pengguna', 'Tambah Supplier', 'Ubah Supplier', 'Tambah Kategori', 'Ubah Kategori', 'Tambah Barang', 'Ubah Barang', 'Tambah Barang Masuk', 'Ubah Barang Masuk', 'Tambah Transaksi', 'Detail Transaksi', 'Barang Terbaik')</h1>
         <button class="logout-btn" onclick="document.getElementById('logout-form').submit();">
             <i class="fas fa-sign-out-alt"></i> Logout
         </button>
