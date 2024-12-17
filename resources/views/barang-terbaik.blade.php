@@ -13,7 +13,7 @@
     @extends('layouts.sidebar')
     @section('title', 'Barang Terbaik')
 
-    @section('header', 'Barang Terbaik')
+    @section('header', 'Perhitungan')
 
     @section('content')
 

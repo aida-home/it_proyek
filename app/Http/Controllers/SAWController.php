@@ -3,22 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\DetailTransaksi;
 use Illuminate\Support\Facades\DB;
     use Illuminate\Support\Carbon;
 
 class SAWController extends Controller
 {
 
-    public function hitungBarangTerbaik(Request $request)
+    public function hitungBarang(Request $request)
     {
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
-    
+        
         // Jika tanggal kosong, set default untuk 1 bulan terakhir
         if (!$startDate || !$endDate) {
             $startDate = $request->input('start_date', now()->startOfMonth()->format('Y-m-d'));
             $endDate = $request->input('end_date', now()->endOfMonth()->format('Y-m-d'));
-            
         }
     
         // Ambil data barang dengan join dan filter tanggal pada transaksi
@@ -38,7 +38,7 @@ class SAWController extends Controller
     
         $barangData = $barangDataQuery->get();
     
-        // Langkah normalisasi dan perhitungan preferensi (sama seperti sebelumnya)
+        // Langkah normalisasi dan perhitungan preferensi
         $maxJumlahTerjual = $barangData->max('jumlah_terjual');
         $maxProfit = $barangData->max('profit');
         $minHargaJual = $barangData->min('harga_jual');
@@ -70,15 +70,23 @@ class SAWController extends Controller
             ];
         });
     
-        $barangTerbaik = $barangPreferensi->sortByDesc('nilai_preferensi');
+        // Urutkan berdasarkan nilai preferensi
+        $barangTerbaik = $barangPreferensi->sortByDesc('nilai_preferensi')->values();
+        
+        // Tambahkan ranking
+        $barangTerbaik = $barangTerbaik->map(function ($item, $index) {
+            $item['ranking'] = $index + 1;  // Penambahan ranking
+            return $item;
+        });
     
-        return view('barang-terbaik', [
-            'barangData' => $barangData,
-            'barangNormalisasi' => $barangNormalisasi,
+        // Menentukan tampilan yang akan digunakan
+        $viewName = $request->routeIs('barang-rekomendasi') ? 'barang-rekomendasi' : 'barang-terbaik';
+    
+        return view($viewName, [
             'barangTerbaik' => $barangTerbaik,
-            'bobot' => $bobot,
             'tanggal_awal' => date('d/m/Y', strtotime($startDate)),
             'tanggal_akhir' => date('d/m/Y', strtotime($endDate)),
         ]);
     }
+    
 }    

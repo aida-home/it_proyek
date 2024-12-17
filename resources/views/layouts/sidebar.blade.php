@@ -34,13 +34,18 @@
             <li><a href="/barang"><i class="fas fa-cube"></i> Barang</a></li>
             <li><a href="/transaksi"><i class="fas fa-exchange-alt"></i> Transaksi</a></li>
             <li><a href="/laporan-penjualan"><i class="fas fa-chart-line"></i> Laporan</a></li>
-            <li><a href="/barang-terbaik"><i class="fa-solid fa-medal"></i> Barang Terbaik</a></li>            
-        </ul>
+            <li class="has-submenu">
+                <a href="#" class="submenu-toggle"><i class="fas fa-star"></i> Barang Terbaik</a>
+                <ul class="submenu">
+                    <li><a href="/barang-terbaik"><i class="fas fa-calculator"></i> Perhitungan</a></li>
+                    <li><a href="/barang-rekomendasi"><i class="fas fa-thumbs-up"></i>Rekomendasi</a></li>
+                </ul>
+            </li>
     </div>
 
     <!-- Header -->
     <div class="header">
-        <h1>@yield('header', 'Dashboard', 'Pengguna', 'Kategori', 'Supplier', 'Barang', 'Barang Masuk', 'Transaksi', 'Laporan Penjualan', 'Tambah Pengguna', 'Ubah Pengguna', 'Tambah Supplier', 'Ubah Supplier', 'Tambah Kategori', 'Ubah Kategori', 'Tambah Barang', 'Ubah Barang', 'Tambah Barang Masuk', 'Ubah Barang Masuk', 'Tambah Transaksi', 'Detail Transaksi', 'Barang Terbaik')</h1>
+        <h1>@yield('header', 'Dashboard', 'Pengguna', 'Kategori', 'Supplier', 'Barang', 'Barang Masuk', 'Transaksi', 'Laporan Penjualan', 'Tambah Pengguna', 'Ubah Pengguna', 'Tambah Supplier', 'Ubah Supplier', 'Tambah Kategori', 'Ubah Kategori', 'Tambah Barang', 'Ubah Barang', 'Tambah Barang Masuk', 'Ubah Barang Masuk', 'Tambah Transaksi', 'Detail Transaksi', 'Perhituangan SAW', 'Rekomendasi Barang')</h1>
         <button class="logout-btn" onclick="document.getElementById('logout-form').submit();">
             <i class="fas fa-sign-out-alt"></i> Logout
         </button>
@@ -88,4 +93,5 @@
         });
     </script>
 </body>
+
 </html>
