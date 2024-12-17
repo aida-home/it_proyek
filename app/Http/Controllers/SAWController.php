@@ -4,13 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+    use Illuminate\Support\Carbon;
 
 class SAWController extends Controller
 {
+
     public function hitungBarangTerbaik(Request $request)
     {
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
+    
+        // Jika tanggal kosong, set default untuk 1 bulan terakhir
+        if (!$startDate || !$endDate) {
+            $startDate = $request->input('start_date', now()->startOfMonth()->format('Y-m-d'));
+            $endDate = $request->input('end_date', now()->endOfMonth()->format('Y-m-d'));
+            
+        }
     
         // Ambil data barang dengan join dan filter tanggal pada transaksi
         $barangDataQuery = DB::table('barang')
@@ -24,11 +33,8 @@ class SAWController extends Controller
                 'barang.harga_jual',
                 DB::raw('(barang.harga_jual - barang_masuk.harga_beli) as profit')
             )
-            ->groupBy('barang.id_barang', 'barang.nama_barang', 'barang.harga_jual', 'barang_masuk.harga_beli');
-    
-        if ($startDate && $endDate) {
-            $barangDataQuery->whereBetween('transaksi.tanggal_transaksi', [$startDate, $endDate]);
-        }
+            ->groupBy('barang.id_barang', 'barang.nama_barang', 'barang.harga_jual', 'barang_masuk.harga_beli')
+            ->whereBetween('transaksi.tanggal_transaksi', [$startDate, $endDate]);
     
         $barangData = $barangDataQuery->get();
     
@@ -71,8 +77,8 @@ class SAWController extends Controller
             'barangNormalisasi' => $barangNormalisasi,
             'barangTerbaik' => $barangTerbaik,
             'bobot' => $bobot,
-            'tanggal_awal' => $startDate ? date('d/m/Y', strtotime($startDate)) : null,
-            'tanggal_akhir' => $endDate ? date('d/m/Y', strtotime($endDate)) : null,
+            'tanggal_awal' => date('d/m/Y', strtotime($startDate)),
+            'tanggal_akhir' => date('d/m/Y', strtotime($endDate)),
         ]);
     }
 }    

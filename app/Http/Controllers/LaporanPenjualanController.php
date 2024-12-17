@@ -16,6 +16,13 @@ class LaporanPenjualanController extends Controller
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
 
+                // Jika tanggal kosong, set default untuk 1 bulan terakhir
+        if (!$startDate || !$endDate) {
+            $startDate = $request->input('start_date', now()->startOfMonth()->format('Y-m-d'));
+            $endDate = $request->input('end_date', now()->endOfMonth()->format('Y-m-d'));
+            
+        }
+
         // Ambil data langsung dari detail_transaksi tanpa join tabel barang
         $query = DetailTransaksi::join('transaksi', 'detail_transaksi.id_transaksi', '=', 'transaksi.id_transaksi')
             ->select(
@@ -40,8 +47,9 @@ class LaporanPenjualanController extends Controller
 
     public function export(Request $request)
     {
-        $startDate = $request->input('start_date');
-        $endDate = $request->input('end_date');
+        // Default tanggal awal dan akhir bulan jika tidak ada input
+        $startDate = $request->input('start_date', now()->startOfMonth()->format('Y-m-d'));
+        $endDate = $request->input('end_date', now()->endOfMonth()->format('Y-m-d'));
 
         // Nama file unduhan
         $fileName = 'Laporan_Penjualan_' . $startDate . '_to_' . $endDate . '.xlsx';

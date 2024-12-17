@@ -20,16 +20,17 @@
     <div class="table-section">
     <!-- Form Filter Tanggal -->
     <form method="GET" action="{{ route('barang-terbaik') }}">
-        <label for="start_date">Tanggal awal:</label>
-        <input type="date" name="start_date" id="start_date" value="{{ old('start_date', $tanggal_awal ?? '') }}"
-            placeholder="dd/mm/yyyy" required>
-
-        <label for="end_date">Tanggal akhir:</label>
-        <input type="date" name="end_date" id="end_date" value="{{ old('end_date', $tanggal_akhir ?? '') }}"
-            placeholder="dd/mm/yyyy" required>
-
-        <button type="submit">Filter</button>
-    </form>
+        <form method="GET" action="{{ route('barang-terbaik') }}">
+            <label for="start_date">Tanggal awal:</label>
+            <input type="date" name="start_date" id="start_date" 
+                value="{{ old('start_date', $tanggal_awal ?? now()->startOfMonth()->format('Y-m-d')) }}" required>
+        
+            <label for="end_date">Tanggal akhir:</label>
+            <input type="date" name="end_date" id="end_date" 
+                value="{{ old('end_date', $tanggal_akhir ?? now()->endOfMonth()->format('Y-m-d')) }}" required>
+        
+            <button type="submit">Filter</button>
+        </form>
 
     @if($errors->any())
         <div class="alert">{{ $errors->first() }}</div>

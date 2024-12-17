@@ -20,11 +20,13 @@
         <div class="table-section">
             <form action="{{ route('laporan-penjualan.index') }}" method="GET">
                 <label for="start_date">Tanggal awal:</label>
-                <input type="date" name="start_date" id="start_date" value="{{ $startDate }}" placeholder="">
+                <input type="date" name="start_date" id="start_date"
+                    value="{{ $startDate ?? now()->startOfMonth()->format('Y-m-d') }}">
                 <label for="end_date">Tanggal akhir:</label>
-                <input type="date" name="end_date" id="end_date" value="{{ $endDate }}" placeholder="">
+                <input type="date" name="end_date" id="end_date"
+                    value="{{ $endDate ?? now()->endOfMonth()->format('Y-m-d') }}">
                 <button type="submit">Filter</button>
-                <a href="{{ route('laporan-penjualan.export', ['start_date' => $startDate, 'end_date' => $endDate]) }}"
+                <a href="{{ route('laporan-penjualan.export', ['start_date' => $startDate ?? now()->startOfMonth()->format('Y-m-d'), 'end_date' => $endDate ?? now()->endOfMonth()->format('Y-m-d')]) }}"
                     class="btn">Unduh Laporan</a>
             </form>
             <table class="table table-bordered">
