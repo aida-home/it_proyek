@@ -78,8 +78,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/delete-kategori/{kategori}', [KategoriController::class,'deleteKategori']);
 
     // Route untuk menampilkan hasil perhitungan SAW
-    Route::get('/barang-terbaik', [SAWController::class, 'hitungBarang'])->name('barang-terbaik');
-    Route::get('/barang-rekomendasi', [SAWController::class, 'hitungBarang'])->name('barang-rekomendasi');
+    Route::get('/barang-terbaik', [SAWController::class, 'hitungBarangTerbaik'])->name('barang-terbaik');
+    Route::get('/barang-rekomendasi', [SAWController::class, 'rekomendasiBarang'])->name('barang-rekomendasi');
 });
 
 // Posts
