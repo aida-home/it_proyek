@@ -34,7 +34,7 @@
                         <tr>
                             <td>{{ $index + 1 }}</td> 
                             <td>{{ $item->tanggal_transaksi }}</td>
-                            <td>Rp {{ number_format($item->total_pembayaran, 2, ',', '.') }}</td>
+                            <td>Rp {{ number_format($item->total_pembayaran, 0, ',', '.') }}</td>
                             <td>
                                 <!-- Link untuk melihat detail transaksi -->
                                 <a href="{{ route('transaksi.show', $item->id_transaksi) }}" class="btn btn-info">Detail</a>
