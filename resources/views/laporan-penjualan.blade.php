@@ -17,21 +17,31 @@
 
     @section('content')
 
-        <div class="table-section">
+        <div class="summary-section">
+            <div class="card">
+                <h3><i class="fas fa-wallet"></i> Total Pendapatan</h3>
+                <p>Rp{{ number_format($totalPendapatan, 0, ',', '.') }}</p>
+            </div>
+            <div class="card">
+                <h3><i class="fas fa-chart-line"></i> Total Profit</h3>
+                <p>Rp{{ number_format($totalProfit, 0, ',', '.') }}</p>
+            </div>
+        </div>
+
+    <div class="table-section">
             <form action="{{ route('laporan-penjualan.index') }}" method="GET">
-                <label for="start_date">Tanggal awal:</label>
+                <label for="start_date">Tanggal :</label>
                 <input type="date" name="start_date" id="start_date"
                     value="{{ $startDate ?? now()->startOfMonth()->format('Y-m-d') }}">
-                <label for="end_date">Tanggal akhir:</label>
+                <label for="end_date"> - </label>
                 <input type="date" name="end_date" id="end_date"
                     value="{{ $endDate ?? now()->endOfMonth()->format('Y-m-d') }}">
                 <button type="submit">Filter</button>
                 <a href="{{ route('laporan-penjualan.export', ['start_date' => $startDate ?? now()->startOfMonth()->format('Y-m-d'), 'end_date' => $endDate ?? now()->endOfMonth()->format('Y-m-d')]) }}"
                     class="btn">Unduh Laporan</a>
             </form>
+
             <table class="table table-bordered">
-                <br>
-                <h2>Total Pendapatan: Rp{{ number_format($totalPendapatan, 0, ',', '.') }}</h2>
                 <thead>
                     <tr>
                         <th>No</th>
@@ -40,6 +50,7 @@
                         <th>Jumlah Terjual</th>
                         <th>Harga Satuan</th>
                         <th>Total Pendapatan</th>
+                        <th>Profit</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -51,6 +62,7 @@
                             <td>{{ $item->jumlah_beli }}</td>
                             <td>Rp {{ number_format($item->harga_jual, 0, ',', '.') }}</td>
                             <td>Rp {{ number_format($item->total_pendapatan, 0, ',', '.') }}</td>
+                            <td>Rp {{ number_format($item->profit, 0, ',', '.') }}</td>
                         </tr>
                     @endforeach
                 </tbody>
