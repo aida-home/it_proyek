@@ -17,11 +17,11 @@
     <div class="table-section">
         <!-- Form Filter Tanggal -->
         <form method="GET" action="{{ route('barang-terbaik') }}">
-            <label for="start_date">Tanggal awal:</label>
+            <label for="start_date">Tanggal :</label>
             <input type="date" name="start_date" id="start_date"
                 value="{{ $start_date ?? now()->startOfMonth()->format('Y-m-d') }}" required>
 
-            <label for="end_date">Tanggal akhir:</label>
+            <label for="end_date"> - </label>
             <input type="date" name="end_date" id="end_date"
                 value="{{ $end_date ?? now()->endOfMonth()->format('Y-m-d') }}" required>
 
