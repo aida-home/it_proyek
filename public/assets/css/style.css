@@ -53,8 +53,8 @@ body {
     margin: 0;
 }
 
+/* Sidebar link */
 .sidebar a {
-    font-family: 'Montserrat', Arial, sans-serif;
     display: block;
     color: white;
     padding: 10px 30px;
@@ -65,11 +65,25 @@ body {
     transition: background-color 0.3s, color 0.3s;
 }
 
+/* Hover state */
 .sidebar a:hover {
     background-color: white;
     color: #8A5E41;
-    border-radius: 0;
 }
+
+/* Active state */
+.sidebar a.active {
+    background-color: #ffffff; /* Sama seperti hover */
+    color: #8A5E41;
+    font-weight: bold;
+}
+
+/* Untuk mencegah konflik dengan hover */
+.sidebar a.active:hover {
+    background-color: #ffffff;
+    color: #8A5E41;
+}
+
 
 /* Data Master */
 .sidebar .has-submenu > a {
