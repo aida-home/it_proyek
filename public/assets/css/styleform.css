@@ -1,5 +1,5 @@
 body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: Verdana, Geneva, sans-serif;
     background-color: #f8f9fa;
     margin: 0;
     padding: 0;
@@ -84,6 +84,7 @@ th {
     color: #000000;
     text-align: justify;
     padding: 15px;
+    font-family: Verdana, Geneva, sans-serif;
 }
 
 td {
@@ -115,7 +116,7 @@ h4 {
     padding: 10px 20px;
     border-radius: 8px;
     transition: background-color 0.3s ease;
-    font-family: 'Montserrat', sans-serif;
+    font-family: Verdana, Geneva, sans-serif;
     box-shadow: none;
 }
 
@@ -129,6 +130,7 @@ h4 {
     font-size: 14px;
     transition: background-color 0.3s ease;
     text-decoration: none;
+    font-family: Verdana, Geneva, sans-serif;
 }
 
 .btn-primary:hover, .btn-success:hover {
@@ -172,12 +174,15 @@ small.form-text {
     color: #888;
     font-size: 12px;
     font-weight: normal;
+    font-family: Verdana, Geneva, sans-serif;
 }
 
 h4, h3 {
     font-size: 16px;
     font-weight: bold;
     color: #5c4934;
+    font-family: Verdana, Geneva, sans-serif;
+
 }
 
 h4 {

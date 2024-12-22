@@ -2,7 +2,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #8A5E41; /* Warna background cokelat */
-    font-family: 'Montserrat', Arial, sans-serif;
+    font-family: Verdana, Geneva, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,7 +22,7 @@ body {
 /* Judul pada form login (dalam satu baris) */
 .login-container h1 {
     font-size: 20px; /* Ukuran font lebih kecil agar tidak meluber */
-    font-family: 'Montserrat', Arial, sans-serif;
+    font-family: Verdana, Geneva, sans-serif;
     color: #8A5E41;
     margin-bottom: 20px;
     font-weight: bold;
@@ -37,7 +37,7 @@ body {
     margin: 8px 0; /* Mengurangi jarak antar elemen */
     border-radius: 8px; /* Sudut lebih bulat */
     font-size: 13px; /* Ukuran font lebih besar */
-    font-family: 'Montserrat', Arial, sans-serif;
+    font-family: Verdana, Geneva, sans-serif;
     box-sizing: border-box; /* Memastikan padding dan border dihitung dalam lebar elemen */
 }
 
@@ -79,7 +79,7 @@ body {
 
 /* Styling untuk pesan selamat datang */
 .welcome-message {
-    font-family: 'Montserrat', Arial, sans-serif;
+    font-family: Verdana, Geneva, sans-serif;
     font-size: 20px;
     color: #8A5E41;
     margin-bottom: 30px;
@@ -92,14 +92,14 @@ body {
     text-align: left;
     margin-bottom: 5px;
     color: #8A5E41;
-    font-family: 'Montserrat', Arial, sans-serif;
+    font-family: Verdana, Geneva, sans-serif;
     font-size: 14px;
 }
 
 .login-container input[type="text"],
 .login-container input[type="password"] {
     padding-left: 10px;
-    font-family: 'Montserrat', Arial, sans-serif;
+    font-family: Verdana, Geneva, sans-serif;
 }
 
 /* Penyesuaian margin di form */

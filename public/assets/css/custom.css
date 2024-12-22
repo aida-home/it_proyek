@@ -7,7 +7,7 @@
 
 /* Styling untuk body: font, warna latar, dan padding */
 body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: Verdana, Geneva, sans-serif;
     background-color: #E8E8E8; /* Warna latar sesuai dengan desain */
     padding: 20px;
 }
@@ -59,7 +59,7 @@ h2 {
     font-size: 14px;
     transition: background-color 0.3s ease;
     text-decoration: none; /* Hilangkan underline pada tombol */
-    font-family: 'Montserrat', sans-serif;
+    font-family: Verdana, Geneva, sans-serif;
 }
 
 /* Hover tombol */
@@ -83,14 +83,14 @@ h2 {
     color: #d9534f; /* Merah untuk pesan error */
     font-size: 14px; /* Ukuran lebih kecil dari teks biasa */
     margin-top: 5px; /* Jarak dengan elemen input */
-    font-family: 'Montserrat', sans-serif;
+    font-family: Verdana, Geneva, sans-serif;
 }
 
 /* Gaya untuk setiap pesan error */
 .error-message p {
     margin: 0 0 5px; /* Jarak antar paragraf */
     line-height: 1.5; /* Tinggi baris */
-    font-family: 'Montserrat', sans-serif;
+    font-family: Verdana, Geneva, sans-serif;
 }
 
 
@@ -109,7 +109,7 @@ h2 {
     background-color: white; /* Latar belakang putih */
     font-size: 14px; /* Ukuran font */
     border-radius: 5px; /* Sudut membulat pada input */
-    font-family: 'Montserrat', sans-serif;
+    font-family: Verdana, Geneva, sans-serif;
 }
 
 /* Styling untuk tabel */
@@ -172,7 +172,7 @@ tr:nth-child(odd) {
 /* Tombol Edit: Teks tebal (bold) dan warna hitam */
 /* Tombol Edit */
 .btn-edit {
-    font-family: 'Montserrat', sans-serif; 
+    font-family: Verdana, Geneva, sans-serif;
     background-color: #FEC53D; /* Warna latar kuning */
     color: black; /* Warna teks putih */
     font-weight: 500; /* Tidak bold */
@@ -191,7 +191,7 @@ tr:nth-child(odd) {
 
 /* Tombol Hapus: Teks tebal (bold) */
 .btn-delete {
-    font-family: 'Montserrat', sans-serif; 
+    font-family: Verdana, Geneva, sans-serif;
     background-color: #D20606; /* Warna latar merah */
     color: white; /* Warna teks putih */
     font-weight: 500; 
@@ -242,7 +242,7 @@ body, html {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: Verdana, Geneva, sans-serif;
 }
 
 /* Main Content Styling */
@@ -264,7 +264,7 @@ input[type="date"] {
     border: 2px solid #8A5E41; /* Warna coklat */
     border-radius: 5px; /* Sudut membulat */
     padding: 5px; /* Kurangi padding untuk ukuran kecil */
-    font-family: 'Montserrat', sans-serif; /* Font konsisten */
+    font-family: Verdana, Geneva, sans-serif;
     font-size: 12px; /* Ukuran font kecil */
     color: #4e4e4e; /* Warna teks */
     background-color: #fff; /* Latar belakang putih */
