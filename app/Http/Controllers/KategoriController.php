@@ -7,72 +7,64 @@ use App\Models\Kategori;
 
 class KategoriController extends Controller
 {
-    public function deleteKategori(Kategori $kategori) {
+    // Menampilkan daftar kategori
+    public function index()
+    {
+        $kategori = Kategori::all();
+        return view('kategori', compact('kategori'));
+    }
+
+    // Menampilkan form untuk membuat kategori baru
+    public function create()
+    {
+        return view('create-kategori');
+    }
+
+    // Menyimpan kategori baru
+    public function store(Request $request)
+    {
+        $request->validate([
+            'nama_kategori' => 'required|unique:kategori,nama_kategori',
+        ]);
+
+        $lastKategori = Kategori::orderBy('id_kategori', 'desc')->first();
+        $newIdNumber = $lastKategori ? ((int) substr($lastKategori->id_kategori, 2) + 1) : 1;
+        $newId = 'KT' . str_pad($newIdNumber, 6, '0', STR_PAD_LEFT);
+
+        Kategori::create([
+            'id_kategori' => $newId,
+            'nama_kategori' => $request->nama_kategori,
+        ]);
+
+        return redirect()->route('kategori.index')->with('success', 'Kategori berhasil ditambahkan.');
+    }
+
+    // Menampilkan form untuk mengedit kategori
+    public function edit(Kategori $kategori)
+    {
+        return view('edit-kategori', compact('kategori'));
+    }
+
+    // Memperbarui data kategori
+    public function update(Request $request, Kategori $kategori)
+    {
+        $request->validate([
+            'nama_kategori' => 'required|unique:kategori,nama_kategori,' . $kategori->id,
+        ]);
+
+        $kategori->update([
+            'nama_kategori' => $request->nama_kategori,
+        ]);
+
+        return redirect()->route('kategori.index')->with('success', 'Kategori berhasil diperbarui.');
+    }
+
+    // Menghapus kategori
+    public function destroy(Kategori $kategori)
+    {
         //hapus kategori
         $nama_kategori = $kategori->nama_kategori;
         $kategori->delete();
-        return redirect('/kategori')->with('success', 'Kategori ' . $nama_kategori . ' berhasil dihapus.');
+        return redirect()->route('kategori.index')->with('success', 'Kategori ' . $nama_kategori . ' berhasil dihapus.');
     }
-    public function actuallyUpdateKategori(Kategori $kategori, Request $request) {
-            // Validasi input
-            $request->validate([
-                'nama_kategori' => 'required'
-            ]);
-
-            if (Kategori::where('nama_kategori', $request->nama_kategori)->exists()) {
-                return back()->withErrors(['nama_kategori' => 'Nama kategori sudah ada.']);
-            }
-    
-            // Update nama kategori
-            $kategori->update([
-                'nama_kategori' => $request->nama_kategori,
-            ]);
-
-            return redirect('/kategori')->with('success', 'Kategori berhasil diperbarui.');    
-    }
-    public function showEditScreen(Kategori $kategori) {
-        return view('edit-kategori', ['kategori'=>$kategori]);
-    }
-
-    public function showCreateForm() {
-        // Tampilkan form untuk menambah kategori baru
-        return view('create-kategori');
-    }
-    
-    public function createKategori(Request $request) {
-            // Validasi input
-            $request->validate([
-                'nama_kategori' => 'required'
-            ]);
-    
-                // Cek apakah nama_kategori sudah ada
-            if (Kategori::where('nama_kategori', $request->nama_kategori)->exists()) {
-                return back()->withErrors(['nama_kategori' => 'Nama kategori sudah ada.']);
-            }
-
-            // Ambil ID kategori terakhir
-            $lastKategori = Kategori::orderBy('id_kategori', 'desc')->first();
-    
-            // Buat ID baru dengan format KT1, KT2, dan seterusnya
-            if ($lastKategori) {
-                // Ambil nomor dari ID terakhir (misal KT1 menjadi 1)
-                $lastIdNumber = (int) substr($lastKategori->id_kategori, 2);
-                // Tambahkan 1 untuk ID baru
-                $newIdNumber = $lastIdNumber + 1;
-            } else {
-                // Jika belum ada data, mulai dari 1
-                $newIdNumber = 1;
-            }
-    
-            // Format ID baru menjadi KT1, KT2, dst.
-            $newId = 'KT' . str_pad($newIdNumber, 6, '0', STR_PAD_LEFT);
-    
-            // Buat kategori baru
-            Kategori::create([
-                'id_kategori' => $newId,  // Set ID kustom
-                'nama_kategori' => $request->nama_kategori,
-            ]);
-    
-            return redirect('/kategori')->with('success', 'Kategori berhasil ditambahkan');
-        }
-    }
+}

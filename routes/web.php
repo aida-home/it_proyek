@@ -65,17 +65,8 @@ Route::middleware('auth')->group(function () {
 
     // Cek Stok
     Route::get('/cek-stok', [BarangController::class, 'cekStok'])->name('barang.cekStok');
-
-    Route::get('/kategori', function () {
-        $kategori = Kategori::all();
-        return view('kategori', ['kategori'=> $kategori]);
-    });
     
-    Route::post('/create-kategori', [KategoriController::class, 'createKategori']);
-    Route::get('/create-kategori', [KategoriController::class, 'showCreateForm']);
-    Route::get('/edit-kategori/{kategori}', [KategoriController::class,'showEditScreen']);
-    Route::put('/edit-kategori/{kategori}', [KategoriController::class,'actuallyUpdateKategori']);
-    Route::delete('/delete-kategori/{kategori}', [KategoriController::class,'deleteKategori']);
+    Route::resource('kategori', KategoriController::class);
 
     // Route untuk menampilkan hasil perhitungan SAW
     Route::get('/barang-terbaik', [SAWController::class, 'hitungBarangTerbaik'])->name('barang-terbaik');

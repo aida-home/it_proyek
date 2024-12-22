@@ -18,7 +18,7 @@
         @section('content')
             <div class="table-section">
                 <!-- Link untuk menambahkan kategori baru -->
-                <a href="/create-kategori" class="btn">Tambah Kategori</a>
+                <a href="{{ route('kategori.create') }}" class="btn">Tambah Kategori</a>
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -35,11 +35,11 @@
                             <td>
                                 <div class="action-buttons">
                                 <!-- Tombol Edit -->
-                                <a href="/edit-kategori/{{$item->id_kategori}}" style="text-decoration: none;">
+                                <a href="{{ route('kategori.edit', $item->id_kategori) }}" style="text-decoration: none;">
                                     <button class="btn-edit">Ubah</button>
                                 </a>
                                 <!-- Tombol Delete -->
-                                <form action="/delete-kategori/{{$item->id_kategori}}" method="POST" style="display:inline;">
+                                <form action="{{ route('kategori.destroy', $item->id_kategori) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn-delete" onclick="return confirm('Apakah yakin ingin menghapus?')">Hapus</button>
