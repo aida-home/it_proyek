@@ -73,6 +73,6 @@ class KategoriController extends Controller
                 'nama_kategori' => $request->nama_kategori,
             ]);
     
-            return redirect('/kategori')->with('success', 'Kategori berhasil ditambahkan dengan ID: ' . $newId);
+            return redirect('/kategori')->with('success', 'Kategori berhasil ditambahkan');
         }
     }
