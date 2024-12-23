@@ -34,8 +34,9 @@
                 <div class="alert">{{ $errors->first() }}</div>
             @endif
 
+            <br>
             <!-- 1. Data Awal -->
-            <h2>1. Data Awal</h2>
+            <h3>1. Data Awal</h3>
             <table>
                 <thead>
                     <tr>
@@ -64,7 +65,7 @@
             </table>
 
             <!-- 2. Normalisasi -->
-            <h2>2. Normalisasi</h2>
+            <h3>2. Normalisasi</h3>
             <table>
                 <thead>
                     <tr>
@@ -93,7 +94,7 @@
             </table>
 
             <!-- 3. Nilai Preferensi -->
-            <h2>3. Nilai Preferensi</h2>
+            <h3>3. Nilai Preferensi</h3>
             <table>
                 <thead>
                     <tr>
