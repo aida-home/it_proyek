@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Kategori</title>
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}?v={{ time() }}">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
         @extends('layouts.sidebar')

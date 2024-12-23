@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Create Transaksi</title>
     <link rel="stylesheet" href="{{ asset('assets/css/styleform.css') }}?v={{ time() }}">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/font/css/all.min.css') }}">
 </head>
 <body>
