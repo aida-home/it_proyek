@@ -26,16 +26,24 @@ class Barang extends Model
         'harga_jual'
     ];
 
+    // Relasi dengan model Kategori (Many to One)
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class, 'kategori', 'id_kategori');
+    }
+    
+
     protected static function boot()
     {
         parent::boot();
     
+        // Ketika data Barang diupdate, cek stok dan kirim notifikasi jika diperlukan
         static::updated(function ($barang) {
-            // Pastikan menggunakan nama kolom yang benar: stok_barang
             if ($barang->stok_barang < 10) {
+                // Menggunakan controller untuk kirim notifikasi jika stok kurang dari 10
                 (new BarangController())->kirimNotifikasiWhatsApp($barang);
             }
         });
     }
-} 
+}
 

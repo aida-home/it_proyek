@@ -35,9 +35,17 @@
             </div>
 
             <div class="form-group">
-                <label for="kategori">Kategori</label>
-                <input type="text" id="kategori" name="kategori" value="{{ $barang->kategori }}" required>
+                <label for="kategori">Kategori:</label>
+                <select id="kategori" name="kategori" required>
+                    @foreach ($kategori as $item)
+                        <option value="{{ $item->id_kategori }}" 
+                            {{ $barang->kategori == $item->id_kategori ? 'selected' : '' }}>
+                            {{ $item->nama_kategori }}
+                        </option>
+                    @endforeach
+                </select>
             </div>
+            
 
             <div class="form-group">
                 <label for="stok_barang">Stok Barang</label>

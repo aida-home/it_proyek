@@ -49,9 +49,14 @@
                 <!-- Input Nama Barang -->
                 <div class="form-group">
                     <label for="nama_barang">Nama Barang :</label>
-                    <input type="text" class="form-control" name="nama_barang" placeholder="Masukkan Nama Barang" required>
+                    <select name="nama_barang" id="nama_barang" class="form-control" required>
+                        <option value="">Pilih Barang</option>
+                        @foreach ($barang as $barang)
+                            <option value="{{ $barang->id_barang }}">{{ $barang->nama_barang }}</option>
+                        @endforeach
+                    </select>
                 </div>
-                @error('nama_barang')
+                @error('barang')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
 

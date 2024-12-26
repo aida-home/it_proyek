@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Kategori;
 use App\Models\BarangMasuk;
 use Illuminate\Http\Request;
-use App\Models\Supplier; // Import Supplier model
+use App\Models\Supplier; 
+use App\Models\Barang;
 
 class BarangMasukController extends Controller
 {
@@ -13,12 +14,13 @@ class BarangMasukController extends Controller
     public function index()
     {
         // Mengambil semua data barang masuk dengan relasi supplier
-        $barangMasuk = BarangMasuk::with('supplier')->get();
+        $barangMasuk = BarangMasuk::with('supplier', 'kategori', 'barang')->get();
         $kategori = Kategori::all(); // Mengambil semua kategori
         $suppliers = Supplier::all(); // Ambil semua supplier
+        $barang = Barang::all();
     
         // Mengirim data barangMasuk dan suppliers ke view 'barangmasuk'
-        return view('barangmasuk', compact('kategori','barangMasuk', 'suppliers'));
+        return view('barangmasuk', compact('kategori','barangMasuk', 'suppliers', 'barang'));
     }
     
 
@@ -27,7 +29,8 @@ class BarangMasukController extends Controller
     {
         $suppliers = Supplier::all(); // Ambil semua supplier
         $kategori = Kategori::all(); 
-        return view('tambah-barangmasuk', compact('kategori','suppliers')); // Arahkan ke tampilan tambah-barangmasuk
+        $barang = Barang::all();
+        return view('tambah-barangmasuk', compact('kategori','suppliers', 'barang')); // Arahkan ke tampilan tambah-barangmasuk
     }
     
     // Metode store untuk menambah barang masuk baru ke database.
@@ -78,13 +81,18 @@ class BarangMasukController extends Controller
     // Metode edit untuk menampilkan data barang yang akan diedit berdasarkan id.
     public function edit($id)
     {
-        // Mengambil data barang berdasarkan id
-        $barang = BarangMasuk::findOrFail($id);
-        $suppliers = Supplier::all(); // Ambil semua supplier
+        // Mengambil satu data barang masuk berdasarkan id
+        $barangMasuk = BarangMasuk::where('id_barangmasuk', $id)->firstOrFail();
+    
+        // Ambil semua data pendukung lainnya
+        $suppliers = Supplier::all();
         $kategori = Kategori::all();
-        // Mengirim data barang dan suppliers ke view 'ubah-barangmasuk'
-        return view('ubah-barangmasuk', compact('barang', 'suppliers','kategori'));
+        $barang = Barang::all();
+    
+        // Mengarahkan ke view dengan data
+        return view('ubah-barangmasuk', compact('barangMasuk', 'suppliers', 'kategori', 'barang'));
     }
+    
 
     // Metode update untuk memperbarui data barang masuk yang sudah ada di database.
     public function update(Request $request, $id)
@@ -100,10 +108,10 @@ class BarangMasukController extends Controller
         ]);
 
         // Mengambil data barang berdasarkan id.
-        $barang = BarangMasuk::findOrFail($id);
+        $barangMasuk = BarangMasuk::findOrFail($id);
 
         // Memperbarui data barang dengan data baru dari request.
-        $barang->update([
+        $barangMasuk->update([
             'supplier' => $request->supplier,
             'kategori' => $request->kategori,
             'nama_barang' => $request->nama_barang,
@@ -120,10 +128,10 @@ class BarangMasukController extends Controller
     public function destroy($id)
     {
         // Mengambil data barang berdasarkan id, atau mengembalikan error 404 jika tidak ditemukan.
-        $barang = BarangMasuk::findOrFail($id);
+        $barangMasuk = BarangMasuk::findOrFail($id);
 
         // Menghapus data barang dari database.
-        $barang->delete();
+        $barangMasuk->delete();
 
         // Mengarahkan kembali ke halaman daftar barang masuk dengan pesan sukses.
         return redirect()->route('barangmasuk.index')->with('success', 'Barang berhasil dihapus.');

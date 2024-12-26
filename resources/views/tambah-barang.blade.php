@@ -19,18 +19,32 @@
         <div class="form-section">
             <form action="{{ route('barang.store') }}" method="POST">
                 @csrf
-                <label for="id_barangmasuk">Nama Barang</label>
-                <select name="id_barangmasuk" id="id_barangmasuk" placeholder="Pilih Nama Barang" required>
-                    @foreach ($barangMasuk as $barang)
-                        <option value="{{ $barang->id_barangmasuk }}">{{ $barang->nama_barang }}</option>
-                    @endforeach
-                </select>
-
-                <label for="harga_jual">Harga Jual</label>
-                <input type="number" name="harga_jual" id="harga_jual" placeholder="Masukkan Harga Jual" required min="0" step="0.01">
-
-                <button type="submit" class="save-btn">Simpan</button>
-                <button type="button" onclick="location.href='{{ route('barang.index') }}'" class="btn-cancel">Batal</button>
+                <div class="form-group">
+                    <label for="nama_barang">Nama Barang:</label>
+                    <input type="text" id="nama_barang" name="nama_barang" required>
+                </div>
+                <div class="form-group">
+                    <label for="kategori">Kategori:</label>
+                    <select id="kategori" name="kategori" required>
+                        <option value="" disabled selected>Pilih Kategori</option>
+                        @foreach ($kategori as $item)
+                            <option value="{{ $item->id_kategori }}">{{ $item->nama_kategori }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="stok_barang">Stok Barang:</label>
+                    <input type="number" id="stok_barang" name="stok_barang" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="harga_jual">Harga Jual:</label>
+                    <input type="number" id="harga_jual" name="harga_jual" min="0" step="0.01" required>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="save-btn">Simpan</button>
+                    <button type="button" onclick="location.href='{{ route('barang.index') }}'" class="btn-cancel">Batal</button>
+                </div>
             </form>
         </div>
     </div>

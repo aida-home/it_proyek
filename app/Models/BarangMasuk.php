@@ -35,7 +35,7 @@ class BarangMasuk extends Model
 
     public function kategori()
     {
-        return $this->belongsTo(Supplier::class, 'kategori', 'id_kategori');
+        return $this->belongsTo(Kategori::class, 'kategori', 'id_kategori');
     }
 
     public function barang()
