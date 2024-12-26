@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tambah Kategori</title>
-    <link href="{{ asset('assets/css/form.css') }}" rel="stylesheet"> <!-- Link ke form.css -->
+    <link rel="stylesheet" href="{{ asset('assets/css/form.css') }}?v={{ time() }}"><!-- Link ke form.css -->
 </head>
 
 <body>
@@ -25,11 +25,11 @@
                             required>
                         <!-- Menampilkan pesan error jika ada -->
                     </div>
-                    @error('nama_kategori')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
+            @error('nama_kategori')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
                     <button type="submit" class="save-btn">Simpan</button> <!-- Ubah warna tombol simpan menjadi coklat -->
-                    <button type="button" onclick="location.href= 'kategori'" class="btn btn-cancel">Batal</button>
+                    <button type="button" onclick="location.href='{{ route('kategori.index') }}'" class="btn btn-cancel">Batal</button>
             </form>
         </div>
         </div>

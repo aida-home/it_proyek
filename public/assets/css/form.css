@@ -79,6 +79,17 @@ input, select {
     background-color: darkred;
 }
 
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-weight: lighter;
+    font-size: 14px;
+}
+
 /* Responsif */
 @media screen and (max-width: 768px) {
     .form-container {

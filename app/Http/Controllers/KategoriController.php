@@ -24,8 +24,12 @@ class KategoriController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_kategori' => 'required|unique:kategori,nama_kategori',
+            'nama_kategori' => 'required',
         ]);
+
+        if (Kategori::where('nama_kategori', $request->nama_kategori)->exists()) {
+            return back()->withErrors(['nama_kategori' => 'Nama kategori sudah ada.']);
+        }
 
         $lastKategori = Kategori::orderBy('id_kategori', 'desc')->first();
         $newIdNumber = $lastKategori ? ((int) substr($lastKategori->id_kategori, 2) + 1) : 1;
@@ -49,8 +53,12 @@ class KategoriController extends Controller
     public function update(Request $request, Kategori $kategori)
     {
         $request->validate([
-            'nama_kategori' => 'required|unique:kategori,nama_kategori,' . $kategori->id,
+            'nama_kategori' => 'required' . $kategori->id,
         ]);
+
+        if (Kategori::where('nama_kategori', $request->nama_kategori)->exists()) {
+            return back()->withErrors(['nama_kategori' => 'Nama kategori sudah ada.']);
+        }
 
         $kategori->update([
             'nama_kategori' => $request->nama_kategori,
