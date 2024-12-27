@@ -55,9 +55,9 @@ class SAWController extends Controller
         });
     
         $bobot = [
-            'jumlah_terjual' => 0.2605,
-            'harga_jual' => 0.1063,
-            'profit' => 0.6333,
+            'jumlah_terjual' => 0.4,
+            'harga_jual' => 0.2,
+            'profit' => 0.4,
         ];
     
         $barangPreferensi = $barangNormalisasi->map(function ($item) use ($bobot) {
@@ -127,9 +127,9 @@ class SAWController extends Controller
     });
 
     $bobot = [
-        'jumlah_terjual' => 0.2605,
-        'harga_jual' => 0.1063,
-        'profit' => 0.6333,
+        'jumlah_terjual' => 0.4,
+        'harga_jual' => 0.2,
+        'profit' => 0.4,
     ];
 
     $barangPreferensi = $barangNormalisasi->map(function ($item) use ($bobot) {
