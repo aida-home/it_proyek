@@ -23,15 +23,15 @@ class LaporanPenjualanController extends Controller
 
         // Ambil data langsung dari detail_transaksi tanpa join tabel barang
         $query = DetailTransaksi::join('transaksi', 'detail_transaksi.id_transaksi', '=', 'transaksi.id_transaksi')
-        ->join('barang_masuk', 'detail_transaksi.nama_barang', '=', 'barang_masuk.nama_barang') // Join dengan barang_masuk
+        ->join('barang', 'detail_transaksi.nama_barang', '=', 'barang.nama_barang') // Join dengan barang_masuk
         ->select(
             'transaksi.tanggal_transaksi',
             'detail_transaksi.nama_barang',
             'detail_transaksi.jumlah_beli',
             'detail_transaksi.harga_jual',
-            'barang_masuk.harga_beli', // Ambil harga_beli dari barang_masuk
+            'barang.harga_beli', // Ambil harga_beli dari barang_masuk
             DB::raw('detail_transaksi.jumlah_beli * detail_transaksi.harga_jual as total_pendapatan'),
-            DB::raw('(detail_transaksi.harga_jual - barang_masuk.harga_beli) * detail_transaksi.jumlah_beli as profit') // Hitung profit
+            DB::raw('(detail_transaksi.harga_jual - barang.harga_beli) * detail_transaksi.jumlah_beli as profit') // Hitung profit
         );
     
     if ($startDate && $endDate) {
