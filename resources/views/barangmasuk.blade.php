@@ -26,7 +26,6 @@
                         <th>No</th>
                         <th>Barang</th>
                         <th>Kategori</th>
-                        <th>Supplier</th>
                         <th>Tanggal Masuk</th>
                         <th>Jumlah Masuk</th>
                         <th>Harga Beli</th>
@@ -38,8 +37,7 @@
                         <tr>
                             <td>{{ $index + 1 }}</td> <!-- Menampilkan nomor urut mulai dari 1 -->
                             <td>{{ $barang->nama_barang }}</td>
-                            <td>{{ $barang->kategori }}</td>
-                            <td>{{ $barang->supplier }}</td>
+                            <td>{{ $barang->kategori}}</td> <!-- Menampilkan nama kategori -->
                             <td>{{ $barang->tgl_masuk }}</td>
                             <td>{{ $barang->jumlah_masuk }}</td>
                             <td>Rp {{ number_format($barang->harga_beli, 0, ',', '.') }}</td>
@@ -83,7 +81,6 @@
                 timer: 2000
             });
         @endif
-
-    </script>
+    </script>
 </body>
 </html>

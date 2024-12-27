@@ -15,30 +15,19 @@
 
     @section('content')
     <div class="form-container">
-        <form action="{{ route('barangmasuk.create') }}" method="POST">
+        <form action="{{ route('barangmasuk.store') }}" method="POST">
             @csrf
             <div class="table-section">
-                <!-- Input Supplier -->
-                <div class="form-group">
-                    <label for="supplier">Supplier :</label>
-                    <select name="supplier" id="supplier" class="form-control" required>
-                        <option value="">Pilih Supplier</option>
-                        @foreach ($suppliers as $supplier)
-                            <option value="{{ $supplier->id_supplier }}">{{ $supplier->nama_supplier }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                @error('supplier')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-
                 <!-- Input Kategori -->
                 <div class="form-group">
                     <label for="kategori">Kategori :</label>
                     <select name="kategori" id="kategori" class="form-control" required>
                         <option value="">Pilih Kategori</option>
-                        @foreach ($kategori as $kategori)
-                            <option value="{{ $kategori->id_kategori }}">{{ $kategori->nama_kategori }}</option>
+                        @foreach ($kategori as $item)
+                            <option value="{{ $item->id_kategori }}" 
+                                {{ old('kategori') == $item->id_kategori ? 'selected' : '' }}>
+                                {{ $item->nama_kategori }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
@@ -51,19 +40,23 @@
                     <label for="nama_barang">Nama Barang :</label>
                     <select name="nama_barang" id="nama_barang" class="form-control" required>
                         <option value="">Pilih Barang</option>
-                        @foreach ($barang as $barang)
-                            <option value="{{ $barang->id_barang }}">{{ $barang->nama_barang }}</option>
+                        @foreach ($barang as $item)
+                            <option value="{{ $item->id_barang }}" 
+                                {{ old('nama_barang') == $item->id_barang ? 'selected' : '' }}>
+                                {{ $item->nama_barang }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
-                @error('barang')
+                @error('nama_barang')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
 
                 <!-- Input Tanggal Masuk -->
                 <div class="form-group">
                     <label for="tgl_masuk">Tanggal Masuk :</label>
-                    <input type="date" class="form-control" name="tgl_masuk" max="{{ date('Y-m-d') }}" required>
+                    <input type="date" class="form-control" name="tgl_masuk" id="tgl_masuk" 
+                           value="{{ old('tgl_masuk') }}" required>
                 </div>
                 @error('tgl_masuk')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -72,7 +65,8 @@
                 <!-- Input Jumlah Masuk -->
                 <div class="form-group">
                     <label for="jumlah_masuk">Jumlah Masuk :</label>
-                    <input type="number" class="form-control" name="jumlah_masuk" placeholder="Masukkan Jumlah Masuk" required>
+                    <input type="number" class="form-control" name="jumlah_masuk" 
+                           value="{{ old('jumlah_masuk') }}" placeholder="Masukkan Jumlah Masuk" required>
                 </div>
                 @error('jumlah_masuk')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -81,7 +75,8 @@
                 <!-- Input Harga Beli -->
                 <div class="form-group">
                     <label for="harga_beli">Harga Beli :</label>
-                    <input type="number" class="form-control" name="harga_beli" placeholder="Masukkan Harga Beli" required>
+                    <input type="number" class="form-control" name="harga_beli" 
+                           value="{{ old('harga_beli') }}" placeholder="Masukkan Harga Beli" required>
                 </div>
                 @error('harga_beli')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -94,5 +89,15 @@
         </form>
     </div>
     @endsection
+
+    <script>
+        // Pastikan DOM sudah dimuat sepenuhnya
+        window.onload = function() {
+            const today = new Date().toISOString().split('T')[0];
+            const tglMasuk = document.getElementById('tgl_masuk');
+            tglMasuk.value = today; // Set default date to today
+            tglMasuk.setAttribute('max', today); // Prevent selecting future dates
+        };
+    </script>
 </body>
 </html>

@@ -57,9 +57,6 @@ Route::middleware('auth')->group(function () {
     // Pengguna
     Route::resource('pengguna', PenggunaController::class);
 
-    // Suppliers
-    Route::resource('suppliers', SupplierController::class);
-
     // SAW Export
     Route::get('/export-saw', [SAWController::class, 'exportDataSAW'])->name('saw.export');
 

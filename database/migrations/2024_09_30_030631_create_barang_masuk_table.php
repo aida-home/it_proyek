@@ -11,7 +11,6 @@ class CreateBarangMasukTable extends Migration
         Schema::create('barang_masuk', function (Blueprint $table) {
             $table->string('id_barangmasuk')->primary();
             $table->string('nama_barang');
-            $table->string('supplier');
             $table->string('kategori');
             $table->foreign('kategori')->references('id_kategori')->on('kategori')->onUpdate('cascade')->onDelete('cascade');
             $table->date('tgl_masuk');

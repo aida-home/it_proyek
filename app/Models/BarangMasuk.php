@@ -19,7 +19,6 @@ class BarangMasuk extends Model
     protected $fillable = [
         'id_barangmasuk',  // <-- Pastikan ini ada
         'nama_barang',
-        'supplier',
         'kategori',
         'tgl_masuk',
         'jumlah_masuk',
@@ -28,16 +27,10 @@ class BarangMasuk extends Model
 
 
     // Definisikan relasi dengan Supplier
-    public function supplier()
-    {
-        return $this->belongsTo(Supplier::class, 'supplier', 'id_supplier');
-    }
-
     public function kategori()
     {
-        return $this->belongsTo(Kategori::class, 'kategori', 'id_kategori');
+        return $this->belongsTo(Kategori::class, 'id_kategori');
     }
-
     public function barang()
     {
         return $this->belongsTo(Barang::class, 'id_barang', 'id_barang');
