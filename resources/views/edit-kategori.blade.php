@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Edit Kategori</title>
-    <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}?v={{ time() }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/form.css') }} ?v={{ time() }}"> 
 </head>
 <body>
     @extends('layouts.sidebar')
