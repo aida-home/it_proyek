@@ -70,18 +70,6 @@
             <div class="card">
                 <div class="card-content">
                     <div class="text">
-                        <h3>Supplier</h3>
-                        <p>{{ $supplierCount }}</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fas fa-truck"></i> <!-- Icon Font Awesome -->
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-content">
-                    <div class="text">
                         <h3>Transaksi</h3>
                         <p>{{ $transaksiCount }}</p>
                     </div>

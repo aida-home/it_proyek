@@ -28,12 +28,11 @@
             <li class="has-submenu">
                 <a href="#" class="submenu-toggle"><i class="fas fa-cogs"></i> Data Master</a>
                 <ul class="submenu">
-                    <li><a href="/suppliers" class="menu-link"><i class="fas fa-truck"></i> Supplier</a></li>
                     <li><a href="/kategori" class="menu-link"><i class="fas fa-tags"></i> Kategori</a></li>
-                    <li><a href="/barangmasuk" class="menu-link"><i class="fas fa-box"></i> Barang Masuk</a></li>
+                    <li><a href="/barang" class="menu-link"><i class="fas fa-box"></i> Barang</a></li>
                 </ul>
             </li>
-            <li><a href="/barang" class="menu-link"><i class="fas fa-cube"></i> Barang</a></li>
+            <li><a href="/barangmasuk" class="menu-link"><i class="fas fa-cube"></i> Barang Masuk</a></li>
             <li><a href="/transaksi" class="menu-link"><i class="fas fa-exchange-alt"></i> Transaksi</a></li>
             <li><a href="/laporan-penjualan" class="menu-link"><i class="fas fa-chart-line"></i> Laporan</a></li>
             <li class="has-submenu">
