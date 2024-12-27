@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('nama_barang'); // Kolom untuk menyimpan nama barang
             $table->string('kategori'); // Kolom untuk menyimpan kategori barang
             $table->integer('stok_barang'); // Kolom untuk menyimpan jumlah stok barang
-            $table->decimal('harga_jual', 10, 2); // Kolom untuk menyimpan harga jual barang
+            $table->decimal('harga_beli', 10, 2);
+            $table->decimal('harga_jual', 10, 2);
             $table->timestamps();
         });
     }

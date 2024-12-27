@@ -21,7 +21,7 @@
                 @csrf
                 <div class="form-group">
                     <label for="nama_barang">Nama Barang:</label>
-                    <input type="text" id="nama_barang" name="nama_barang" required>
+                    <input type="text" id="nama_barang" name="nama_barang" placeholder="Masukkan nama barang" required>
                 </div>
                 <div class="form-group">
                     <label for="kategori">Kategori:</label>
@@ -35,11 +35,17 @@
                 
                 <div class="form-group">
                     <label for="stok_barang">Stok Barang:</label>
-                    <input type="number" id="stok_barang" name="stok_barang" min="0" required>
+                    <input type="number" id="stok_barang" name="stok_barang" placeholder="Masukkan jumlah stok barang" min="0" required>
                 </div>
+
+                <div class="form-group">
+                    <label for="harga_beli">Harga Beli:</label>
+                    <input type="number" id="harga_beli" name="harga_beli" placeholder="Masukkan harga beli barang" min="0" step="0.01" required>
+                </div>
+
                 <div class="form-group">
                     <label for="harga_jual">Harga Jual:</label>
-                    <input type="number" id="harga_jual" name="harga_jual" min="0" step="0.01" required>
+                    <input type="number" id="harga_jual" name="harga_jual" placeholder="Masukkan harga jual barang" min="0" step="0.01" required>
                 </div>
                 <div class="form-actions">
                     <button type="submit" class="save-btn">Simpan</button>

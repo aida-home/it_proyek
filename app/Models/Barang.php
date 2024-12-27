@@ -23,6 +23,7 @@ class Barang extends Model
         'nama_barang',
         'kategori',
         'stok_barang',
+        'harga_beli',
         'harga_jual'
     ];
 
@@ -31,7 +32,11 @@ class Barang extends Model
     {
         return $this->belongsTo(Kategori::class, 'kategori', 'id_kategori');
     }
-    
+    public function barangMasuk()
+{
+    return $this->hasMany(BarangMasuk::class, 'id_barangmasuk', 'id_barangmasuk');
+}
+
 
     protected static function boot()
     {

@@ -25,6 +25,7 @@
                         <th>Nama Barang</th>
                         <th>Kategori</th>
                         <th>Stok Barang</th>
+                        <th>Harga Beli</th> <!-- Menambahkan kolom harga beli -->
                         <th>Harga Jual</th>
                         <th>Aksi</th>
                     </tr>
@@ -36,6 +37,7 @@
                         <td>{{ $item->nama_barang }}</td>
                         <td>{{ $item->kategori->nama_kategori ?? '-' }}</td> <!-- Menampilkan nama kategori -->
                         <td>{{ $item->stok_barang }}</td>
+                        <td>Rp {{ number_format($item->harga_beli, 0, ',', '.') }}</td> <!-- Menampilkan harga beli -->
                         <td>Rp {{ number_format($item->harga_jual, 0, ',', '.') }}</td> <!-- Format harga jual -->
                         <td>
                             <div class="action-buttons">
