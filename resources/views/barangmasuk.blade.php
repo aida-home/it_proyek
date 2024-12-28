@@ -38,7 +38,7 @@
                             <td>{{ $index + 1 }}</td> <!-- Menampilkan nomor urut mulai dari 1 -->
                             <td>{{ $barang->barang->nama_barang ?? '-' }}</td> 
                             <td>{{ $barang->barang->kategori->nama_kategori ?? '-' }}</td> <!-- Menampilkan nama kategori berdasarkan barang -->
-                            <td>{{ \Carbon\Carbon::parse($barang->tgl_masuk)->format('d-m-Y') }}</td> <!-- Menampilkan tanggal dengan format yang lebih mudah dibaca -->
+                            <td>{{ \Carbon\Carbon::parse($barang->tgl_masuk)->format('d/m/Y') }}</td> <!-- Menampilkan tanggal dengan format yang lebih mudah dibaca -->
                             <td>{{ $barang->jumlah_masuk }}</td>
                             <td>Rp {{ number_format($barang->harga_beli, 0, ',', '.') }}</td>
                             <td>
