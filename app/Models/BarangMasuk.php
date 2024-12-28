@@ -18,8 +18,8 @@ class BarangMasuk extends Model
     // Tambahkan id_barangmasuk ke fillable fields
     protected $fillable = [
         'id_barangmasuk',  // <-- Pastikan ini ada
-        'nama_barang',
-        'kategori',
+        'id_barang',
+        'id_kategori',
         'tgl_masuk',
         'jumlah_masuk',
         'harga_beli',
@@ -29,7 +29,7 @@ class BarangMasuk extends Model
     // Definisikan relasi dengan Supplier
     public function kategori()
     {
-        return $this->belongsTo(Kategori::class, 'id_kategori');
+        return $this->belongsTo(Kategori::class, 'id_kategori', 'id_kategori');
     }
     public function barang()
     {

@@ -10,9 +10,10 @@ class CreateBarangMasukTable extends Migration
     {
         Schema::create('barang_masuk', function (Blueprint $table) {
             $table->string('id_barangmasuk')->primary();
-            $table->string('nama_barang');
-            $table->string('kategori');
-            $table->foreign('kategori')->references('id_kategori')->on('kategori')->onUpdate('cascade')->onDelete('cascade');
+            $table->string('id_barang');
+            $table->foreign('id_barang')->references('id_barang')->on('barang')->onUpdate('cascade')->onDelete('cascade');
+            $table->string('id_kategori');
+            $table->foreign('id_kategori')->references('id_kategori')->on('kategori')->onUpdate('cascade')->onDelete('cascade');
             $table->date('tgl_masuk');
             $table->integer('jumlah_masuk');
             $table->integer('harga_beli');

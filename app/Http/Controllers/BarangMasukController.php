@@ -31,8 +31,8 @@ class BarangMasukController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'kategori' => 'required',
-            'nama_barang' => 'required|exists:barang,id_barang', // pastikan 'nama_barang' adalah id_barang
+            'id_kategori' => 'required|exists:kategori,id_kategori',
+            'id_barang' => 'required|exists:barang,id_barang', // pastikan 'id_barang' adalah id_barang
             'tgl_masuk' => 'required|date|before_or_equal:today',
             'jumlah_masuk' => 'required|integer',
             'harga_beli' => 'required|numeric',
@@ -45,21 +45,23 @@ class BarangMasukController extends Controller
         // Menyimpan data barang masuk
         $barangMasuk = BarangMasuk::create([
             'id_barangmasuk' => $newId,
-            'kategori' => $request->kategori,
-            'nama_barang' => $request->nama_barang,
+            'id_kategori' => $request->id_kategori,
+            'id_barang' => $request->id_barang,
             'tgl_masuk' => $request->tgl_masuk,
             'jumlah_masuk' => $request->jumlah_masuk,
             'harga_beli' => $request->harga_beli,
         ]);
 
-        // Update stok barang dan harga beli jika diperlukan
-        $barang = Barang::findOrFail($request->nama_barang);
-        $barang->stok_barang += $request->jumlah_masuk;
+        // Update stok barang
+        $barang = Barang::findOrFail($request->id_barang); // Menggunakan id_barang
+        $barang->stok_barang += $request->jumlah_masuk;   // Menambahkan jumlah masuk ke stok barang
 
         // Jika harga beli berbeda, perbarui harga beli
         if ($barang->harga_beli != $request->harga_beli) {
             $barang->harga_beli = $request->harga_beli;
         }
+
+        // Simpan perubahan stok barang
         $barang->save();
 
         return redirect()->route('barangmasuk.index')->with('success', 'Barang masuk berhasil ditambahkan dan stok diperbarui.');
@@ -79,8 +81,8 @@ class BarangMasukController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'kategori' => 'required',
-            'nama_barang' => 'required|exists:barang,id_barang', // pastikan 'nama_barang' adalah id_barang
+            'id_kategori' => 'required|exists:kategori,id_kategori',
+            'id_barang' => 'required|exists:barang,id_barang', // pastikan 'id_barang' adalah id_barang
             'tgl_masuk' => 'required|date',
             'jumlah_masuk' => 'required|integer',
             'harga_beli' => 'required|numeric',
@@ -89,8 +91,7 @@ class BarangMasukController extends Controller
         $barangMasuk = BarangMasuk::findOrFail($id);
 
         // Update stok barang
-        $barang = Barang::findOrFail($barangMasuk->nama_barang);
-        $barang->stok_barang -= $barangMasuk->jumlah_masuk; // Kurangi stok lama
+        $barang = Barang::findOrFail($barangMasuk->id_barang); // Menggunakan id_barang yang benar
         $barang->stok_barang += $request->jumlah_masuk;     // Tambahkan stok baru
 
         // Update harga beli jika berbeda
@@ -102,8 +103,8 @@ class BarangMasukController extends Controller
 
         // Update data barang masuk
         $barangMasuk->update([
-            'kategori' => $request->kategori,
-            'nama_barang' => $request->nama_barang,
+            'id_kategori' => $request->id_kategori,
+            'id_barang' => $request->id_barang,
             'tgl_masuk' => $request->tgl_masuk,
             'jumlah_masuk' => $request->jumlah_masuk,
             'harga_beli' => $request->harga_beli,
@@ -118,7 +119,7 @@ class BarangMasukController extends Controller
         $barangMasuk = BarangMasuk::findOrFail($id);
 
         // Update stok barang sebelum menghapus barang masuk
-        $barang = Barang::findOrFail($barangMasuk->nama_barang);
+        $barang = Barang::findOrFail($barangMasuk->id_barang); // Menggunakan id_barang yang benar
         $barang->stok_barang -= $barangMasuk->jumlah_masuk; // Kurangi stok barang yang dihapus
         $barang->save();
 

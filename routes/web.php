@@ -36,12 +36,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/barang/search', [BarangController::class, 'getBarang'])->name('barang.search');
 
     // Barang Masuk
-    Route::resource('barangmasuk', BarangMasukController::class)->except(['show']);
     Route::get('/barangmasuk', [BarangMasukController::class, 'index'])->name('barangmasuk.index');
-    // Route untuk menampilkan form tambah barangmasuk (metode GET)
     Route::get('/barangmasuk/create', [BarangMasukController::class, 'create'])->name('barangmasuk.create');
-    // Route untuk menyimpan data barang masuk (metode POST)
-    Route::post('/barangmasuk/create', [BarangMasukController::class, 'store'])->name('barangmasuk.store');
+    Route::post('/barangmasuk', [BarangMasukController::class, 'store'])->name('barangmasuk.store');
     Route::get('/barangmasuk/{id}/edit', [BarangMasukController::class, 'edit'])->name('barangmasuk.edit');
     Route::put('/barangmasuk/{id}', [BarangMasukController::class, 'update'])->name('barangmasuk.update');
     Route::delete('/barangmasuk/{id}', [BarangMasukController::class, 'destroy'])->name('barangmasuk.destroy');

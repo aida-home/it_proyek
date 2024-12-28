@@ -21,7 +21,7 @@
                 <!-- Input Kategori -->
                 <div class="form-group">
                     <label for="kategori">Kategori :</label>
-                    <select name="kategori" id="kategori" class="form-control" required>
+                    <select name="id_kategori" id="kategori" class="form-control" required>
                         <option value="">Pilih Kategori</option>
                         @foreach ($kategori as $item)
                             <option value="{{ $item->id_kategori }}" 
@@ -37,12 +37,12 @@
 
                 <!-- Input Nama Barang -->
                 <div class="form-group">
-                    <label for="nama_barang">Nama Barang :</label>
-                    <select name="nama_barang" id="nama_barang" class="form-control" required>
+                    <label for="barang">Nama Barang :</label>
+                    <select name="id_barang" id="barang" class="form-control" required>
                         <option value="">Pilih Barang</option>
                         @foreach ($barang as $item)
                             <option value="{{ $item->id_barang }}" 
-                                {{ old('nama_barang') == $item->id_barang ? 'selected' : '' }}>
+                                {{ old('barang') == $item->id_barang ? 'selected' : '' }}>
                                 {{ $item->nama_barang }}
                             </option>
                         @endforeach
@@ -56,7 +56,7 @@
                 <div class="form-group">
                     <label for="tgl_masuk">Tanggal Masuk :</label>
                     <input type="date" class="form-control" name="tgl_masuk" id="tgl_masuk" 
-                           value="{{ old('tgl_masuk') }}" required>
+                        value="{{ old('tgl_masuk') }}" required>
                 </div>
                 @error('tgl_masuk')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -66,7 +66,7 @@
                 <div class="form-group">
                     <label for="jumlah_masuk">Jumlah Masuk :</label>
                     <input type="number" class="form-control" name="jumlah_masuk" 
-                           value="{{ old('jumlah_masuk') }}" placeholder="Masukkan Jumlah Masuk" required>
+                        value="{{ old('jumlah_masuk') }}" placeholder="Masukkan Jumlah Masuk" required>
                 </div>
                 @error('jumlah_masuk')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -76,7 +76,7 @@
                 <div class="form-group">
                     <label for="harga_beli">Harga Beli :</label>
                     <input type="number" class="form-control" name="harga_beli" 
-                           value="{{ old('harga_beli') }}" placeholder="Masukkan Harga Beli" required>
+                        value="{{ old('harga_beli') }}" placeholder="Masukkan Harga Beli" required>
                 </div>
                 @error('harga_beli')
                     <div class="alert alert-danger">{{ $message }}</div>
