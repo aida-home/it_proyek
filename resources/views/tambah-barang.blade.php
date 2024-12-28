@@ -25,7 +25,7 @@
                 </div>
                 <div class="form-group">
                     <label for="kategori">Kategori:</label>
-                    <select id="kategori" name="kategori" required>
+                    <select id="kategori" name="id_kategori" required>
                         <option value="" disabled selected>Pilih Kategori</option>
                         @foreach ($kategori as $item)
                             <option value="{{ $item->id_kategori }}">{{ $item->nama_kategori }}</option>

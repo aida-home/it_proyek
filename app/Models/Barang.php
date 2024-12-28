@@ -21,7 +21,7 @@ class Barang extends Model
     protected $fillable = [
         'id_barang',
         'nama_barang',
-        'kategori',
+        'id_kategori',
         'stok_barang',
         'harga_beli',
         'harga_jual'
@@ -30,7 +30,7 @@ class Barang extends Model
     // Relasi dengan model Kategori (Many to One)
     public function kategori()
     {
-        return $this->belongsTo(Kategori::class, 'kategori', 'id_kategori');
+        return $this->belongsTo(Kategori::class, 'id_kategori', 'id_kategori');
     }
     public function barangMasuk()
 {

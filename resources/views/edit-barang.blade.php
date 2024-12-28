@@ -36,7 +36,7 @@
 
             <div class="form-group">
                 <label for="kategori">Kategori:</label>
-                <select id="kategori" name="kategori" required>
+                <select id="kategori" name="id_kategori" required>
                     @foreach ($kategori as $item)
                         <option value="{{ $item->id_kategori }}" 
                             {{ old('kategori', $barang->kategori) == $item->id_kategori ? 'selected' : '' }}>

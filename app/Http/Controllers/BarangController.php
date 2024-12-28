@@ -3,45 +3,48 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barang;
+use App\Models\Kategori;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
-use App\Models\Kategori; 
 
 class BarangController extends Controller
 {
     // Menampilkan daftar barang (Index)
     public function index()
     {
-        $barang = Barang::with('kategori')->get(); // Muat relasi kategori
+        // Mengambil semua barang beserta relasi kategori
+        $barang = Barang::with('kategori')->get();
         return view('barang', compact('barang'));
     }
-    
+
     // Menampilkan form untuk membuat barang baru
     public function create()
     {
-        $kategori = Kategori::all();  // Ambil semua kategori
-        return view('tambah-barang', compact('kategori'));  // Kirim ke view
+        // Mengambil semua kategori untuk dropdown
+        $kategori = Kategori::all();
+        return view('tambah-barang', compact('kategori'));
     }
-    
+
     // Menyimpan barang baru
     public function store(Request $request)
     {
+        // Validasi inputan
         $validatedData = $request->validate([
             'nama_barang' => 'required|string|max:255',
-            'kategori' => 'required|exists:kategori,id_kategori', // Validasi kategori yang dipilih
+            'id_kategori' => 'required|exists:kategori,id_kategori', // Validasi kategori
             'stok_barang' => 'required|integer|min:0',
-            'harga_beli' => 'required|numeric|min:0', // Validasi harga_beli
+            'harga_beli' => 'required|numeric|min:0',
             'harga_jual' => 'required|numeric|min:0',
         ]);
 
-        $barang = new Barang();
-        $barang->id_barang = 'DB' . str_pad(Barang::count() + 1, 6, '0', STR_PAD_LEFT);
-        $barang->nama_barang = $request->nama_barang;
-        $barang->kategori = $request->kategori; // Simpan ID kategori
-        $barang->stok_barang = $request->stok_barang;
-        $barang->harga_beli = $request->harga_beli; // Simpan harga_beli
-        $barang->harga_jual = $request->harga_jual;
-        $barang->save();
+        // Membuat barang baru
+        Barang::create([
+            'id_barang' => 'DB' . str_pad(Barang::count() + 1, 6, '0', STR_PAD_LEFT), // Format ID otomatis
+            'nama_barang' => $request->nama_barang,
+            'id_kategori' => $request->id_kategori,
+            'stok_barang' => $request->stok_barang,
+            'harga_beli' => $request->harga_beli,
+            'harga_jual' => $request->harga_jual,
+        ]);
 
         return redirect()->route('barang.index')->with('success', 'Barang berhasil ditambahkan.');
     }
@@ -57,20 +60,22 @@ class BarangController extends Controller
     // Mengupdate barang
     public function update(Request $request, $id_barang)
     {
-        $request->validate([
+        // Validasi inputan
+        $validatedData = $request->validate([
             'nama_barang' => 'required|string|max:255',
-            'kategori' => 'required|exists:kategori,id_kategori', // Validasi kategori
+            'id_kategori' => 'required|exists:kategori,id_kategori', // Validasi kategori
             'stok_barang' => 'required|integer|min:0',
-            'harga_beli' => 'required|numeric|min:0', // Validasi harga_beli
-            'harga_jual' => 'required|numeric|min:0'
+            'harga_beli' => 'required|numeric|min:0',
+            'harga_jual' => 'required|numeric|min:0',
         ]);
 
+        // Update barang berdasarkan ID
         $barang = Barang::findOrFail($id_barang);
         $barang->update([
             'nama_barang' => $request->nama_barang,
-            'kategori' => $request->kategori, // Update kategori
+            'id_kategori' => $request->id_kategori,
             'stok_barang' => $request->stok_barang,
-            'harga_beli' => $request->harga_beli, // Update harga_beli
+            'harga_beli' => $request->harga_beli,
             'harga_jual' => $request->harga_jual,
         ]);
 
@@ -117,7 +122,7 @@ class BarangController extends Controller
         $pesan = "⚠️ Stok Barang Hampir Habis ⚠️\n\n" .
                  "Nama Barang: {$barang->nama_barang}\n" .  // Gunakan nama_barang, bukan nama
                  "Sisa Stok: {$barang->stok_barang}\n" .   // Gunakan stok_barang, bukan stok
-                 "Segera lakukan pemesanan ulang.";
+                "Segera lakukan pemesanan ulang.";
     
         // Mengirim request ke API Fonnte untuk mengirimkan WhatsApp
         $response = Http::withHeaders([
