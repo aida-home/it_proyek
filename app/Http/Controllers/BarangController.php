@@ -68,7 +68,7 @@ class BarangController extends Controller
         $barang = Barang::findOrFail($id_barang);
         $barang->update([
             'nama_barang' => $request->nama_barang,
-            'id_kategori' => $request->kategori, // Update kategori
+            'id_kategori' => $request->id_kategori, // Update kategori
             'stok_barang' => $request->stok_barang,
             'harga_beli' => $request->harga_beli, // Update harga_beli
             'harga_jual' => $request->harga_jual,
