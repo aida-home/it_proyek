@@ -32,34 +32,34 @@ class BarangMasukController extends Controller
     {
         // Validasi input
         $request->validate([
-            'id_barang' => 'required|exists:barang,id_barang', 
-            'id_kategori' => 'required|exists:kategori,id_kategori',
+            'id_barang' => 'required|exists:barang,id_barang',
             'tgl_masuk' => 'required|date|before_or_equal:today',
             'jumlah_masuk' => 'required|integer|min:1',
             'harga_beli' => 'required|numeric|min:0',
         ]);
 
+        // Ambil data barang dan kategori
+        $barang = Barang::with('kategori')->findOrFail($request->id_barang);
+
         // Membuat ID barang masuk baru
         $lastBarang = BarangMasuk::orderBy('id_barangmasuk', 'desc')->first();
         $newId = $lastBarang ? 'BM' . str_pad((int)substr($lastBarang->id_barangmasuk, 2) + 1, 6, '0', STR_PAD_LEFT) : 'BM000001';
 
-        // Menyimpan data barang masuk
+        // Simpan data barang masuk
         $barangMasuk = BarangMasuk::create([
             'id_barangmasuk' => $newId,
             'id_barang' => $request->id_barang,
-            'id_kategori' => $request->id_kategori,
+            'id_kategori' => $barang->kategori->id_kategori ?? null,
             'tgl_masuk' => $request->tgl_masuk,
             'jumlah_masuk' => $request->jumlah_masuk,
             'harga_beli' => $request->harga_beli,
         ]);
 
         // Update stok barang
-        $barang = Barang::findOrFail($request->id_barang);
         $barang->stok_barang += $request->jumlah_masuk;
-        $barang->harga_beli = $request->harga_beli; // Update harga beli
+        $barang->harga_beli = $request->harga_beli;
         $barang->save();
 
-        // Redirect ke halaman barang masuk dengan pesan sukses
         return redirect()->route('barangmasuk.index')->with('success', 'Barang masuk berhasil ditambahkan dan stok diperbarui.');
     }
 
@@ -78,32 +78,36 @@ class BarangMasukController extends Controller
     {
         // Validasi input
         $request->validate([
-            'id_barang' => 'required|exists:barang,id_barang', 
-            'id_kategori' => 'required|exists:kategori,id_kategori',
+            'id_barang' => 'required|exists:barang,id_barang',
             'tgl_masuk' => 'required|date',
             'jumlah_masuk' => 'required|integer|min:1',
             'harga_beli' => 'required|numeric|min:0',
         ]);
 
+        // Cari data barang masuk yang akan diupdate
         $barangMasuk = BarangMasuk::findOrFail($id);
-        $barang = Barang::findOrFail($barangMasuk->id_barang);
 
-        // Update stok barang sebelum perubahan (kembalikan stok sebelumnya)
-        $barang->stok_barang -= $barangMasuk->jumlah_masuk;
+        // Kembalikan stok lama
+        $barangLama = Barang::findOrFail($barangMasuk->id_barang);
+        $barangLama->stok_barang -= $barangMasuk->jumlah_masuk;
+        $barangLama->save();
 
-        // Update barang masuk dan stok baru
+        // Ambil data barang baru
+        $barangBaru = Barang::with('kategori')->findOrFail($request->id_barang);
+
+        // Update data barang masuk
         $barangMasuk->update([
             'id_barang' => $request->id_barang,
-            'id_kategori' => $request->id_kategori,
+            'id_kategori' => $barangBaru->kategori->id_kategori ?? null,
             'tgl_masuk' => $request->tgl_masuk,
             'jumlah_masuk' => $request->jumlah_masuk,
             'harga_beli' => $request->harga_beli,
         ]);
 
-        // Tambahkan stok baru dan update harga beli
-        $barang->stok_barang += $request->jumlah_masuk;
-        $barang->harga_beli = $request->harga_beli;
-        $barang->save();
+        // Update stok barang baru
+        $barangBaru->stok_barang += $request->jumlah_masuk;
+        $barangBaru->harga_beli = $request->harga_beli;
+        $barangBaru->save();
 
         return redirect()->route('barangmasuk.index')->with('success', 'Barang masuk berhasil diperbarui dan stok diperbarui.');
     }
@@ -113,7 +117,7 @@ class BarangMasukController extends Controller
     {
         $barangMasuk = BarangMasuk::findOrFail($id);
 
-        // Update stok barang sebelum menghapus barang masuk
+        // Kembalikan stok barang sebelum menghapus barang masuk
         $barang = Barang::findOrFail($barangMasuk->id_barang);
         $barang->stok_barang -= $barangMasuk->jumlah_masuk;
         $barang->save();
