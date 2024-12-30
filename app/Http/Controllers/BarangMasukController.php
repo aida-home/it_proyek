@@ -5,127 +5,139 @@ namespace App\Http\Controllers;
 use App\Models\Kategori;
 use App\Models\BarangMasuk;
 use Illuminate\Http\Request;
-use App\Models\Supplier; // Import Supplier model
+use App\Models\Barang;
 
 class BarangMasukController extends Controller
 {
-    // Metode index untuk menampilkan seluruh data barang masuk.
+    // Menampilkan semua data barang masuk
     public function index()
     {
-        // Mengambil semua data barang masuk dengan relasi supplier
-        $barangMasuk = BarangMasuk::with('supplier')->get();
-        $kategori = Kategori::all(); // Mengambil semua kategori
-        $suppliers = Supplier::all(); // Ambil semua supplier
-    
-        // Mengirim data barangMasuk dan suppliers ke view 'barangmasuk'
-        return view('barangmasuk', compact('kategori','barangMasuk', 'suppliers'));
-    }
-    
+        $barangMasuk = BarangMasuk::with('kategori', 'barang')->get();
+        $kategori = Kategori::all();
+        $barang = Barang::all();
 
-    // Metode create untuk menampilkan form tambah barang masuk.
+        return view('barangmasuk', compact('kategori', 'barangMasuk', 'barang'));
+    }
+
+    // Menampilkan form tambah barang masuk
     public function create()
     {
-        $suppliers = Supplier::all(); // Ambil semua supplier
-        $kategori = Kategori::all(); 
-        return view('tambah-barangmasuk', compact('kategori','suppliers')); // Arahkan ke tampilan tambah-barangmasuk
+        $kategori = Kategori::all();
+        $barang = Barang::all();
+        return view('tambah-barangmasuk', compact('kategori', 'barang'));
     }
-    
-    // Metode store untuk menambah barang masuk baru ke database.
+
+    // Menyimpan data barang masuk baru
     public function store(Request $request)
     {
-        // Validasi data yang dimasukkan oleh user sebelum menyimpannya.
+        // Validasi input
         $request->validate([
-            'supplier' => 'required|exists:suppliers,id_supplier', // Pastikan supplier yang dipilih ada di database
-            'kategori' => 'required',
-            'nama_barang' => 'required|string|max:255',
+            'id_barang' => 'required|exists:barang,id_barang', 
+            'id_kategori' => 'required|exists:kategori,id_kategori',
             'tgl_masuk' => 'required|date|before_or_equal:today',
-            'jumlah_masuk' => 'required|integer',
-            'kategori' => 'required',
-            'harga_beli' => 'required|numeric',
-        ], [
-            'tgl_masuk.before_or_equal'       
+            'jumlah_masuk' => 'required|integer|min:1',
+            'harga_beli' => 'required|numeric|min:0',
         ]);
-    
-        // Mengambil data ID barang terakhir
+
+        // Membuat ID barang masuk baru
         $lastBarang = BarangMasuk::orderBy('id_barangmasuk', 'desc')->first();
-        
-        // Logika untuk membuat ID baru
-        if ($lastBarang) {
-            $lastIdNumber = (int) substr($lastBarang->id_barangmasuk, 2); // Ambil nomor dari ID terakhir
-            $newIdNumber = $lastIdNumber + 1; // Tambah 1 untuk ID baru
-        } else {
-            $newIdNumber = 1; // Jika belum ada data, mulai dari 1
-        }
-    
-        // Format ID baru menjadi BM01, BM02, dst.
-        $newId = 'BM' . str_pad($newIdNumber, 6, '0', STR_PAD_LEFT);
-    
-        // Menyimpan data barang masuk yang valid ke database.
-        BarangMasuk::create([
-            'id_barangmasuk' => $newId,  // Set ID kustom
-            'supplier' => $request->supplier, // Simpan ID supplier
-            'kategori' => $request->kategori, // Simpan ID supplier
-            'nama_barang' => $request->nama_barang,
+        $newId = $lastBarang ? 'BM' . str_pad((int)substr($lastBarang->id_barangmasuk, 2) + 1, 6, '0', STR_PAD_LEFT) : 'BM000001';
+
+        // Menyimpan data barang masuk
+        $barangMasuk = BarangMasuk::create([
+            'id_barangmasuk' => $newId,
+            'id_barang' => $request->id_barang,
+            'id_kategori' => $request->id_kategori,
             'tgl_masuk' => $request->tgl_masuk,
             'jumlah_masuk' => $request->jumlah_masuk,
             'harga_beli' => $request->harga_beli,
         ]);
-    
-        // Mengarahkan kembali ke halaman daftar barang masuk dengan pesan sukses.
-        return redirect()->route('barangmasuk.index')->with('success', 'Barang masuk berhasil ditambahkan.');
+
+        // Update stok barang
+        $barang = Barang::findOrFail($request->id_barang);
+        $barang->stok_barang += $request->jumlah_masuk;
+        $barang->harga_beli = $request->harga_beli; // Update harga beli
+        $barang->save();
+
+        // Redirect ke halaman barang masuk dengan pesan sukses
+        return redirect()->route('barangmasuk.index')->with('success', 'Barang masuk berhasil ditambahkan dan stok diperbarui.');
     }
-    
-    // Metode edit untuk menampilkan data barang yang akan diedit berdasarkan id.
+
+    // Menampilkan form edit barang masuk
     public function edit($id)
     {
-        // Mengambil data barang berdasarkan id
-        $barang = BarangMasuk::findOrFail($id);
-        $suppliers = Supplier::all(); // Ambil semua supplier
+        $barangMasuk = BarangMasuk::findOrFail($id);
         $kategori = Kategori::all();
-        // Mengirim data barang dan suppliers ke view 'ubah-barangmasuk'
-        return view('ubah-barangmasuk', compact('barang', 'suppliers','kategori'));
+        $barang = Barang::all();
+
+        return view('ubah-barangmasuk', compact('barangMasuk', 'kategori', 'barang'));
     }
 
-    // Metode update untuk memperbarui data barang masuk yang sudah ada di database.
+    // Memperbarui data barang masuk
     public function update(Request $request, $id)
     {
-        // Validasi data yang diperbarui oleh user sebelum menyimpannya.
+        // Validasi input
         $request->validate([
-            'supplier' => 'required|exists:suppliers,id_supplier',        // Supplier harus valid
-            'kategori' => 'required',
-            'nama_barang' => 'required|string|max:255',                   // Nama barang harus valid
-            'tgl_masuk' => 'required|date',                               // Tanggal masuk harus valid
-            'jumlah_masuk' => 'required|integer',                         // Jumlah masuk harus valid
-            'harga_beli' => 'required|numeric',                           // Harga beli harus valid
+            'id_barang' => 'required|exists:barang,id_barang', 
+            'id_kategori' => 'required|exists:kategori,id_kategori',
+            'tgl_masuk' => 'required|date',
+            'jumlah_masuk' => 'required|integer|min:1',
+            'harga_beli' => 'required|numeric|min:0',
         ]);
 
-        // Mengambil data barang berdasarkan id.
-        $barang = BarangMasuk::findOrFail($id);
+        $barangMasuk = BarangMasuk::findOrFail($id);
+        $barang = Barang::findOrFail($barangMasuk->id_barang);
 
-        // Memperbarui data barang dengan data baru dari request.
-        $barang->update([
-            'supplier' => $request->supplier,
-            'kategori' => $request->kategori,
-            'nama_barang' => $request->nama_barang,
+        // Update stok barang sebelum perubahan (kembalikan stok sebelumnya)
+        $barang->stok_barang -= $barangMasuk->jumlah_masuk;
+
+        // Update barang masuk dan stok baru
+        $barangMasuk->update([
+            'id_barang' => $request->id_barang,
+            'id_kategori' => $request->id_kategori,
             'tgl_masuk' => $request->tgl_masuk,
             'jumlah_masuk' => $request->jumlah_masuk,
             'harga_beli' => $request->harga_beli,
         ]);
 
-        // Mengarahkan kembali ke halaman daftar barang masuk dengan pesan sukses.
-        return redirect()->route('barangmasuk.index')->with('success', 'Barang berhasil diperbarui.');
+        // Tambahkan stok baru dan update harga beli
+        $barang->stok_barang += $request->jumlah_masuk;
+        $barang->harga_beli = $request->harga_beli;
+        $barang->save();
+
+        return redirect()->route('barangmasuk.index')->with('success', 'Barang masuk berhasil diperbarui dan stok diperbarui.');
     }
 
-    // Metode destroy untuk menghapus data barang masuk dari database.
+    // Menghapus data barang masuk
     public function destroy($id)
     {
-        // Mengambil data barang berdasarkan id, atau mengembalikan error 404 jika tidak ditemukan.
-        $barang = BarangMasuk::findOrFail($id);
+        $barangMasuk = BarangMasuk::findOrFail($id);
 
-        // Menghapus data barang dari database.
-        $barang->delete();
+        // Update stok barang sebelum menghapus barang masuk
+        $barang = Barang::findOrFail($barangMasuk->id_barang);
+        $barang->stok_barang -= $barangMasuk->jumlah_masuk;
+        $barang->save();
 
-        // Mengarahkan kembali ke halaman daftar barang masuk dengan pesan sukses.
-        return redirect()->route('barangmasuk.index')->with('success', 'Barang berhasil dihapus.');
+        // Hapus data barang masuk
+        $barangMasuk->delete();
+
+        return redirect()->route('barangmasuk.index')->with('success', 'Data barang masuk berhasil dihapus.');
+    }
+
+    // Mendapatkan kategori berdasarkan barang (untuk pengisian otomatis kategori)
+    public function getKategori($id)
+    {
+        $barang = Barang::with('kategori')->find($id);
+    
+        // Jika barang ditemukan dan kategori ada
+        if ($barang && $barang->kategori) {
+            return response()->json([
+                'nama_kategori' => $barang->kategori->nama_kategori,
+            ]);
+        }
+    
+        // Jika kategori tidak ditemukan
+        return response()->json(['error' => 'Kategori tidak ditemukan'], 404);
     }
 }
+

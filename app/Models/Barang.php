@@ -21,21 +21,34 @@ class Barang extends Model
     protected $fillable = [
         'id_barang',
         'nama_barang',
-        'kategori',
+        'id_kategori',
         'stok_barang',
+        'harga_beli',
         'harga_jual'
     ];
+
+    // Relasi dengan model Kategori (Many to One)
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class, 'id_kategori', 'id_kategori');
+    }
+    public function barangMasuk()
+{
+    return $this->hasMany(BarangMasuk::class, 'id_barangmasuk', 'id_barangmasuk');
+}
+
 
     protected static function boot()
     {
         parent::boot();
     
+        // Ketika data Barang diupdate, cek stok dan kirim notifikasi jika diperlukan
         static::updated(function ($barang) {
-            // Pastikan menggunakan nama kolom yang benar: stok_barang
             if ($barang->stok_barang < 10) {
+                // Menggunakan controller untuk kirim notifikasi jika stok kurang dari 10
                 (new BarangController())->kirimNotifikasiWhatsApp($barang);
             }
         });
     }
-} 
+}
 

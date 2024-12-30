@@ -26,7 +26,6 @@
                         <th>No</th>
                         <th>Barang</th>
                         <th>Kategori</th>
-                        <th>Supplier</th>
                         <th>Tanggal Masuk</th>
                         <th>Jumlah Masuk</th>
                         <th>Harga Beli</th>
@@ -37,10 +36,9 @@
                     @foreach ($barangMasuk as $index => $barang) <!-- Menambahkan $index untuk nomor urut -->
                         <tr>
                             <td>{{ $index + 1 }}</td> <!-- Menampilkan nomor urut mulai dari 1 -->
-                            <td>{{ $barang->nama_barang }}</td>
-                            <td>{{ $barang->kategori }}</td>
-                            <td>{{ $barang->supplier }}</td>
-                            <td>{{ $barang->tgl_masuk }}</td>
+                            <td>{{ $barang->barang->nama_barang ?? '-' }}</td> 
+                            <td>{{ $barang->barang->kategori->nama_kategori ?? '-' }}</td> <!-- Menampilkan nama kategori berdasarkan barang -->
+                            <td>{{ \Carbon\Carbon::parse($barang->tgl_masuk)->format('d/m/Y') }}</td> <!-- Menampilkan tanggal dengan format yang lebih mudah dibaca -->
                             <td>{{ $barang->jumlah_masuk }}</td>
                             <td>Rp {{ number_format($barang->harga_beli, 0, ',', '.') }}</td>
                             <td>
@@ -65,7 +63,7 @@
     <script src="{{ asset('assets/js/custom.js') }}"></script>
 
     <script>
-        //message with sweetalert
+        // Pesan dengan SweetAlert
         @if(session('success'))
             Swal.fire({
                 icon: "success",
@@ -83,7 +81,6 @@
                 timer: 2000
             });
         @endif
-
-    </script>
+    </script>
 </body>
 </html>

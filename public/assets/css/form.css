@@ -46,6 +46,17 @@ input, select {
     font-size: 14px;
 }
 
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-weight: lighter;
+    font-size: 14px;
+}
+
 /* Tombol Simpan */
 .save-btn {
     background-color: #8A5E41;

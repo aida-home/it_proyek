@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{{ asset('assets/css/form.css') }}" rel="stylesheet"> <!-- Link ke form.css -->
+    <link rel="stylesheet" href="{{ asset('assets/css/form.css') }} ?v={{ time() }}"> 
     <title>Edit Barang</title>
 </head>
 <body>
@@ -31,22 +31,35 @@
 
             <div class="form-group">
                 <label for="nama_barang">Nama Barang</label>
-                <input type="text" id="nama_barang" name="nama_barang" value="{{ $barang->nama_barang }}" required>
+                <input type="text" id="nama_barang" name="nama_barang" value="{{ old('nama_barang', $barang->nama_barang) }}" required>
             </div>
 
             <div class="form-group">
-                <label for="kategori">Kategori</label>
-                <input type="text" id="kategori" name="kategori" value="{{ $barang->kategori }}" required>
+                <label for="kategori">Kategori:</label>
+                <select id="kategori" name="id_kategori" required>
+                    @foreach ($kategori as $item)
+                        <option value="{{ $item->id_kategori }}" 
+                            {{ old('kategori', $barang->kategori) == $item->id_kategori ? 'selected' : '' }}>
+                            {{ $item->nama_kategori }}
+                        </option>
+                    @endforeach
+                </select>
             </div>
 
             <div class="form-group">
                 <label for="stok_barang">Stok Barang</label>
-                <input type="number" id="stok_barang" name="stok_barang" value="{{ $barang->stok_barang }}" required min="0">
+                <input type="number" id="stok_barang" name="stok_barang" value="{{ old('stok_barang', $barang->stok_barang) }}" required min="0">
+            </div>
+
+            <!-- Menambahkan input harga beli -->
+            <div class="form-group">
+                <label for="harga_beli">Harga Beli</label>
+                <input type="number" id="harga_beli" name="harga_beli" value="{{ old('harga_beli', $barang->harga_beli) }}" required min="0" step="0.01">
             </div>
 
             <div class="form-group">
                 <label for="harga_jual">Harga Jual</label>
-                <input type="number" id="harga_jual" name="harga_jual" value="{{ $barang->harga_jual }}" required min="0" step="0.01">
+                <input type="number" id="harga_jual" name="harga_jual" value="{{ old('harga_jual', $barang->harga_jual) }}" required min="0" step="0.01">
             </div>
 
             <button type="submit" class="save-btn">Simpan Perubahan</button> <!-- Mengganti kelas tombol menjadi save-btn -->

@@ -15,50 +15,42 @@
 
     @section('content')
     <div class="form-container">
-        <form action="{{ route('barangmasuk.create') }}" method="POST">
+        <form action="{{ route('barangmasuk.store') }}" method="POST">
             @csrf
             <div class="table-section">
-                <!-- Input Supplier -->
+
+                <!-- Input Nama Barang -->
                 <div class="form-group">
-                    <label for="supplier">Supplier :</label>
-                    <select name="supplier" id="supplier" class="form-control" required>
-                        <option value="">Pilih Supplier</option>
-                        @foreach ($suppliers as $supplier)
-                            <option value="{{ $supplier->id_supplier }}">{{ $supplier->nama_supplier }}</option>
+                    <label for="barang">Nama Barang :</label>
+                    <select name="id_barang" id="barang" class="form-control" required>
+                        <option value="">Pilih Barang</option>
+                        @foreach ($barang as $item)
+                            <option value="{{ $item->id_barang }}" 
+                                {{ old('id_barang') == $item->id_barang ? 'selected' : '' }}>
+                                {{ $item->nama_barang }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
-                @error('supplier')
+                @error('id_barang')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
 
                 <!-- Input Kategori -->
                 <div class="form-group">
                     <label for="kategori">Kategori :</label>
-                    <select name="kategori" id="kategori" class="form-control" required>
-                        <option value="">Pilih Kategori</option>
-                        @foreach ($kategori as $kategori)
-                            <option value="{{ $kategori->id_kategori }}">{{ $kategori->nama_kategori }}</option>
-                        @endforeach
-                    </select>
+                    <input type="text" name="kategori" id="kategori" class="form-control" 
+                           value="{{ old('kategori') }}" readonly>
                 </div>
                 @error('kategori')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-
-                <!-- Input Nama Barang -->
-                <div class="form-group">
-                    <label for="nama_barang">Nama Barang :</label>
-                    <input type="text" class="form-control" name="nama_barang" placeholder="Masukkan Nama Barang" required>
-                </div>
-                @error('nama_barang')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
 
                 <!-- Input Tanggal Masuk -->
                 <div class="form-group">
                     <label for="tgl_masuk">Tanggal Masuk :</label>
-                    <input type="date" class="form-control" name="tgl_masuk" max="{{ date('Y-m-d') }}" required>
+                    <input type="date" class="form-control" name="tgl_masuk" id="tgl_masuk" 
+                        value="{{ old('tgl_masuk') }}" required>
                 </div>
                 @error('tgl_masuk')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -67,7 +59,8 @@
                 <!-- Input Jumlah Masuk -->
                 <div class="form-group">
                     <label for="jumlah_masuk">Jumlah Masuk :</label>
-                    <input type="number" class="form-control" name="jumlah_masuk" placeholder="Masukkan Jumlah Masuk" required>
+                    <input type="number" class="form-control" name="jumlah_masuk" 
+                        value="{{ old('jumlah_masuk') }}" placeholder="Masukkan Jumlah Masuk" required>
                 </div>
                 @error('jumlah_masuk')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -76,7 +69,8 @@
                 <!-- Input Harga Beli -->
                 <div class="form-group">
                     <label for="harga_beli">Harga Beli :</label>
-                    <input type="number" class="form-control" name="harga_beli" placeholder="Masukkan Harga Beli" required>
+                    <input type="number" class="form-control" name="harga_beli" 
+                        value="{{ old('harga_beli') }}" placeholder="Masukkan Harga Beli" required>
                 </div>
                 @error('harga_beli')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -89,5 +83,38 @@
         </form>
     </div>
     @endsection
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const barangSelect = document.getElementById('barang');
+            const kategoriInput = document.getElementById('kategori');
+
+            barangSelect.addEventListener('change', function () {
+                const barangId = barangSelect.value;
+
+                if (barangId) {
+                    // Mengambil kategori berdasarkan ID barang
+                    fetch(`/get-kategori/${barangId}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            // Set nilai kategori jika ditemukan
+                            kategoriInput.value = data.nama_kategori || 'Kategori tidak ditemukan';
+                        })
+                        .catch(error => {
+                            console.error('Error fetching kategori:', error);
+                            kategoriInput.value = 'Error mengambil kategori';
+                        });
+                } else {
+                    kategoriInput.value = '';
+                }
+            });
+
+            // Set default tanggal
+            const tglMasuk = document.getElementById('tgl_masuk');
+            const today = new Date().toISOString().split('T')[0];
+            tglMasuk.value = today;
+            tglMasuk.setAttribute('max', today);
+        });
+    </script>
 </body>
 </html>

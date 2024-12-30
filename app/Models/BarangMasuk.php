@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Supplier; // Import Supplier model
 
 class BarangMasuk extends Model
 {
@@ -18,9 +17,8 @@ class BarangMasuk extends Model
     // Tambahkan id_barangmasuk ke fillable fields
     protected $fillable = [
         'id_barangmasuk',  // <-- Pastikan ini ada
-        'nama_barang',
-        'supplier',
-        'kategori',
+        'id_barang',
+        'id_kategori',
         'tgl_masuk',
         'jumlah_masuk',
         'harga_beli',
@@ -28,16 +26,10 @@ class BarangMasuk extends Model
 
 
     // Definisikan relasi dengan Supplier
-    public function supplier()
-    {
-        return $this->belongsTo(Supplier::class, 'supplier', 'id_supplier');
-    }
-
     public function kategori()
     {
-        return $this->belongsTo(Supplier::class, 'kategori', 'id_kategori');
+        return $this->belongsTo(Kategori::class, 'id_kategori', 'id_kategori');
     }
-
     public function barang()
     {
         return $this->belongsTo(Barang::class, 'id_barang', 'id_barang');

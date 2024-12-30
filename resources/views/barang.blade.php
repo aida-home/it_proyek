@@ -16,7 +16,6 @@
     @section('content')
     <div class="table-section">
         <div class="box">
-            
             <!-- Tombol tambah barang -->
             <a href="{{ route('barang.create') }}" class="btn">Tambah Barang</a>
             <table>
@@ -26,22 +25,24 @@
                         <th>Nama Barang</th>
                         <th>Kategori</th>
                         <th>Stok Barang</th>
+                        <th>Harga Beli</th> <!-- Menambahkan kolom harga beli -->
                         <th>Harga Jual</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($barang as $index => $barang) <!-- Menambahkan indeks untuk nomor urut -->
+                    @foreach ($barang as $index => $item) <!-- Perubahan variabel dari $barang ke $item -->
                     <tr>
                         <td>{{ $index + 1 }}</td> <!-- Menampilkan nomor urut -->
-                        <td>{{ $barang->nama_barang }}</td>
-                        <td>{{ $barang->kategori }}</td>
-                        <td>{{ $barang->stok_barang }}</td>
-                        <td>Rp {{ number_format($barang->harga_jual, 0, ',', '.') }}</td> <!-- Format harga jual dengan dua angka desimal dan awalan Rp -->
+                        <td>{{ $item->nama_barang }}</td>
+                        <td>{{ $item->kategori->nama_kategori ?? '-' }}</td> <!-- Menampilkan nama kategori -->
+                        <td>{{ $item->stok_barang }}</td>
+                        <td>Rp {{ number_format($item->harga_beli, 0, ',', '.') }}</td> <!-- Menampilkan harga beli -->
+                        <td>Rp {{ number_format($item->harga_jual, 0, ',', '.') }}</td> <!-- Format harga jual -->
                         <td>
                             <div class="action-buttons">
-                                <a href="{{ route('barang.edit', $barang->id_barang) }}" class="btn-edit">Ubah</a>
-                                <form action="{{ route('barang.destroy', $barang->id_barang) }}" method="POST" style="display:inline;">
+                                <a href="{{ route('barang.edit', $item->id_barang) }}" class="btn-edit">Ubah</a>
+                                <form action="{{ route('barang.destroy', $item->id_barang) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-delete" onclick="return confirm('Anda yakin ingin menghapus data ini?')">Hapus</button>
@@ -51,8 +52,11 @@
                     </tr>
                     @endforeach              
                 </tbody>                
-            </table>            
+            </table>
+        </div>
+    </div>
     @endsection
+
     <script src="{{ asset('assets/js/custom.js') }}"></script>
 
     <script>
@@ -74,7 +78,6 @@
                 timer: 2000
             });
         @endif
-
-    </script>
+    </script>
 </body>
 </html>

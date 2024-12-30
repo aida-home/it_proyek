@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Barang;
 use App\Models\Kategori;
 use App\Models\Pengguna;
-use App\Models\Supplier;
 use App\Models\Transaksi;
 use App\Models\BarangMasuk;
 use Illuminate\Http\Request;
@@ -133,7 +132,6 @@ class PenggunaController extends Controller
         $barangCount = Barang::count();
         $barangMasukCount = BarangMasuk::count();
         $kategoriCount = Kategori::count();
-        $supplierCount = Supplier::count();
         $transaksiCount = Transaksi::count();
         $laporanPenjualanCount = Transaksi::distinct('id')->count(); 
 
@@ -157,7 +155,6 @@ class PenggunaController extends Controller
             'barangCount',
             'barangMasukCount',
             'kategoriCount',
-            'supplierCount',
             'transaksiCount',
             'laporanPenjualanCount',
             'barangPopuler'

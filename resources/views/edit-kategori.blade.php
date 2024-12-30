@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Edit Kategori</title>
-    <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}?v={{ time() }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/form.css') }} ?v={{ time() }}"> 
 </head>
 <body>
     @extends('layouts.sidebar')
@@ -19,13 +19,16 @@
         <form action="{{ route('kategori.update', $kategori->id_kategori) }}" method="POST">
             @csrf
             @method('PUT') 
+            <div class="table-section">
             <div class="form-group">
+                <label for="nama_kategori">Nama Kategori</label>
                 <input type="text" name="nama_kategori" value="{{ $kategori->nama_kategori }}" placeholder="Nama Kategori" required>
             </div>
             @error('nama_kategori')
             <div class="alert alert-danger">{{ $message }}</div>
             @enderror
-            <button type="submit">Simpan</button>
+            <button type="submit" class="save-btn">Simpan Perubahan</button>
+            <button type="button" onclick="location.href='{{ route('kategori.index') }}'" class="btn btn-cancel">Batal</button>
         </form>
     </div>
 </div>

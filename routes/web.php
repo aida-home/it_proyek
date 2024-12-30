@@ -36,15 +36,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/barang/search', [BarangController::class, 'getBarang'])->name('barang.search');
 
     // Barang Masuk
-    Route::resource('barangmasuk', BarangMasukController::class)->except(['show']);
     Route::get('/barangmasuk', [BarangMasukController::class, 'index'])->name('barangmasuk.index');
-    // Route untuk menampilkan form tambah barangmasuk (metode GET)
     Route::get('/barangmasuk/create', [BarangMasukController::class, 'create'])->name('barangmasuk.create');
-    // Route untuk menyimpan data barang masuk (metode POST)
-    Route::post('/barangmasuk/create', [BarangMasukController::class, 'store'])->name('barangmasuk.store');
+    Route::post('/barangmasuk', [BarangMasukController::class, 'store'])->name('barangmasuk.store');
     Route::get('/barangmasuk/{id}/edit', [BarangMasukController::class, 'edit'])->name('barangmasuk.edit');
     Route::put('/barangmasuk/{id}', [BarangMasukController::class, 'update'])->name('barangmasuk.update');
     Route::delete('/barangmasuk/{id}', [BarangMasukController::class, 'destroy'])->name('barangmasuk.destroy');
+    Route::get('/get-kategori/{id}', [BarangMasukController::class, 'getKategori']);
+
 
     // Transaksi
     Route::resource('transaksi', TransaksiController::class);
@@ -56,9 +55,6 @@ Route::middleware('auth')->group(function () {
 
     // Pengguna
     Route::resource('pengguna', PenggunaController::class);
-
-    // Suppliers
-    Route::resource('suppliers', SupplierController::class);
 
     // SAW Export
     Route::get('/export-saw', [SAWController::class, 'exportDataSAW'])->name('saw.export');

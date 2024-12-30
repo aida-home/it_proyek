@@ -14,4 +14,11 @@ class Kategori extends Model
         protected $keyType = 'string';  // Tipe data id_kategori adalah string
     
         protected $fillable = ['id_kategori', 'nama_kategori'];  // Kolom yang bisa diisi
+
+        // Kategori.php
+        public function barang()
+        {
+            return $this->hasMany(Barang::class, 'id_kategori', 'id_kategori');
+        }
+
     }
