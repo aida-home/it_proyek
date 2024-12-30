@@ -18,22 +18,6 @@
         <form action="{{ route('barangmasuk.store') }}" method="POST">
             @csrf
             <div class="table-section">
-                <!-- Input Kategori -->
-                <div class="form-group">
-                    <label for="kategori">Kategori :</label>
-                    <select name="id_kategori" id="kategori" class="form-control" required>
-                        <option value="">Pilih Kategori</option>
-                        @foreach ($kategori as $item)
-                            <option value="{{ $item->id_kategori }}" 
-                                {{ old('kategori') == $item->id_kategori ? 'selected' : '' }}>
-                                {{ $item->nama_kategori }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-                @error('kategori')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
 
                 <!-- Input Nama Barang -->
                 <div class="form-group">
@@ -42,13 +26,23 @@
                         <option value="">Pilih Barang</option>
                         @foreach ($barang as $item)
                             <option value="{{ $item->id_barang }}" 
-                                {{ old('barang') == $item->id_barang ? 'selected' : '' }}>
+                                {{ old('id_barang') == $item->id_barang ? 'selected' : '' }}>
                                 {{ $item->nama_barang }}
                             </option>
                         @endforeach
                     </select>
                 </div>
-                @error('nama_barang')
+                @error('id_barang')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+
+                <!-- Input Kategori -->
+                <div class="form-group">
+                    <label for="kategori">Kategori :</label>
+                    <input type="text" name="kategori" id="kategori" class="form-control" 
+                           value="{{ old('kategori') }}" readonly>
+                </div>
+                @error('kategori')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
 
@@ -91,13 +85,36 @@
     @endsection
 
     <script>
-        // Pastikan DOM sudah dimuat sepenuhnya
-        window.onload = function() {
-            const today = new Date().toISOString().split('T')[0];
+        document.addEventListener('DOMContentLoaded', function () {
+            const barangSelect = document.getElementById('barang');
+            const kategoriInput = document.getElementById('kategori');
+
+            barangSelect.addEventListener('change', function () {
+                const barangId = barangSelect.value;
+
+                if (barangId) {
+                    // Mengambil kategori berdasarkan ID barang
+                    fetch(`/get-kategori/${barangId}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            // Set nilai kategori jika ditemukan
+                            kategoriInput.value = data.nama_kategori || 'Kategori tidak ditemukan';
+                        })
+                        .catch(error => {
+                            console.error('Error fetching kategori:', error);
+                            kategoriInput.value = 'Error mengambil kategori';
+                        });
+                } else {
+                    kategoriInput.value = '';
+                }
+            });
+
+            // Set default tanggal
             const tglMasuk = document.getElementById('tgl_masuk');
-            tglMasuk.value = today; // Set default date to today
-            tglMasuk.setAttribute('max', today); // Prevent selecting future dates
-        };
+            const today = new Date().toISOString().split('T')[0];
+            tglMasuk.value = today;
+            tglMasuk.setAttribute('max', today);
+        });
     </script>
 </body>
 </html>

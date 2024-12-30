@@ -30,12 +30,13 @@ class BarangMasukController extends Controller
     // Menyimpan data barang masuk baru
     public function store(Request $request)
     {
+        // Validasi input
         $request->validate([
+            'id_barang' => 'required|exists:barang,id_barang', 
             'id_kategori' => 'required|exists:kategori,id_kategori',
-            'id_barang' => 'required|exists:barang,id_barang', // pastikan 'id_barang' adalah id_barang
             'tgl_masuk' => 'required|date|before_or_equal:today',
-            'jumlah_masuk' => 'required|integer',
-            'harga_beli' => 'required|numeric',
+            'jumlah_masuk' => 'required|integer|min:1',
+            'harga_beli' => 'required|numeric|min:0',
         ]);
 
         // Membuat ID barang masuk baru
@@ -45,25 +46,20 @@ class BarangMasukController extends Controller
         // Menyimpan data barang masuk
         $barangMasuk = BarangMasuk::create([
             'id_barangmasuk' => $newId,
-            'id_kategori' => $request->id_kategori,
             'id_barang' => $request->id_barang,
+            'id_kategori' => $request->id_kategori,
             'tgl_masuk' => $request->tgl_masuk,
             'jumlah_masuk' => $request->jumlah_masuk,
             'harga_beli' => $request->harga_beli,
         ]);
 
         // Update stok barang
-        $barang = Barang::findOrFail($request->id_barang); // Menggunakan id_barang
-        $barang->stok_barang += $request->jumlah_masuk;   // Menambahkan jumlah masuk ke stok barang
-
-        // Jika harga beli berbeda, perbarui harga beli
-        if ($barang->harga_beli != $request->harga_beli) {
-            $barang->harga_beli = $request->harga_beli;
-        }
-
-        // Simpan perubahan stok barang
+        $barang = Barang::findOrFail($request->id_barang);
+        $barang->stok_barang += $request->jumlah_masuk;
+        $barang->harga_beli = $request->harga_beli; // Update harga beli
         $barang->save();
 
+        // Redirect ke halaman barang masuk dengan pesan sukses
         return redirect()->route('barangmasuk.index')->with('success', 'Barang masuk berhasil ditambahkan dan stok diperbarui.');
     }
 
@@ -80,35 +76,34 @@ class BarangMasukController extends Controller
     // Memperbarui data barang masuk
     public function update(Request $request, $id)
     {
+        // Validasi input
         $request->validate([
+            'id_barang' => 'required|exists:barang,id_barang', 
             'id_kategori' => 'required|exists:kategori,id_kategori',
-            'id_barang' => 'required|exists:barang,id_barang', // pastikan 'id_barang' adalah id_barang
             'tgl_masuk' => 'required|date',
-            'jumlah_masuk' => 'required|integer',
-            'harga_beli' => 'required|numeric',
+            'jumlah_masuk' => 'required|integer|min:1',
+            'harga_beli' => 'required|numeric|min:0',
         ]);
 
         $barangMasuk = BarangMasuk::findOrFail($id);
+        $barang = Barang::findOrFail($barangMasuk->id_barang);
 
-        // Update stok barang
-        $barang = Barang::findOrFail($barangMasuk->id_barang); // Menggunakan id_barang yang benar
-        $barang->stok_barang += $request->jumlah_masuk;     // Tambahkan stok baru
+        // Update stok barang sebelum perubahan (kembalikan stok sebelumnya)
+        $barang->stok_barang -= $barangMasuk->jumlah_masuk;
 
-        // Update harga beli jika berbeda
-        if ($barang->harga_beli != $request->harga_beli) {
-            $barang->harga_beli = $request->harga_beli;
-        }
-
-        $barang->save();
-
-        // Update data barang masuk
+        // Update barang masuk dan stok baru
         $barangMasuk->update([
-            'id_kategori' => $request->id_kategori,
             'id_barang' => $request->id_barang,
+            'id_kategori' => $request->id_kategori,
             'tgl_masuk' => $request->tgl_masuk,
             'jumlah_masuk' => $request->jumlah_masuk,
             'harga_beli' => $request->harga_beli,
         ]);
+
+        // Tambahkan stok baru dan update harga beli
+        $barang->stok_barang += $request->jumlah_masuk;
+        $barang->harga_beli = $request->harga_beli;
+        $barang->save();
 
         return redirect()->route('barangmasuk.index')->with('success', 'Barang masuk berhasil diperbarui dan stok diperbarui.');
     }
@@ -119,8 +114,8 @@ class BarangMasukController extends Controller
         $barangMasuk = BarangMasuk::findOrFail($id);
 
         // Update stok barang sebelum menghapus barang masuk
-        $barang = Barang::findOrFail($barangMasuk->id_barang); // Menggunakan id_barang yang benar
-        $barang->stok_barang -= $barangMasuk->jumlah_masuk; // Kurangi stok barang yang dihapus
+        $barang = Barang::findOrFail($barangMasuk->id_barang);
+        $barang->stok_barang -= $barangMasuk->jumlah_masuk;
         $barang->save();
 
         // Hapus data barang masuk
@@ -128,4 +123,21 @@ class BarangMasukController extends Controller
 
         return redirect()->route('barangmasuk.index')->with('success', 'Data barang masuk berhasil dihapus.');
     }
+
+    // Mendapatkan kategori berdasarkan barang (untuk pengisian otomatis kategori)
+    public function getKategori($id)
+    {
+        $barang = Barang::with('kategori')->find($id);
+    
+        // Jika barang ditemukan dan kategori ada
+        if ($barang && $barang->kategori) {
+            return response()->json([
+                'nama_kategori' => $barang->kategori->nama_kategori,
+            ]);
+        }
+    
+        // Jika kategori tidak ditemukan
+        return response()->json(['error' => 'Kategori tidak ditemukan'], 404);
+    }
 }
+

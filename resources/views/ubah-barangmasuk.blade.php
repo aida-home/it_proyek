@@ -21,22 +21,6 @@
             <form action="{{ route('barangmasuk.update', $barangMasuk->id_barangmasuk) }}" method="POST">
                 @csrf
                 @method('PUT')
-                <div class="form-group">
-                    <label for="kategori">Kategori</label>
-                    <!-- Dropdown untuk memilih kategori -->
-                    <select name="id_kategori" id="kategori" required>
-                        <option value="">Pilih Kategori</option>
-                        @foreach ($kategori as $kat)
-                            <option value="{{ $kat->id_kategori }}"
-                                {{ old('id_kategori', $barangMasuk->id_kategori) == $kat->id_kategori ? 'selected' : '' }}>
-                                {{ $kat->nama_kategori }}
-                            </option>
-                        @endforeach
-                    </select>
-                    @error('id_kategori')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
-                </div>
 
                 <div class="form-group">
                     <label for="barang">Nama Barang :</label>
@@ -50,6 +34,23 @@
                         @endforeach
                     </select>
                     @error('id_barang')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="kategori">Kategori</label>
+                    <!-- Dropdown untuk memilih kategori -->
+                    <select name="id_kategori" id="kategori" required>
+                        <option value="">Pilih Kategori</option>
+                        @foreach ($kategori as $kat)
+                            <option value="{{ $kat->id_kategori }}"
+                                {{ old('id_kategori', $barangMasuk->id_kategori) == $kat->id_kategori ? 'selected' : '' }}>
+                                {{ $kat->nama_kategori }}
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('id_kategori')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
@@ -123,6 +124,29 @@
                 timer: 2000
             });
         @endif
+
+        // Mengupdate kategori berdasarkan pilihan barang (optional)
+        document.getElementById('barang').addEventListener('change', function() {
+            var barangId = this.value;
+            if (barangId) {
+                // Call Ajax to get category based on selected product
+                fetch(`/barang/${barangId}/kategori`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.nama_kategori) {
+                            // Set category dropdown
+                            var kategoriSelect = document.getElementById('kategori');
+                            for (let i = 0; i < kategoriSelect.options.length; i++) {
+                                if (kategoriSelect.options[i].text === data.nama_kategori) {
+                                    kategoriSelect.selectedIndex = i;
+                                    break;
+                                }
+                            }
+                        }
+                    })
+                    .catch(error => console.log(error));
+            }
+        });
     </script>
 </body>
 

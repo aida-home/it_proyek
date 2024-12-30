@@ -42,6 +42,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/barangmasuk/{id}/edit', [BarangMasukController::class, 'edit'])->name('barangmasuk.edit');
     Route::put('/barangmasuk/{id}', [BarangMasukController::class, 'update'])->name('barangmasuk.update');
     Route::delete('/barangmasuk/{id}', [BarangMasukController::class, 'destroy'])->name('barangmasuk.destroy');
+    Route::get('/get-kategori/{id}', [BarangMasukController::class, 'getKategori']);
+
 
     // Transaksi
     Route::resource('transaksi', TransaksiController::class);
