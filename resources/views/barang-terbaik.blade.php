@@ -81,9 +81,9 @@
                         <tr>
                             <td>{{ $index + 1 }}</td>
                             <td>{{ $barang['nama_barang'] }}</td>
-                            <td>{{ number_format($barang['jumlah_terjual'], 4, ',') }}</td>
-                            <td>{{ number_format($barang['harga_jual'], 4, ',') }}</td>
-                            <td>{{ number_format($barang['profit'], 4, ',') }}</td>
+                            <td>{{ number_format($barang['jumlah_terjual'], 2, ',') }}</td>
+                            <td>{{ number_format($barang['harga_jual'], 2, ',') }}</td>
+                            <td>{{ number_format($barang['profit'], 2, ',') }}</td>
                         </tr>
                     @empty
                         <tr>
@@ -106,7 +106,7 @@
                     @forelse ($barangTerbaik as $barang)
                         <tr>
                             <td>{{ $barang['nama_barang'] }}</td>
-                            <td>{{ number_format($barang['nilai_preferensi'], 4, ',') }}</td>
+                            <td>{{ number_format($barang['nilai_preferensi'], 2, ',') }}</td>
                         </tr>
                     @empty
                         <tr>
