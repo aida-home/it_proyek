@@ -15,7 +15,7 @@
     @section('content')
     <div class="table-section">
         <!-- Form Filter Tanggal -->
-        <form method="GET" action="{{ route('barang-terbaik') }}">
+        <form method="GET" action="{{ route('barang-rekomendasi') }}">
             <label for="start_date">Tanggal :</label>
             <input type="date" name="start_date" id="start_date"
                 value="{{ $start_date ?? now()->startOfMonth()->format('Y-m-d') }}" required>
