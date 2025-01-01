@@ -39,11 +39,11 @@
                 <select id="kategori" name="id_kategori" required>
                     @foreach ($kategori as $item)
                         <option value="{{ $item->id_kategori }}" 
-                            {{ old('kategori', $barang->kategori) == $item->id_kategori ? 'selected' : '' }}>
+                            {{ old('id_kategori', $barang->id_kategori) == $item->id_kategori ? 'selected' : '' }}>
                             {{ $item->nama_kategori }}
                         </option>
                     @endforeach
-                </select>
+                </select>                
             </div>
 
             <div class="form-group">
