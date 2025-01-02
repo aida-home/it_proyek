@@ -29,7 +29,6 @@ class Kernel extends ConsoleKernel
         // Memuat semua command yang ada di folder Commands
         $this->load(__DIR__.'/Commands');
 
-        // Memuat route-console.php jika ada
         require base_path('routes/console.php');
     }
 }
