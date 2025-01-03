@@ -23,28 +23,45 @@ class BarangController extends Controller
         return view('tambah-barang', compact('kategori'));  // Kirim ke view
     }
     
-    // Menyimpan barang baru
     public function store(Request $request)
     {
+        // Validasi input dari pengguna
         $validatedData = $request->validate([
             'nama_barang' => 'required|string|max:255',
             'id_kategori' => 'required|exists:kategori,id_kategori', // Validasi kategori yang dipilih
             'stok_barang' => 'required|integer|min:0',
-            'harga_beli' => 'required|numeric|min:0', // Validasi harga_beli
-            'harga_jual' => 'required|numeric|min:0',
+            'harga_beli' => 'required|numeric|min:0', // Validasi harga beli
+            'harga_jual' => 'required|numeric|min:0', // Validasi harga jual
         ]);
-
-        $barang = new Barang();
-        $barang->id_barang = 'DB' . str_pad(Barang::count() + 1, 6, '0', STR_PAD_LEFT);
-        $barang->nama_barang = $request->nama_barang;
-        $barang->id_kategori = $request->id_kategori; // Simpan ID kategori
-        $barang->stok_barang = $request->stok_barang;
-        $barang->harga_beli = $request->harga_beli; // Simpan harga_beli
-        $barang->harga_jual = $request->harga_jual;
-        $barang->save();
-
+    
+        // Ambil ID barang terakhir
+        $lastBarang = Barang::orderBy('id_barang', 'desc')->first();
+    
+        // Tentukan nomor ID berikutnya berdasarkan ID terakhir
+        $newIdNumber = $lastBarang ? ((int) substr($lastBarang->id_barang, 2) + 1) : 1;
+    
+        // Format ID barang baru
+        $newId = 'DB' . str_pad($newIdNumber, 6, '0', STR_PAD_LEFT);
+    
+        // Cek apakah ID barang yang dihasilkan sudah ada (meskipun ini kecil kemungkinannya)
+        if (Barang::where('id_barang', $newId)->exists()) {
+            return back()->withErrors(['id_barang' => 'Terjadi konflik dengan ID barang yang ada. Coba lagi.']);
+        }
+    
+        // Simpan data barang baru
+        Barang::create([
+            'id_barang' => $newId,
+            'nama_barang' => $validatedData['nama_barang'],
+            'id_kategori' => $validatedData['id_kategori'], // ID kategori yang valid
+            'stok_barang' => $validatedData['stok_barang'], // Stok barang
+            'harga_beli' => $validatedData['harga_beli'], // Harga beli
+            'harga_jual' => $validatedData['harga_jual'], // Harga jual
+        ]);
+    
+        // Redirect ke halaman index barang dengan pesan sukses
         return redirect()->route('barang.index')->with('success', 'Barang berhasil ditambahkan.');
     }
+    
 
     // Menampilkan form edit barang
     public function edit($id_barang)
