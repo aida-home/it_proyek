@@ -1,4 +1,4 @@
 
-  2024-12-31 14:27:04 Running ["artisan" cek:stok] ........................................................... 1s DONE
+  2025-01-03 08:24:14 Running ["artisan" cek:stok] ........................................................... 1s DONE
   ⇂ "C:\laragon\bin\php\php-8.3.11-nts-Win32-vs16-x64\php.exe" "artisan" cek:stok > "NUL" 2>&1  
 
