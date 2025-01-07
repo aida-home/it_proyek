@@ -23,6 +23,9 @@
                     <label for="nama_barang">Nama Barang:</label>
                     <input type="text" id="nama_barang" name="nama_barang" placeholder="Masukkan nama barang" required>
                 </div>
+                @error('nama_barang')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
                 <div class="form-group">
                     <label for="kategori">Kategori:</label>
                     <select id="kategori" name="id_kategori" required>
@@ -31,11 +34,6 @@
                             <option value="{{ $item->id_kategori }}">{{ $item->nama_kategori }}</option>
                         @endforeach
                     </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="stok_barang">Stok Barang:</label>
-                    <input type="number" id="stok_barang" name="stok_barang" placeholder="Masukkan jumlah stok barang" min="0" required>
                 </div>
 
                 <div class="form-group">

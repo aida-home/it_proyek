@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('barang', function (Blueprint $table) {
             $table->string('id_barang')->primary(); // Menjadikan id_barang sebagai primary key
-            $table->string('nama_barang'); // Kolom untuk menyimpan nama barang
+            $table->string('nama_barang')->unique();
             $table->string('id_kategori'); // Kolom untuk menyimpan kategori barang
             $table->foreign('id_kategori')->references('id_kategori')->on('kategori')->onUpdate('cascade')->onDelete('cascade');
             $table->integer('stok_barang'); // Kolom untuk menyimpan jumlah stok barang

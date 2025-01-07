@@ -15,16 +15,6 @@
 
     @section('content')
     <div class="form-container"> <!-- Menambahkan class form-container -->
-        @if ($errors->any())
-            <div class="error">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-        
         <form action="{{ route('barang.update', $barang->id_barang) }}" method="POST">
             @csrf
             @method('PUT') <!-- Update method -->
@@ -33,7 +23,9 @@
                 <label for="nama_barang">Nama Barang</label>
                 <input type="text" id="nama_barang" name="nama_barang" value="{{ old('nama_barang', $barang->nama_barang) }}" required>
             </div>
-
+            @error('nama_barang')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
             <div class="form-group">
                 <label for="kategori">Kategori:</label>
                 <select id="kategori" name="id_kategori" required>
@@ -46,12 +38,6 @@
                 </select>                
             </div>
 
-            <div class="form-group">
-                <label for="stok_barang">Stok Barang</label>
-                <input type="number" id="stok_barang" name="stok_barang" value="{{ old('stok_barang', $barang->stok_barang) }}" required min="0">
-            </div>
-
-            <!-- Menambahkan input harga beli -->
             <div class="form-group">
                 <label for="harga_beli">Harga Beli</label>
                 <input type="number" id="harga_beli" name="harga_beli" value="{{ old('harga_beli', $barang->harga_beli) }}" required min="0" step="0.01">
