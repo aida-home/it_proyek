@@ -76,21 +76,13 @@ class BarangMasukController extends Controller
     // Memperbarui data barang masuk
     public function update(Request $request, $id)
     {
-        // Validasi input
         $request->validate([
             'id_barang' => 'required|exists:barang,id_barang',
-            'tgl_masuk' => 'required|date',
-            'jumlah_masuk' => 'required|integer|min:1',
             'harga_beli' => 'required|numeric|min:0',
         ]);
 
         // Cari data barang masuk yang akan diupdate
         $barangMasuk = BarangMasuk::findOrFail($id);
-
-        // Kembalikan stok lama
-        $barangLama = Barang::findOrFail($barangMasuk->id_barang);
-        $barangLama->stok_barang -= $barangMasuk->jumlah_masuk;
-        $barangLama->save();
 
         // Ambil data barang baru
         $barangBaru = Barang::with('kategori')->findOrFail($request->id_barang);
@@ -98,18 +90,13 @@ class BarangMasukController extends Controller
         // Update data barang masuk
         $barangMasuk->update([
             'id_barang' => $request->id_barang,
-            'id_kategori' => $barangBaru->kategori->id_kategori ?? null,
-            'tgl_masuk' => $request->tgl_masuk,
-            'jumlah_masuk' => $request->jumlah_masuk,
             'harga_beli' => $request->harga_beli,
         ]);
 
-        // Update stok barang baru
-        $barangBaru->stok_barang += $request->jumlah_masuk;
         $barangBaru->harga_beli = $request->harga_beli;
         $barangBaru->save();
 
-        return redirect()->route('barangmasuk.index')->with('success', 'Barang masuk berhasil diperbarui dan stok diperbarui.');
+        return redirect()->route('barangmasuk.index')->with('success', 'Barang masuk berhasil diperbarui');
     }
 
     // Menghapus data barang masuk

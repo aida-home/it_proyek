@@ -56,23 +56,13 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="tgl_masuk">Tanggal Masuk</label>
-                    <!-- Input tanggal masuk -->
-                    <input type="date" name="tgl_masuk" id="tgl_masuk"
-                        value="{{ old('tgl_masuk', $barangMasuk->tgl_masuk) }}" max="{{ date('Y-m-d') }}" required>
-                    @error('tgl_masuk')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
+                    <label for="tgl_masuk">Tanggal Masuk:</label>
+                    <input type="date" id="tgl_masuk" value="{{ $barangMasuk->tgl_masuk }}" readonly>
                 </div>
-
+    
                 <div class="form-group">
-                    <label for="jumlah_masuk">Jumlah Masuk</label>
-                    <!-- Input jumlah barang masuk -->
-                    <input type="number" name="jumlah_masuk" id="jumlah_masuk"
-                        value="{{ old('jumlah_masuk', $barangMasuk->jumlah_masuk) }}" placeholder="Jumlah Masuk" required>
-                    @error('jumlah_masuk')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
+                    <label for="jumlah_masuk">Jumlah Masuk:</label>
+                    <input type="number" id="jumlah_masuk" value="{{ $barangMasuk->barang->stok_barang }}" readonly>
                 </div>
 
                 <div class="form-group">
