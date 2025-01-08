@@ -36,13 +36,15 @@
                         <td>{{ $user->no_telepon }}</td>
                         <td>{{ $user->username }}</td>
                         <td>
-                            <div class="action-buttons">
+                            <div style="display: flex; justify-content: {{ count($pengguna) === 1 ? 'center' : 'flex-start' }}; align-items: center; gap: 10px;">
                                 <a href="{{ route('pengguna.edit', $user->id_pengguna) }}" class="btn-edit">Ubah</a>
+                                @if (count($pengguna) > 1) <!-- Tampilkan tombol Hapus hanya jika jumlah pengguna > 1 -->
                                 <form action="{{ route('pengguna.destroy', $user->id_pengguna) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-delete" onclick="return confirm('Anda yakin ingin menghapus data ini?')">Hapus</button>
-                                </form>                           
+                                </form>
+                                @endif
                             </div>
                         </td>
                     </tr>
