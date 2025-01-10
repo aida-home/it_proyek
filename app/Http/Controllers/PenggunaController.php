@@ -18,7 +18,7 @@ class PenggunaController extends Controller
     // Menampilkan semua pengguna
     public function index()
     {
-        $pengguna = Pengguna::all(); // Mengambil semua data pengguna
+        $pengguna = Pengguna::orderBy('id_pengguna', 'desc')->get();
         return view('pengguna', compact('pengguna')); // Mengirim data ke view
     }
 

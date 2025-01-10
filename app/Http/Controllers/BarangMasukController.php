@@ -9,15 +9,14 @@ use App\Models\Barang;
 
 class BarangMasukController extends Controller
 {
-    // Menampilkan semua data barang masuk
     public function index()
     {
-        $barangMasuk = BarangMasuk::with('kategori', 'barang')->get();
+        $barangMasuk = BarangMasuk::with('kategori', 'barang')->orderBy('tgl_masuk', 'desc')->get();
         $kategori = Kategori::all();
         $barang = Barang::all();
-
+    
         return view('barangmasuk', compact('kategori', 'barangMasuk', 'barang'));
-    }
+    }    
 
     // Menampilkan form tambah barang masuk
     public function create()

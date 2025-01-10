@@ -10,7 +10,7 @@ class KategoriController extends Controller
     // Menampilkan daftar kategori
     public function index()
     {
-        $kategori = Kategori::all();
+        $kategori = Kategori::orderBy('id_kategori', 'desc')->get();
         return view('kategori', compact('kategori'));
     }
 

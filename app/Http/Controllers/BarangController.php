@@ -12,7 +12,7 @@ class BarangController extends Controller
     // Menampilkan daftar barang
     public function index()
     {
-        $barang = Barang::with('kategori')->get();
+        $barang = Barang::with('kategori')->orderBy('id_barang', 'desc')->get();
         return view('barang', compact('barang'));
     }
 

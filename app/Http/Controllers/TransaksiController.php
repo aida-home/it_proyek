@@ -80,7 +80,7 @@ class TransaksiController extends Controller
     // Menampilkan Semua Data Transaksi
     public function index()
     {
-        $transaksi = Transaksi::with('detailTransaksi')->get();
+        $transaksi = Transaksi::with('detailTransaksi')->orderBy('tanggal_transaksi', 'desc')->get();
         return view('transaksi', compact('transaksi'));
     }
 
