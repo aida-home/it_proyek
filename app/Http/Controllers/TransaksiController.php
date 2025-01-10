@@ -58,6 +58,7 @@ class TransaksiController extends Controller
                 $detailTransaksi->id_barang = $barang->id_barang; // Simpan referensi
                 $detailTransaksi->nama_barang = $barang->nama_barang; // Tetap tersimpan meskipun barang dihapus
                 $detailTransaksi->harga_jual = $barang->harga_jual;
+                $detailTransaksi->harga_beli = $barang->harga_beli;
                 $detailTransaksi->jumlah_beli = $item['jumlah_beli'];
                 $detailTransaksi->subtotal = $item['jumlah_beli'] * $barang->harga_jual;
                 $detailTransaksi->save();

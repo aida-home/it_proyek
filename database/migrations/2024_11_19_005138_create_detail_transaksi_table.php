@@ -16,6 +16,7 @@ class CreateDetailTransaksiTable extends Migration
             $table->foreign('id_barang')->references('id_barang')->on('barang')->onUpdate('cascade')->onDelete('set null');
             $table->string('nama_barang');
             $table->decimal('harga_jual', 15, 2);
+            $table->decimal('harga_beli', 15, 2);
             $table->integer('jumlah_beli');
             $table->decimal('subtotal', 15, 2);
             $table->timestamps();

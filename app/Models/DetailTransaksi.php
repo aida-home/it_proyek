@@ -13,7 +13,7 @@ class DetailTransaksi extends Model
     protected $primaryKey = 'id_detail_transaksi';
     public $incrementing = false;
     protected $keyType = 'string';
-    protected $fillable = ['id_detail_transaksi', 'id_transaksi', 'id_barang', 'nama_barang', 'harga_jual', 'jumlah_beli', 'subtotal'];
+    protected $fillable = ['id_detail_transaksi', 'id_transaksi', 'id_barang', 'nama_barang', 'harga_jual', 'harga_beli', 'jumlah_beli', 'subtotal'];
 
     // Relasi ke Transaksi (Many-to-One)
     public function transaksi()
