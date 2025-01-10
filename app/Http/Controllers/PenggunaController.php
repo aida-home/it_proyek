@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barang;
+use App\Models\Setting;
 use App\Models\Kategori;
 use App\Models\Pengguna;
 use App\Models\Transaksi;
@@ -149,6 +150,8 @@ class PenggunaController extends Controller
             ->limit(5) // Ambil 5 barang teratas
             ->get();
 
+            $setting = Setting::first();
+
         // Kirim data ke view
         return view('dashboard', compact(
             'penggunaCount',
@@ -157,7 +160,8 @@ class PenggunaController extends Controller
             'kategoriCount',
             'transaksiCount',
             'laporanPenjualanCount',
-            'barangPopuler'
+            'barangPopuler',
+            'setting'
         ));
     }
 }

@@ -78,12 +78,55 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Tombol Ubah Nomor Target -->
+            <div class="card">
+                <div class="card-content">
+                    <div class="text">
+                        <h3>
+                            @if ($setting && $setting->whatsapp_number)
+                                Nomor tujuan notifikasi saat ini:
+                                <br><br>
+                                <strong>{{ $setting->whatsapp_number }}</strong>
+                            @else
+                                <span style="color: red;">Nomor belum diatur.</span>
+                            @endif
+                        </h3>
+                    </div>
+                </div>
+                <a href="{{ route('settings.index') }}" class="btn btn-primary">
+                    <button class="btn-edit">Ubah</button>
+                </a>
+            </div>
         </div>
 
         <div class="popular-items">
             <h4 style="text-align: center;">Barang Populer RPS Collection Tahun <span id="currentYear"></span></h4>
             <canvas id="popularChart"></canvas>
         </div>
+
+        <script src="{{ asset('assets/js/custom.js') }}"></script>
+
+        <script>
+            //message with sweetalert
+            @if (session('success'))
+                Swal.fire({
+                    icon: "success",
+                    title: "BERHASIL",
+                    text: "{{ session('success') }}",
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+            @elseif (session('error'))
+                Swal.fire({
+                    icon: "error",
+                    title: "GAGAL!",
+                    text: "{{ session('error') }}",
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+            @endif
+        </script>
 
         <script>
             // Ambil tahun saat ini

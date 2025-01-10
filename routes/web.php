@@ -12,6 +12,10 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\BarangMasukController;
 use App\Http\Controllers\LaporanPenjualanController;
+use App\Http\Controllers\SettingController;
+
+Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
+Route::put('/settings', [SettingController::class, 'update'])->name('settings.update');
 
 // Halaman utama
 Route::get('/', function () {

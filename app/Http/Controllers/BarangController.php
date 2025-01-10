@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barang;
+use App\Models\Setting;
+use App\Models\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-use App\Models\Kategori;
 
 class BarangController extends Controller
 {
@@ -129,7 +130,9 @@ class BarangController extends Controller
     public function kirimNotifikasiWhatsApp($barang)
     {
         $apiKey = "eV5dYotqwXQvvykMfvv9";
-        $nomorTarget = "6283862166822";
+        $setting = Setting::first(); 
+
+        $nomorTarget = $setting->whatsapp_number; 
 
         $pesan = "⚠️ Stok Barang Hampir Habis ⚠️\n\n" .
             "Nama Barang: {$barang->nama_barang}\n" .
