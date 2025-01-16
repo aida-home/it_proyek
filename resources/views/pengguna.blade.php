@@ -23,7 +23,6 @@
                     <tr>
                         <th>No</th>
                         <th>Nama Pengguna</th>
-                        <th>No. Telepon</th>
                         <th>Username</th>
                         <th>Aksi</th>
                     </tr>
@@ -33,7 +32,6 @@
                     <tr>
                         <td>{{ $index + 1 }}</td> 
                         <td>{{ $user->nama_pengguna }}</td>
-                        <td>{{ $user->no_telepon }}</td>
                         <td>{{ $user->username }}</td>
                         <td>
                             <div style="display: flex; justify-content: {{ count($pengguna) === 1 ? 'center' : 'flex-start' }}; align-items: center; gap: 10px;">
