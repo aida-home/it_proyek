@@ -22,9 +22,6 @@
             <label for="nama_pengguna">Nama Pengguna</label>
             <input type="text" id="nama_pengguna" name="nama_pengguna" value="{{ $pengguna->nama_pengguna }}" required>
             
-            <label for="no_telepon">No. Telepon</label>
-            <input type="number" id="no_telepon" name="no_telepon" value="{{ $pengguna->no_telepon }}" required>
-            
             <label for="username">Username</label>
             <input type="text" id="username" name="username" value="{{ $pengguna->username }}" required>
             
