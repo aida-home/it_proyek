@@ -25,12 +25,6 @@
                     <div class="error-message">{{ $message }}</div>
                 @enderror
 
-                <label for="no_telepon">No. Telepon</label>
-                <input type="string" id="no_telepon" name="no_telepon" placeholder="No. Telepon" required>
-                @error('no_telepon')
-                    <div class="error-message">{{ $message }}</div>
-                @enderror
-
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" placeholder="Username" required>
                 @error('username')
