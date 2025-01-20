@@ -24,7 +24,6 @@ class PenggunaSeeder extends Seeder
             'id_pengguna' => $newId, // ID baru yang dihitung otomatis
             'username' => 'sayaadmin',
             'nama_pengguna' => 'Administrator',
-            'no_telepon' => '08123456789',
             'password' => bcrypt('12345678'),
         ]);
     }

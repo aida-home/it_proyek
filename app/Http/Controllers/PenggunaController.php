@@ -36,7 +36,6 @@ class PenggunaController extends Controller
         $request->validate([
             'username' => ['required', 'string', 'max:255', 'unique:pengguna,username'],
             'nama_pengguna' => 'required|string|max:255',
-            'no_telepon' => 'required|string|max:15',
             'password' => 'required|string|min:8',
         ]);
 
@@ -49,7 +48,6 @@ class PenggunaController extends Controller
         Pengguna::create([
             'id_pengguna' => $newId,
             'nama_pengguna' => $request->nama_pengguna,
-            'no_telepon' => $request->no_telepon,
             'username' => $request->username,
             'password' => bcrypt($request->password), // Hash password
         ]);
@@ -70,7 +68,6 @@ class PenggunaController extends Controller
         // Validasi data
         $request->validate([
             'nama_pengguna' => 'required|string|max:255',
-            'no_telepon' => 'required|string|max:15',
             'username' => 'required|string|max:255|unique:pengguna,username,' . $id_pengguna . ',id_pengguna',
         ]);
 
